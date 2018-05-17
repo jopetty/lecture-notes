@@ -9,44 +9,44 @@
 %% MARK: Class Metadata
 %% Provides information to the LaTeX3 compiler
 %% about what our class does.
-\tl_const:Nn \c__notes_class_name_tl			{notes}
-\tl_const:Nn \c__notes_class_version_tl			{1.0.0}
-\tl_const:Nn \c__notes_class_date_tl			{2018/05/12}
-\tl_const:Nn \c__notes_class_description_tl		{A~LaTeX3~class~for~lecture~notes.}
-\tl_const:Nn \c__notes_class_parent_class_tl	{article}
+\tl_const:Nn \c__notes_class_name_tl            {notes}
+\tl_const:Nn \c__notes_class_version_tl         {1.0.0}
+\tl_const:Nn \c__notes_class_date_tl            {2018/05/12}
+\tl_const:Nn \c__notes_class_description_tl     {A~LaTeX3~class~for~lecture~notes.}
+\tl_const:Nn \c__notes_class_parent_class_tl    {article}
 
-\ProvidesExplClass{\c__notes_class_name_tl}			% Class
-                  {\c__notes_class_date_tl}			% Date
-                  {\c__notes_class_version_tl}		% Version
-                  {\c__notes_class_description_tl}	% Description
+\ProvidesExplClass{\c__notes_class_name_tl}         % Class
+                  {\c__notes_class_date_tl}         % Date
+                  {\c__notes_class_version_tl}      % Version
+                  {\c__notes_class_description_tl}  % Description
 
 %% MARK: Class Data
 %% Data set by the user about the course or lecture.
 %% Used to create headers, title page, etc.
-\tl_new:N	\g_notes_title_tl		% Document Title (Course Name, Lecture Name, etc)
-\tl_new:N	\g_notes_subtitle_tl	% Document Subtitle
-\tl_new:N	\g_notes_shorttitle_tl	% Document Short Title (for headers)
-\tl_new:N	\g_notes_speaker_tl		% Speaker (Professor, Lecturer, etc)
-\tl_new:N	\g_notes_spkemail_tl	% Speaker Email
-\tl_new:N	\g_notes_scribe_tl		% Scribe (you, person taking notes)
-\tl_new:N	\g_notes_scremail_tl	% Scribe Email
-\tl_new:N	\g_notes_coursecode_tl	% Course ID (e.g., MATH 230)
-\tl_new:N	\g_notes_term_tl		% Course Term (Spring, Michaelmas, etc)
-\tl_new:N	\g_notes_year_tl		% Year
-\tl_new:N	\g_notes_place_tl		% Place
+\tl_new:N \g_notes_title_tl       % Document Title (Course Name, Lecture Name, etc)
+\tl_new:N \g_notes_subtitle_tl    % Document Subtitle
+\tl_new:N \g_notes_shorttitle_tl  % Document Short Title (for headers)
+\tl_new:N \g_notes_speaker_tl     % Speaker (Professor, Lecturer, etc)
+\tl_new:N \g_notes_spkemail_tl    % Speaker Email
+\tl_new:N \g_notes_scribe_tl      % Scribe (you, person taking notes)
+\tl_new:N \g_notes_scremail_tl    % Scribe Email
+\tl_new:N \g_notes_coursecode_tl  % Course ID (e.g., MATH 230)
+\tl_new:N \g_notes_term_tl        % Course Term (Spring, Michaelmas, etc)
+\tl_new:N \g_notes_year_tl        % Year
+\tl_new:N \g_notes_place_tl       % Place
 
 % Set default values for data commands
 \tl_gset:Nn	\g_notes_title_tl		{Course Title}
-\tl_gset:Nn	\g_notes_subtitle_tl	{}
 \tl_gset:Nn	\g_notes_shorttitle_tl	{\g_notes_title_tl}
 \tl_gset:Nn	\g_notes_speaker_tl		{Lecturer}
-\tl_gset:Nn	\g_notes_spkemail_tl	{}
-\tl_gset:Nn	\g_notes_scribe_tl		{}
-\tl_gset:Nn	\g_notes_scremail_tl	{}
-\tl_gset:Nn	\g_notes_coursecode_tl	{}
-\tl_gset:Nn	\g_notes_term_tl		{}
-\tl_gset:Nn	\g_notes_year_tl		{}
-\tl_gset:Nn	\g_notes_place_tl		{}
+\tl_clear_new:N	\g_notes_subtitle_tl
+\tl_clear_new:N	\g_notes_spkemail_tl
+\tl_clear_new:N	\g_notes_scribe_tl
+\tl_clear_new:N	\g_notes_scremail_tl
+\tl_clear_new:N	\g_notes_coursecode_tl
+\tl_clear_new:N	\g_notes_term_tl
+\tl_clear_new:N	\g_notes_year_tl
+\tl_clear_new:N	\g_notes_place_tl
 
 % Provide user-facing interface to document commands
 \RenewDocumentCommand\title{ m }{\tl_gset:Nn \g_notes_title_tl {#1}}
@@ -129,6 +129,7 @@
 	\setmainfont{Palatino-Roman}
 \fi
 \newcommand{\widekern}{\addfontfeatures{LetterSpace=10}}
+\renewcommand{\baselinestretch}{1.2}
 
 %% MARK: Title/Section Formatting
 % Table of Contents
@@ -157,9 +158,16 @@
 	\vskip 4ex
 	\begin{center}
 		{\widekern
-		{\large\MakeUppercase{\g_notes_coursecode_tl{}~---~\g_notes_title_tl{}}}
+		{\large\MakeUppercase{
+			\tl_if_empty:NTF \g_notes_coursecode_tl {} {\g_notes_coursecode_tl{}~---~}
+			\g_notes_title_tl{}
+		}}
 		\vskip 2ex
-		{\MakeUppercase{\g_notes_place_tl{},~\g_notes_term_tl{}~\g_notes_year_tl{}}}
+		{\MakeUppercase{
+			\tl_if_empty:NTF \g_notes_place_tl {} {\g_notes_place_tl{},}
+			\tl_if_empty:NTF \g_notes_term_tl  {} {~\g_notes_term_tl{}}
+			\tl_if_empty:NTF \g_notes_year_tl  {} {~\g_notes_year_tl{}}
+		}}
 		\vskip 2ex
 		{\small\MakeUppercase{\g_notes_speaker_tl{}}}}
 		\vskip 3.5ex
@@ -172,26 +180,27 @@
 	\vskip 7ex
 }
 
-% Line spacing
-\renewcommand{\baselinestretch}{1.2}
-
 %% MARK: Custom Macros
 % Margin Notes
-\NewDocumentCommand\note{ m }{\marginpar{\textit{\footnotesize{#1}}}}
+\NewDocumentCommand\note{ m } {
+	\renewcommand{\baselinestretch}{0.8}
+	\marginpar{\textit{\footnotesize{#1}}}
+	\renewcommand{\baselinestretch}{1.2}
+}
 
 % Put footnotes in the margins
-\RenewDocumentCommand\footnote{ m }{\footnotemark\note{\footnotetext{#1}}}
+\RenewDocumentCommand\footnote{ m } {\footnotemark\note{\footnotetext{#1}}}
 
 % Final box
-\NewDocumentCommand\final{ m }{\boxed{#1}}
+\NewDocumentCommand\final{ m } {\boxed{#1}}
 
 % Custom math commands
-\NewDocumentCommand\bbr{}	{\mathbb{R}}
-\NewDocumentCommand\bbc{}	{\mathbb{C}}
-\NewDocumentCommand\bbz{}	{\mathbb{Z}}
-\NewDocumentCommand\bbq{}	{\mathbb{Q}}
-\NewDocumentCommand\bbn{}	{\mathbb{N}}
-\NewDocumentCommand\bbf{}	{\mathbb{F}}
+\NewDocumentCommand\bbr{} {\mathbb{R}}
+\NewDocumentCommand\bbc{} {\mathbb{C}}
+\NewDocumentCommand\bbz{} {\mathbb{Z}}
+\NewDocumentCommand\bbq{} {\mathbb{Q}}
+\NewDocumentCommand\bbn{} {\mathbb{N}}
+\NewDocumentCommand\bbf{} {\mathbb{F}}
 
 % Custom Physics commands
 \DeclareSIUnit{\mile}{mi}
