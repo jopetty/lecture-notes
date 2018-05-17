@@ -36,9 +36,9 @@
 \tl_new:N \g_notes_place_tl       % Place
 
 % Set default values for data commands
-\tl_gset:Nn	\g_notes_title_tl		{Course Title}
-\tl_gset:Nn	\g_notes_shorttitle_tl	{\g_notes_title_tl}
-\tl_gset:Nn	\g_notes_speaker_tl		{Lecturer}
+\tl_gset:Nn	\g_notes_title_tl       {Course Title}
+\tl_gset:Nn	\g_notes_shorttitle_tl  {\g_notes_title_tl}
+\tl_gset:Nn	\g_notes_speaker_tl     {Lecturer}
 \tl_clear_new:N	\g_notes_subtitle_tl
 \tl_clear_new:N	\g_notes_spkemail_tl
 \tl_clear_new:N	\g_notes_scribe_tl
@@ -139,17 +139,19 @@
 \renewcommand{\cftsubsecfont}{\itshape}
 
 % Format Sections
-\titleformat{\section}							% Level
-            {\normalfont\centering\widekern}	% Formatting
-            {\thesection}						% Label
-            {1em}								% Label Spacing
-            {\MakeTextUppercase}									% Before Code
+\titleformat{\section}                          % Level
+            {\normalfont\centering\widekern}    % Formatting
+            {\thesection}                       % Label
+            {1em}                               % Label Spacing
+            {\MakeTextUppercase}                % Before Code
+
+\titleformat{\subsection}                       % Level
+            {\normalfont\centering\itshape}     % Formatting
+            {\thesubsection}                    % Label
+            {1em}                               % Label Spacing
+            {}                                  % Before Code
+
 \titlespacing\section{0ex}{4ex plus 0.2ex minus 0.2ex}{1.5ex plus 0.2ex minus 0.2ex}
-\titleformat{\subsection}				% Level
-            {\normalfont\centering\itshape}		% Formatting
-            {\thesubsection}			% Label
-            {1em}						% Label Spacing
-            {}							% Before Code
 
 % Title Page
 \RenewDocumentCommand\maketitle{}{
@@ -170,10 +172,12 @@
 		}}
 		\vskip 2ex
 		{\small\MakeUppercase{\g_notes_speaker_tl{}}}}
-		\vskip 3.5ex
-		{\small\itshape{Notes~by~\g_notes_scribe_tl{}}}
-		\vskip 4ex
-		\noindent \rule{1.5cm}{0.4pt}
+		\tl_if_empty:NTF \g_notes_scribe_tl {} {
+			\vskip 3.5ex
+			{\small\itshape{Notes~by~\g_notes_scribe_tl{}}}
+		}
+		\vskip 7ex
+		\noindent \rule{2.4cm}{0.4pt}
 	\end{center}
 	\vskip 7ex
 	\tableofcontents{}
@@ -202,7 +206,7 @@
 \NewDocumentCommand\bbn{} {\mathbb{N}}
 \NewDocumentCommand\bbf{} {\mathbb{F}}
 
-% Custom Physics commands
+% Custom units
 \DeclareSIUnit{\mile}{mi}
 \DeclareSIUnit{\gallon}{gallon}
 \DeclareSIUnit{\pound}{lb}
@@ -214,6 +218,8 @@
 \DeclareSIUnit{\calorie}{cal}
 \DeclareSIUnit{\Calorie}{Cal}
 \DeclareSIUnit{\inch}{in}
+
+% Unit vector formatting
 \NewDocumentCommand\unit{ m }	{\bm{\hat{\mathbf{#1}}}}
 
 % Formatting Theorems/etc
