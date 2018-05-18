@@ -24,13 +24,12 @@
 %% Data set by the user about the course or lecture.
 %% Used to create headers, title page, etc.
 \tl_new:N \g_notes_title_tl       % Document Title (Course Name, Lecture Name, etc)
-\tl_new:N \g_notes_subtitle_tl    % Document Subtitle
 \tl_new:N \g_notes_shorttitle_tl  % Document Short Title (for headers)
 \tl_new:N \g_notes_speaker_tl     % Speaker (Professor, Lecturer, etc)
 \tl_new:N \g_notes_spkemail_tl    % Speaker Email
 \tl_new:N \g_notes_scribe_tl      % Scribe (you, person taking notes)
 \tl_new:N \g_notes_scremail_tl    % Scribe Email
-\tl_new:N \g_notes_coursecode_tl  % Course ID (e.g., MATH 230)
+\tl_new:N \g_notes_courseid_tl  % Course ID (e.g., MATH 230)
 \tl_new:N \g_notes_term_tl        % Course Term (Spring, Michaelmas, etc)
 \tl_new:N \g_notes_year_tl        % Year
 \tl_new:N \g_notes_place_tl       % Place
@@ -39,24 +38,22 @@
 \tl_gset:Nn	\g_notes_title_tl       {Course Title}
 \tl_gset:Nn	\g_notes_shorttitle_tl  {\g_notes_title_tl}
 \tl_gset:Nn	\g_notes_speaker_tl     {Lecturer}
-\tl_clear_new:N	\g_notes_subtitle_tl
 \tl_clear_new:N	\g_notes_spkemail_tl
 \tl_clear_new:N	\g_notes_scribe_tl
 \tl_clear_new:N	\g_notes_scremail_tl
-\tl_clear_new:N	\g_notes_coursecode_tl
+\tl_clear_new:N	\g_notes_courseid_tl
 \tl_clear_new:N	\g_notes_term_tl
 \tl_clear_new:N	\g_notes_year_tl
 \tl_clear_new:N	\g_notes_place_tl
 
 % Provide user-facing interface to document commands
 \RenewDocumentCommand\title{ m }{\tl_gset:Nn \g_notes_title_tl {#1}}
-\NewDocumentCommand\subtitle{ m }{\tl_gset:Nn \g_notes_subtitle_tl {#1}}
 \NewDocumentCommand\shorttitle{ m }{\tl_gset:Nn \g_notes_shorttitle_tl {#1}}
 \NewDocumentCommand\speaker{ m }{\tl_gset:Nn \g_notes_speaker_tl {#1}}
 \NewDocumentCommand\speakeremail{ m }{\tl_gset:Nn \g_notes_spkemail_tl {#1}}
 \NewDocumentCommand\scribe{ m }{\tl_gset:Nn \g_notes_scribe_tl {#1}}
 \NewDocumentCommand\scribeemail{ m }{\tl_gset:Nn \g_notes_scremail_tl {#1}}
-\NewDocumentCommand\coursecode{ m }{\tl_gset:Nn \g_notes_coursecode_tl {#1}}
+\NewDocumentCommand\courseid{ m }{\tl_gset:Nn \g_notes_courseid_tl {#1}}
 \NewDocumentCommand\term{ m }{\tl_gset:Nn \g_notes_term_tl {#1}}
 \RenewDocumentCommand\year{ m }{\tl_gset:Nn \g_notes_year_tl {#1}}
 \NewDocumentCommand\place{ m }{\tl_gset:Nn \g_notes_place_tl {#1}}
@@ -74,12 +71,24 @@
 \bool_gset_false:N	\g_notes_loaddiag_bool
 
 % Provide class options to load packages
-\DeclareOption{chemistry}{\bool_gset_true:N	\g_notes_loadchem_bool}
-\DeclareOption{code}{\bool_gset_true:N	\g_notes_loadcode_bool}
-\DeclareOption{diagram}{\bool_gset_true:N	\g_notes_loaddiag_bool}
+\DeclareOption{chemistry}{\bool_gset_true:N \g_notes_loadchem_bool}
+\DeclareOption{code}{\bool_gset_true:N \g_notes_loadcode_bool}
+\DeclareOption{diagram}{\bool_gset_true:N \g_notes_loaddiag_bool}
 
-% Font Options
+% Table of Contents
+\bool_new:N \g_notes_toc_bool
+\bool_gset_true:N \g_notes_toc_bool
+\DeclareOption{no-toc}{\bool_gset_false:N \g_notes_toc_bool}
 
+% Font
+\str_new:N \g_notes_font_str
+\bool_new:N \g_notes_cmufont_bool
+\str_gset:Nn \g_notes_font_str {Palatino-Roman}
+\bool_gset_false:N \g_notes_cmufont_bool
+\DeclareOption{cmu}{
+	\bool_gset_true:N \g_notes_cmufont_bool
+	\str_gset:Nn \g_notes_font_str {CMUSerif-Roman}
+}
 
 % Pass all remaining options to parent class
 \DeclareOption*{
@@ -98,6 +107,7 @@
 \RequirePackage{titlesec}
 \RequirePackage[overload]{textcase}
 \RequirePackage[titles]{tocloft}
+\RequirePackage{fancyhdr}
 
 % Mathematics
 \RequirePackage{amsmath}
@@ -111,7 +121,7 @@
 \RequirePackage{siunitx}
 
 % Computer Science
-\bool_if:NT	\g_notes_loadcode_bool{
+\bool_if:NT	\g_notes_loadcode_bool {
 	\RequirePackage{minted} \usemintedstyle{tango}
 	\RequirePackage{algorithm}
 	\RequirePackage{algpseudocode}
@@ -124,14 +134,32 @@
 }
 
 %% MARK: Fonts
+% Load Palatino by default
 \ifxetex
 	\RequirePackage[no-math]{fontspec}
-	\setmainfont{Palatino-Roman}
+	\setmainfont{\g_notes_font_str}
 \fi
-\newcommand{\widekern}{\addfontfeatures{LetterSpace=10}}
-\renewcommand{\baselinestretch}{1.2}
+
+% Wide kerning for title page / sections
+\bool_if:NTF \g_notes_cmufont_bool {
+	\NewDocumentCommand\widekern{ } {\addfontfeatures{LetterSpace=8}}
+} {
+	\NewDocumentCommand\widekern{ } {\addfontfeatures{LetterSpace=10}}
+}
+
+% Define line spacing
+\NewDocumentCommand\normalspacing{ } {\renewcommand{\baselinestretch}{1.2}}
+\NewDocumentCommand\tightspacing{ }  {\renewcommand{\baselinestretch}{0.8}}
+\normalspacing
 
 %% MARK: Title/Section Formatting
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\rightmark}
+\fancyfoot[C]{\small \thepage}
+\renewcommand{\sectionmark}[1]{\markright{\relax\widekern\thesection{}~\hspace{1.2em}\MakeTextUppercase{#1}}}
+
 % Table of Contents
 \renewcommand{\cfttoctitlefont}{\relax\centering\widekern\MakeUppercase}
 \renewcommand{\cftsecfont}{}
@@ -151,17 +179,19 @@
             {1em}                               % Label Spacing
             {}                                  % Before Code
 
+% Section spacing
 \titlespacing\section{0ex}{4ex plus 0.2ex minus 0.2ex}{1.5ex plus 0.2ex minus 0.2ex}
 
 % Title Page
 \RenewDocumentCommand\maketitle{}{
 	\newpage
+	\thispagestyle{plain}
 	\null
 	\vskip 4ex
 	\begin{center}
 		{\widekern
 		{\large\MakeUppercase{
-			\tl_if_empty:NTF \g_notes_coursecode_tl {} {\g_notes_coursecode_tl{}~---~}
+			\tl_if_empty:NTF \g_notes_courseid_tl {} {\g_notes_courseid_tl{}~---~}
 			\g_notes_title_tl{}
 		}}
 		\vskip 2ex
@@ -180,16 +210,18 @@
 		\noindent \rule{2.4cm}{0.4pt}
 	\end{center}
 	\vskip 7ex
-	\tableofcontents{}
-	\vskip 7ex
+	\bool_if:NT \g_notes_toc_bool {
+		{\tightspacing\tableofcontents{}\normalspacing}
+		\vskip 7ex
+	}
 }
 
 %% MARK: Custom Macros
 % Margin Notes
 \NewDocumentCommand\note{ m } {
-	\renewcommand{\baselinestretch}{0.8}
+	\tightspacing
 	\marginpar{\textit{\footnotesize{#1}}}
-	\renewcommand{\baselinestretch}{1.2}
+	\normalspacing
 }
 
 % Put footnotes in the margins
