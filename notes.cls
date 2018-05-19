@@ -35,7 +35,7 @@
 \tl_new:N \g_notes_place_tl       % Place
 
 % Set default values for data commands
-\tl_gset:Nn	\g_notes_title_tl       {Course Title}
+\tl_gset:Nn	\g_notes_title_tl       {Course~Title}
 \tl_gset:Nn	\g_notes_shorttitle_tl  {\g_notes_title_tl}
 \tl_gset:Nn	\g_notes_speaker_tl     {Lecturer}
 \tl_clear_new:N	\g_notes_spkemail_tl
@@ -134,18 +134,29 @@
 }
 
 %% MARK: Fonts
-% Load Palatino by default
 \ifxetex
+	% Load xelatex font
 	\RequirePackage[no-math]{fontspec}
 	\setmainfont{\g_notes_font_str}
-\fi
 
-% Wide kerning for title page / sections
-\bool_if:NTF \g_notes_cmufont_bool {
-	\NewDocumentCommand\widekern{ } {\addfontfeatures{LetterSpace=8}}
-} {
-	\NewDocumentCommand\widekern{ } {\addfontfeatures{LetterSpace=10}}
-}
+	% Wide kerning for title page / sections
+	\bool_if:NTF \g_notes_cmufont_bool {
+		\NewDocumentCommand\widekern{ } {\addfontfeatures{LetterSpace=8}}
+	} {
+		\NewDocumentCommand\widekern{ } {\addfontfeatures{LetterSpace=10}}
+	}
+\else
+	% Adjust kerning
+	\RequirePackage{microtype}
+
+	% Create empty macro for kerning
+	\NewDocumentCommand\widekern{ }{}
+
+	% Load pdflatex Palatino
+	\bool_if:NTF \g_notes_cmufont_bool {} {
+		\RequirePackage{palatino}
+	}
+\fi
 
 % Define line spacing
 \NewDocumentCommand\normalspacing{ } {\renewcommand{\baselinestretch}{1.2}}
@@ -223,9 +234,6 @@
 	\marginpar{\textit{\footnotesize{#1}}}
 	\normalspacing
 }
-
-% Put footnotes in the margins
-\RenewDocumentCommand\footnote{ m } {\footnotemark\note{\footnotetext{#1}}}
 
 % Final box
 \NewDocumentCommand\final{ m } {\boxed{#1}}
