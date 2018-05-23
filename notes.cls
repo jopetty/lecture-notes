@@ -59,7 +59,6 @@
 \NewDocumentCommand\place{ m }{\tl_gset:Nn \g_notes_place_tl {#1}}
 
 %% MARK: Class Options
-
 % Flags for packages
 \bool_new:N	\g_notes_loadchem_bool	% Chemical Diagrams
 \bool_new:N	\g_notes_loadcode_bool	% Algorithm/Source code formatting
@@ -108,6 +107,7 @@
 \RequirePackage[overload]{textcase}
 \RequirePackage[titles]{tocloft}
 \RequirePackage{fancyhdr}
+\RequirePackage[side,flushmargin]{footmisc}
 
 % Mathematics
 \RequirePackage{amsmath}
@@ -146,11 +146,14 @@
 		\NewDocumentCommand\widekern{ } {\addfontfeatures{LetterSpace=10}}
 	}
 \else
+	% Allow UTF-8 characters
+	\RequirePackage[utf8]{inputenc}
+
 	% Adjust kerning
-	\RequirePackage{microtype}
+	\RequirePackage[letterspace=140]{microtype}
 
 	% Create empty macro for kerning
-	\NewDocumentCommand\widekern{ }{}
+	\NewDocumentCommand\widekern{ } {\lsstyle}
 
 	% Load pdflatex Palatino
 	\bool_if:NTF \g_notes_cmufont_bool {} {
@@ -235,6 +238,10 @@
 	\normalspacing
 }
 
+% Footnotes
+\let\oldfootnote\footnote
+\RenewDocumentCommand\footnote{ m } {\oldfootnote{\textit{#1}}}
+
 % Final box
 \NewDocumentCommand\final{ m } {\boxed{#1}}
 
@@ -260,7 +267,7 @@
 \DeclareSIUnit{\inch}{in}
 
 % Unit vector formatting
-\NewDocumentCommand\unit{ m }	{\bm{\hat{\mathbf{#1}}}}
+\NewDocumentCommand\unit{ m } {\bm{\hat{\mathbf{#1}}}}
 
 % Formatting Theorems/etc
 \RenewDocumentCommand\qedsymbol{}{$\blacksquare$}
