@@ -114,6 +114,7 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
+\RequirePackage{thmtools}
 \RequirePackage{mathtools}
 \RequirePackage{bm}
 
@@ -284,13 +285,16 @@
                                             {\item}
                                             {\item\label{#1}}}
 
-% Formatting Theorems/etc
+%% MARK: - Theorem-like environments
+% QED Symbol
 \RenewDocumentCommand\qedsymbol{}{$\blacksquare$}
+
+% Solution (clone of proof)
 \NewDocumentEnvironment{solution}{ o }
                        {\IfNoValueTF{#1}{\begin{proof}[Solution]}{\begin{proof}[#1]}}
                        {\end{proof}}
 
-\RequirePackage{thmtools}
+% Plain style theorems
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -299,23 +303,30 @@
 \newtheorem{conjecture}{Conjecture}
 \newtheorem{criterion}{Criterion}
 \newtheorem{assertion}{Assertion}
-	
-\declaretheoremstyle[headfont=\normalfont\bfseries,
-                     bodyfont=\normalfont]
-                     {definition}
-\declaretheorem[style=definition,
-                postheadhook=\leftskip=1cm\rightskip=1cm]
-                {definition}
 
+% Remark style theorems
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 
+% Definition style theorems
+\declaretheoremstyle[headfont=\normalfont\bfseries,
+                     bodyfont=\normalfont]{definition}
+
+\declaretheorem[style=definition,
+                postheadhook=\leftskip=1cm\rightskip=1cm]{definition}
+\declaretheorem[style=definition,
+                postheadhook=\leftskip=1cm\rightskip=1cm]{notation}
+                
+% Make shaded theorems have uniform padding
+\NewDocumentCommand\headpadding{}{\leftskip=0.2cm\rightskip=0.2cm\vspace{0.4cm}}
+\NewDocumentCommand\footpadding{}{\vspace{0.2cm}}
+
 \declaretheorem[shaded={bgcolor={rgb}{0.95,0.95,0.95}},
                 style=definition,
-                postheadhook=\leftskip=0.2cm\rightskip=0.2cm\vspace{0.4cm},
-                postfoothook=\vspace{0.2cm}]
-                {problem}
+                postheadhook=\headpadding,
+                postfoothook=\footpadding]{problem}
 
+% Break style theorems
 \declaretheoremstyle[headfont=\normalfont\bfseries,
                      bodyfont=\normalfont,
                      postheadspace=\newline]
@@ -323,13 +334,12 @@
 
 \declaretheorem[shaded={bgcolor={rgb}{1,0.93,0.8}},
                 style=break,
-                postheadhook=\leftskip=0.2cm\rightskip=0.2cm\vspace{0.4cm},
-                postfoothook=\vspace{0.2cm}]
+                postheadhook=\headpadding,
+                postfoothook=\footpadding]
                 {example}
                 
 
 %% MARK: Begining of document
 \AtBeginDocument{
-	
 	\maketitle
 }
