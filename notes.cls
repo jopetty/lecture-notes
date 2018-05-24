@@ -82,11 +82,11 @@
 % Font
 \str_new:N \g_notes_font_str
 \bool_new:N \g_notes_cmufont_bool
-\str_gset:Nn \g_notes_font_str {Palatino-Roman}
+\str_gset:Nn \g_notes_font_str {CMUSerif-Roman}
 \bool_gset_false:N \g_notes_cmufont_bool
-\DeclareOption{cmu}{
+\DeclareOption{palatino}{
 	\bool_gset_true:N \g_notes_cmufont_bool
-	\str_gset:Nn \g_notes_font_str {CMUSerif-Roman}
+	\str_gset:Nn \g_notes_font_str {Palatino-Roman}
 }
 
 % Pass all remaining options to parent class
@@ -158,9 +158,7 @@
 	% Create empty macro for kerning
 	\NewDocumentCommand\widekern{ } {\lsstyle}
 	% Load pdflatex Palatino
-	\bool_if:NTF \g_notes_cmufont_bool {} {
-		\RequirePackage{palatino}
-	}
+	\bool_if:NT \g_notes_cmufont_bool {\RequirePackage{palatino}}
 \fi
 
 % Define line spacing
@@ -313,9 +311,14 @@
                      bodyfont=\normalfont]{definition}
 
 \declaretheorem[style=definition,
-                postheadhook=\leftskip=1cm\rightskip=1cm]{definition}
+                postheadhook=\leftskip=1cm\rightskip=1cm,]{definition}
 \declaretheorem[style=definition,
-                postheadhook=\leftskip=1cm\rightskip=1cm]{notation}
+                postheadhook=\leftskip=1cm\rightskip=1cm,
+                numbered=no]{notation}
+\declaretheorem[style=definition,
+                postheadhook=\leftskip=1cm\rightskip=1cm,
+                title={Abuse~of~notation},
+                numbered=no]{abuse}
                 
 % Make shaded theorems have uniform padding
 \NewDocumentCommand\headpadding{}{\leftskip=0.2cm\rightskip=0.2cm\vspace{0.4cm}}
