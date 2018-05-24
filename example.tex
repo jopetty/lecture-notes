@@ -1,0 +1,103 @@
+\documentclass[code]{notes}
+
+% Demonstration packages
+\usepackage{kantlipsum}
+
+\title{The Good Life}
+\place{School of Life}
+\speaker{Immanuel Kant}
+\scribe{Jackson Petty}
+\term{Michælmas}
+\year{2018}
+\courseid{Life 101}
+
+\begin{document}
+	\section{This is a section}
+	\kant[1]
+	\note{You might notice that the page is asymmetric. That is so you have ample room for margin notes like this.}
+	\subsection{This is a subsection}
+	\kant[2-4]
+	\section{This is another section}
+	\kant[5-7]
+	\section{Examples of Algorithms}
+	Let's look at a few examples of some common, useful algorithms.
+	\begin{algorithm}
+	    \caption{Euclid’s algorithm}
+	    \label{euclid}
+	    \begin{algorithmic}[1] % The number tells where the line numbering should start
+	        \Procedure{Euclid}{$a,b$} \Comment{The gcd of $a$ and $b$}
+	            \State $r\gets a \bmod b$
+	            \While{$r\not=0$} \Comment{We have the answer if $r$ is 0}
+	                \State $a \gets b$
+	                \State $b \gets r$
+	                \State $r \gets a \bmod b$
+	            \EndWhile\label{euclidendwhile}
+	            \State \textbf{return} $b$\Comment{The gcd is $b$}
+	        \EndProcedure
+	    \end{algorithmic}
+	\end{algorithm}
+	\kant[8]
+	Let's see an example of the \texttt{equation} environment in action\footnote{Footnotes are also placed in the margin!}:
+	\begin{equation}
+		\lim_{n\to\infty} \frac{1}{n} \sum_{k=0}^{n-1} f(T^k x) = \frac{1}{\mu(X)} \int f \dd{\mu}.
+	\end{equation}
+	This is the \emph{ergodic theorem}. \kant[2]
+
+	\subsection{Types of Theorems}
+	Let's explore how the various kinds of theorem-like environments are formatted.
+	You can, of course, change how these are styled if you prefer. \kant[1]
+	\begin{definition}[Group]
+		A group is an ordered pair $(G,\star)$, where $\star$ is a binary operation on a set $G$, which satisfies the following four axioms.
+		\begin{enumerate}
+			\item The element $a \star b$ is in $G$ for all $a,b \in G$.
+			\item For all $a,b,c \in G$, $a \star (b \star c) = (a \star b) \star c$.
+			\item There exists an element $e \in G$ known as the idendity element for which $a \star e = e \star a = a$.
+			\item For all $a \in G$, there exists an element $a^{-1} \in G$ such that $a \star a^{-1} = a^{-1} \star a = e$.
+		\end{enumerate}
+	\end{definition}
+	\kant[1]
+	\begin{problem}\label{prob:p-root-rat}
+			If $p$ is a prime prove that there do not exist nonzero integers $a$ and $b$ such that $a^2 = pb^2$ (i.e., $\sqrt{p}$ is not a rational number).
+		\end{problem}
+	\begin{lemma}
+		Let $a$ and $b$ be square integers. If there exists an integer $z$ such that $a = z \cdot b$, then $z$ must be square as well.
+	\end{lemma}
+	\begin{proof}
+		Every composite integer can be written as the product of its prime factors.
+		Since this decomposition is guaranteed to be unique, we know that if $a = (p_i \cdot p_2 \cdots p_n)^2$, then the prime factors of $b$ must be a subset of those listed.
+		If, by associativity, we decompose $a$ into the factors of $b$, we will still be left with a square term; that is, if $b = (p_j \cdots p_j)^2$, then 
+		\[ a = (p_1 \cdots p_n)^2 \longrightarrow \underbrace{(p_1 \cdots p_j)^2}_{b} \cdot \underbrace{(p_k \cdots p_n)^2}_{z}. \]
+		Notice that no matter how we group the factors, we are left with a second term which is also square.
+		This is a direct coneqsuence of the restriction that $b$ be square.
+	\end{proof}
+	\begin{proof}[Proof of~\ref{prob:p-root-rat}]
+	This follows directly from the above lemma. Since $p$ is prime it cannot be square, and so there are no square integers for which $a^2 = pb^2$.
+	\end{proof}
+	\begin{remark}
+		This is a remark.
+	\end{remark}
+	\begin{problem}
+		Determine which of the following functions are well defined.
+		\begin{parts}\relax
+			\part\relax $f(a/b) = a$;
+			\part\relax $f(a/b) = a^2/b^2$.
+		\end{parts}
+	\end{problem}
+	\begin{example}
+		Consider the functions 
+		\[ f(x) = \begin{cases}
+						e^{1/(x+1)} & x < -1 \\
+						0 & -1 \leq x \leq 1 \\
+						e^{-1/(x-1)} & e > 1
+		           \end{cases},\qquad g(x) = 0. \]
+		Both functions are $C^\infty$ and equal one another if and only if $x \in [-1,1]$.
+	\end{example}
+	In addition to the more typical theorem-like environments, \texttt{notes} also defines some more unusual environments which may be more or less useful to you depending on your classes.
+	\begin{notation}[$\times$]
+		The \emph{cartesian product} of two sets. For two sets $A$ and $B$, let $A \times B$ be defined as $A \times B \coloneqq \{(a,b) \mid a \in A \land b \in B\}$.
+	\end{notation}
+	Along with the \emph{notation} environment, we provide the closely-related \emph{abuse of notation} environment.
+	\begin{abuse}
+		We define $\sin^{-1}(x)$ to be the inverse $\sin$ function, and $\sin^2(x)$ to mean $(\sin(x))^2$. What does $\sin^{-2}(x)$ mean? Who knows.
+	\end{abuse}
+\end{document}
