@@ -14,7 +14,7 @@ This class is designed to meet the following criteria:
 
 ### Font Requirements
 
-By default, `lecture-notes` will attempt to load the *Palatino* fonts if you compile with `xelatex`. I think this is a bit softer than the Latin Modern/Computer Modern fonts which are typical to LaTeX documents. If you don't want to typeset your documents with Palatino, you can either 1) compile with `pdflatex`, which uses the default Computer Modern fonts, or 2) add the following line to your document preamble and compile with `xelatex`:
+`lecture-notes` provides the `[palatino]` option to load the *Palatino* fonts for the body text. This works if you compile with `xelatex` or `pdflatex`, but the `xelatex` version will attempt to load the *Palatino* font from your computer; if you do not have it installed, you must either install it or patch the class load a different font, using the following =,
 ```tex
 \setmainfont{<your-font-here>} % Replace <your-font-here> with the desired font
 ```
