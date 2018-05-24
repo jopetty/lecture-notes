@@ -29,7 +29,7 @@
 \tl_new:N \g_notes_spkemail_tl    % Speaker Email
 \tl_new:N \g_notes_scribe_tl      % Scribe (you, person taking notes)
 \tl_new:N \g_notes_scremail_tl    % Scribe Email
-\tl_new:N \g_notes_courseid_tl  % Course ID (e.g., MATH 230)
+\tl_new:N \g_notes_courseid_tl    % Course ID (e.g., MATH 230)
 \tl_new:N \g_notes_term_tl        % Course Term (Spring, Michaelmas, etc)
 \tl_new:N \g_notes_year_tl        % Year
 \tl_new:N \g_notes_place_tl       % Place
@@ -108,6 +108,7 @@
 \RequirePackage[titles]{tocloft}
 \RequirePackage{fancyhdr}
 \RequirePackage[side,flushmargin]{footmisc}
+\RequirePackage{enumitem}
 
 % Mathematics
 \RequirePackage{amsmath}
@@ -134,6 +135,7 @@
 }
 
 %% MARK: Fonts
+
 \ifxetex
 	% Load xelatex font
 	\RequirePackage[no-math]{fontspec}
@@ -148,13 +150,12 @@
 \else
 	% Allow UTF-8 characters
 	\RequirePackage[utf8]{inputenc}
-
+	
 	% Adjust kerning
-	\RequirePackage[letterspace=140]{microtype}
+	\RequirePackage[letterspace=100]{microtype}
 
 	% Create empty macro for kerning
 	\NewDocumentCommand\widekern{ } {\lsstyle}
-
 	% Load pdflatex Palatino
 	\bool_if:NTF \g_notes_cmufont_bool {} {
 		\RequirePackage{palatino}
@@ -269,16 +270,66 @@
 % Unit vector formatting
 \NewDocumentCommand\unit{ m } {\bm{\hat{\mathbf{#1}}}}
 
+% Parts environment
+\NewDocumentEnvironment{parts}{ }
+		               {\begin{enumerate}[label=\textup{(\alph*)},
+		                                  labelwidth=4.5em,
+		                                  labelsep=0.5em,
+		                                  leftmargin=2\parindent,
+		                                  resume]}
+		               {\end{enumerate}}
+
+% \part[]
+\RenewDocumentCommand\part{ o }{\IfNoValueTF{#1}
+                                            {\item}
+                                            {\item\label{#1}}}
+
 % Formatting Theorems/etc
 \RenewDocumentCommand\qedsymbol{}{$\blacksquare$}
 \NewDocumentEnvironment{solution}{ o }
                        {\IfNoValueTF{#1}{\begin{proof}[Solution]}{\begin{proof}[#1]}}
                        {\end{proof}}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
+\RequirePackage{thmtools}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{criterion}{Criterion}
+\newtheorem{assertion}{Assertion}
+	
+\declaretheoremstyle[headfont=\normalfont\bfseries,
+                     bodyfont=\normalfont]
+                     {definition}
+\declaretheorem[style=definition,
+                postheadhook=\leftskip=1cm\rightskip=1cm]
+                {definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\declaretheorem[shaded={bgcolor={rgb}{0.95,0.95,0.95}},
+                style=definition,
+                postheadhook=\leftskip=0.2cm\rightskip=0.2cm\vspace{0.4cm},
+                postfoothook=\vspace{0.2cm}]
+                {problem}
+
+\declaretheoremstyle[headfont=\normalfont\bfseries,
+                     bodyfont=\normalfont,
+                     postheadspace=\newline]
+                     {break}
+
+\declaretheorem[shaded={bgcolor={rgb}{1,0.93,0.8}},
+                style=break,
+                postheadhook=\leftskip=0.2cm\rightskip=0.2cm\vspace{0.4cm},
+                postfoothook=\vspace{0.2cm}]
+                {example}
+                
 
 %% MARK: Begining of document
 \AtBeginDocument{
+	
 	\maketitle
 }
