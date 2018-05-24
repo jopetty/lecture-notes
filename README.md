@@ -83,7 +83,7 @@ There are several options available to you to customize your lecture notes.
 
 - `code`: Loads the `minted`, `algorithm`, and `algpseudocode` packages to typeset source code and algorithms.
 - `diagram`: Loads `tikz`, and `circuitikz` to draw general diagrams.
-- `cmu`: Typesets the document in Computer Modern fonts instead of Palatino.
+- `palatino`: Typesets the document in *Palatino* instead of *Computer Modern*.
 - `no-toc`: Removes the table of contents at the beginning of the document (useful for shorter notes and handouts).
 
 Aside from this, you can use all document options which are compatible with the `article` class, except for options relating to page layout; if you want to modify the margins, you'll have to set the margins in you document preable (the `geometry` class is already loaded).
