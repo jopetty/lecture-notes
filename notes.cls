@@ -168,24 +168,25 @@
 
 %% MARK: Title/Section Formatting
 % Header and Footer
+\setlength{\headheight}{14pt}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\rightmark}
 \fancyfoot[C]{\small \thepage}
-\renewcommand{\sectionmark}[1]{\markright{\relax\widekern\thesection{}~\hspace{1.2em}\MakeTextUppercase{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\widekern{\small\bfseries\S}~\large\textsc{\MakeLowercase{#1 \hfill \g_notes_courseid_tl}}}}
 
 % Table of Contents
-\renewcommand{\cfttoctitlefont}{\relax\centering\widekern\MakeUppercase}
+\renewcommand{\cfttoctitlefont}{\relax\centering\widekern}
 \renewcommand{\cftsecfont}{}
 \renewcommand{\cftsecpagefont}{}
 \renewcommand{\cftsubsecfont}{\itshape}
 
 % Format Sections
 \titleformat{\section}                          % Level
-            {\normalfont\centering\widekern}    % Formatting
+            {\normalfont\centering\widekern\scshape}    % Formatting
             {\thesection}                       % Label
             {1em}                               % Label Spacing
-            {\MakeTextUppercase}                % Before Code
+            {\Large\MakeLowercase}                % Before Code
 
 \titleformat{\subsection}                       % Level
             {\normalfont\centering\itshape}     % Formatting
