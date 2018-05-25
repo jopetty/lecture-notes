@@ -109,6 +109,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage[side,flushmargin]{footmisc}
 \RequirePackage{enumitem}
+\RequirePackage{hyperref}
 
 % Mathematics
 \RequirePackage{amsmath}
@@ -197,10 +198,23 @@
 % Section spacing
 \titlespacing\section{0ex}{4ex plus 0.2ex minus 0.2ex}{1.5ex plus 0.2ex minus 0.2ex}
 
+% Header/Footer on title page
+\fancypagestyle{firstpage}{
+	\fancyfoot[L]{
+		\tl_if_empty:NTF \g_notes_scremail_tl {} {$^\dagger$\url{\g_notes_scremail_tl}}
+	}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{
+		\tl_if_empty:NTF \g_notes_spkemail_tl {} {$^\ast$\url{\g_notes_spkemail_tl}}
+	}
+	\fancyhead{}
+	\renewcommand{\headrulewidth}{0pt}
+}
+
 % Title Page
 \RenewDocumentCommand\maketitle{}{
 	\newpage
-	\thispagestyle{plain}
+	\thispagestyle{firstpage}
 	\null
 	\vskip 4ex
 	\begin{center}
@@ -216,10 +230,14 @@
 			\tl_if_empty:NTF \g_notes_year_tl  {} {~\g_notes_year_tl{}}
 		}}
 		\vskip 2ex
-		{\small\MakeUppercase{\g_notes_speaker_tl{}}}}
+		{\small\MakeUppercase{\g_notes_speaker_tl{}}
+        	\tl_if_empty:NTF \g_notes_spkemail_tl {} {$^\ast$}
+		}}
 		\tl_if_empty:NTF \g_notes_scribe_tl {} {
 			\vskip 3.5ex
-			{\small\itshape{Notes~by~\g_notes_scribe_tl{}}}
+			{\small\itshape{Notes~by~\g_notes_scribe_tl{}
+			\tl_if_empty:NTF \g_notes_scremail_tl {} {$^\dagger$}
+			}}
 		}
 		\vskip 7ex
 		\noindent \rule{2.4cm}{0.4pt}
@@ -293,54 +311,66 @@
                        {\IfNoValueTF{#1}{\begin{proof}[Solution]}{\begin{proof}[#1]}}
                        {\end{proof}}
 
-% Plain style theorems
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{corollary}{Corollary}
-\newtheorem{proposition}{Proposition}
-\newtheorem{conjecture}{Conjecture}
-\newtheorem{criterion}{Criterion}
-\newtheorem{assertion}{Assertion}
-
-% Remark style theorems
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}
-
-% Definition style theorems
-\declaretheoremstyle[headfont=\normalfont\bfseries,
-                     bodyfont=\normalfont]{definition}
-
-\declaretheorem[style=definition,
-                postheadhook=\leftskip=1cm\rightskip=1cm,]{definition}
-\declaretheorem[style=definition,
-                postheadhook=\leftskip=1cm\rightskip=1cm,
-                numbered=no]{notation}
-\declaretheorem[style=definition,
-                postheadhook=\leftskip=1cm\rightskip=1cm,
-                title={Abuse~of~notation},
-                numbered=no]{abuse}
-                
 % Make shaded theorems have uniform padding
 \NewDocumentCommand\headpadding{}{\leftskip=0.2cm\rightskip=0.2cm\vspace{0.4cm}}
 \NewDocumentCommand\footpadding{}{\vspace{0.2cm}}
+\NewDocumentCommand\theoremvert{}{6pt}
 
-\declaretheorem[shaded={bgcolor={rgb}{0.95,0.95,0.95}},
-                style=definition,
-                postheadhook=\headpadding,
-                postfoothook=\footpadding]{problem}
+% Lemma style definition
+\declaretheoremstyle[
+	spaceabove=\theoremvert, spacebelow=\theoremvert,
+	headfont=\normalfont\bfseries,
+	bodyfont=\normalfont\itshape
+]{lemma}
+
+\declaretheorem[style=lemma]{lemma}
+\declaretheorem[style=lemma]{theorem}
+\declaretheorem[style=lemma]{corollary}
+\declaretheorem[style=lemma]{conjecture}
+
+% Definition style theorems
+\declaretheoremstyle[
+	spaceabove=\theoremvert, spacebelow=\theoremvert,
+	headfont=\normalfont\bfseries,
+	bodyfont=\normalfont
+]{definition}
+
+\declaretheorem[
+	style=definition,
+	postheadhook=\leftskip=1cm\rightskip=1cm
+]{definition}
+\declaretheorem[
+	style=definition,
+	postheadhook=\leftskip=1cm\rightskip=1cm,
+	numbered=no
+]{notation}
+\declaretheorem[
+	style=definition,
+	postheadhook=\leftskip=1cm\rightskip=1cm,
+	title={Abuse~of~notation},
+	numbered=no
+]{abuse}
+\declaretheorem[
+	shaded={bgcolor={rgb}{0.95,0.95,0.95}},
+	style=definition,
+	postheadhook=\headpadding,
+	postfoothook=\footpadding
+]{problem}
 
 % Break style theorems
-\declaretheoremstyle[headfont=\normalfont\bfseries,
-                     bodyfont=\normalfont,
-                     postheadspace=\newline]
-                     {break}
+\declaretheoremstyle[
+	spaceabove=\theoremvert, spacebelow=\theoremvert,
+	headfont=\normalfont\bfseries,
+	bodyfont=\normalfont,
+	postheadspace=\newline
+]{break}
 
-\declaretheorem[shaded={bgcolor={rgb}{1,0.93,0.8}},
-                style=break,
-                postheadhook=\headpadding,
-                postfoothook=\footpadding]
-                {example}
+\declaretheorem[
+	shaded={bgcolor={rgb}{1,0.93,0.8}},
+	style=break,
+	postheadhook=\headpadding,
+	postfoothook=\footpadding
+]{example}
                 
 
 %% MARK: Begining of document

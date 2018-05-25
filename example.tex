@@ -6,7 +6,9 @@
 \title{The Good Life}
 \place{School of Life}
 \speaker{Immanuel Kant}
+%\speakeremail{immanuel.kant@yale.edu}
 \scribe{Jackson Petty}
+%\scribeemail{jackson.petty@yale.edu}
 \term{Michælmas}
 \year{2018}
 \courseid{Life 101}
@@ -73,22 +75,23 @@
 	\begin{proof}[Proof of~\ref{prob:p-root-rat}]
 	This follows directly from the above lemma. Since $p$ is prime it cannot be square, and so there are no square integers for which $a^2 = pb^2$.
 	\end{proof}
-	\begin{remark}
-		This is a remark.
-	\end{remark}
-	\begin{problem}
+	
+	\begin{problem}[Szemerédi, p. 42]
 		Determine which of the following functions are well defined.
 		\begin{parts}\relax
 			\part\relax $f(a/b) = a$;
 			\part\relax $f(a/b) = a^2/b^2$.
 		\end{parts}
 	\end{problem}
-	\begin{example}
+	\begin{solution}
+		Sometimes, instead of a proof, it's more appropriate to submit a solution.
+	\end{solution}
+	\begin{example}[Non-analytic smooth functions]
 		Consider the functions 
 		\[ f(x) = \begin{cases}
 						e^{1/(x+1)} & x < -1 \\
 						0 & -1 \leq x \leq 1 \\
-						e^{-1/(x-1)} & e > 1
+						e^{-1/(x-1)} & x > 1
 		           \end{cases},\qquad g(x) = 0. \]
 		Both functions are $C^\infty$ and equal one another if and only if $x \in [-1,1]$.
 	\end{example}
@@ -100,4 +103,8 @@
 	\begin{abuse}
 		We define $\sin^{-1}(x)$ to be the inverse $\sin$ function, and $\sin^2(x)$ to mean $(\sin(x))^2$. What does $\sin^{-2}(x)$ mean? Who knows.
 	\end{abuse}
+
+	\begin{lemma}[Sperner's]
+		This is a statement of Sperner's lemma.
+	\end{lemma}
 \end{document}
