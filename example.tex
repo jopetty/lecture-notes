@@ -1,110 +1,96 @@
-\documentclass[code]{notes}
+\documentclass{notes}
 
 % Demonstration packages
 \usepackage{kantlipsum}
 
-\title{The Good Life}
-\place{School of Life}
-\speaker{Immanuel Kant}
-%\speakeremail{immanuel.kant@yale.edu}
-\scribe{Jackson Petty}
-%\scribeemail{jackson.petty@yale.edu}
-\term{Michælmas}
+\title{The \texttt{notes} class}
+\place{School of GitHub}
 \year{2018}
-\courseid{Life 101}
+\speaker{Jackson Petty}
+\speakeremail{jackson.petty@yale.edu}
+\courseid{Notes 101}
+
+\blurb{This is a section where you can write a short blurb about the course or the notes. It's kind of like the abstract to a research paper. In fact, you can even include display style equations, like Stoke's Theorem!
+\[ \int_\Omega \dd{\omega} = \int_{\partial\Omega} \omega. \]
+Really, the sky is the limit here. If you don't need it, you can just omit it.
+}
 
 \begin{document}
-	\section{This is a section}
+	\section{September 9, 2014}
 	\kant[1]
 	\note{You might notice that the page is asymmetric. That is so you have ample room for margin notes like this.}
 	\subsection{This is a subsection}
 	\kant[2-4]
-	\section{This is another section}
+	\section{The sets $\mathcal{O}(n)$ and $\Omega(n)$}
 	\kant[5-7]
-	\section{Examples of Algorithms}
-	Let's look at a few examples of some common, useful algorithms.
-	\begin{algorithm}
-	    \caption{Euclid’s algorithm}
-	    \label{euclid}
-	    \begin{algorithmic}[1] % The number tells where the line numbering should start
-	        \Procedure{Euclid}{$a,b$} \Comment{The gcd of $a$ and $b$}
-	            \State $r\gets a \bmod b$
-	            \While{$r\not=0$} \Comment{We have the answer if $r$ is 0}
-	                \State $a \gets b$
-	                \State $b \gets r$
-	                \State $r \gets a \bmod b$
-	            \EndWhile\label{euclidendwhile}
-	            \State \textbf{return} $b$\Comment{The gcd is $b$}
-	        \EndProcedure
-	    \end{algorithmic}
-	\end{algorithm}
-	\kant[8]
-	Let's see an example of the \texttt{equation} environment in action\footnote{Footnotes are also placed in the margin!}:
-	\begin{equation}
-		\lim_{n\to\infty} \frac{1}{n} \sum_{k=0}^{n-1} f(T^k x) = \frac{1}{\mu(X)} \int f \dd{\mu}.
-	\end{equation}
-	This is the \emph{ergodic theorem}. \kant[2]
-
-	\subsection{Types of Theorems}
-	Let's explore how the various kinds of theorem-like environments are formatted.
-	You can, of course, change how these are styled if you prefer. \kant[1]
-	\begin{definition}[Group]
-		A group is an ordered pair $(G,\star)$, where $\star$ is a binary operation on a set $G$, which satisfies the following four axioms.
-		\begin{enumerate}
-			\item The element $a \star b$ is in $G$ for all $a,b \in G$.
-			\item For all $a,b,c \in G$, $a \star (b \star c) = (a \star b) \star c$.
-			\item There exists an element $e \in G$ known as the idendity element for which $a \star e = e \star a = a$.
-			\item For all $a \in G$, there exists an element $a^{-1} \in G$ such that $a \star a^{-1} = a^{-1} \star a = e$.
-		\end{enumerate}
-	\end{definition}
-	\kant[1]
-	\begin{problem}\label{prob:p-root-rat}
-			If $p$ is a prime prove that there do not exist nonzero integers $a$ and $b$ such that $a^2 = pb^2$ (i.e., $\sqrt{p}$ is not a rational number).
-		\end{problem}
-	\begin{lemma}
-		Let $a$ and $b$ be square integers. If there exists an integer $z$ such that $a = z \cdot b$, then $z$ must be square as well.
-	\end{lemma}
-	\begin{proof}
-		Every composite integer can be written as the product of its prime factors.
-		Since this decomposition is guaranteed to be unique, we know that if $a = (p_i \cdot p_2 \cdots p_n)^2$, then the prime factors of $b$ must be a subset of those listed.
-		If, by associativity, we decompose $a$ into the factors of $b$, we will still be left with a square term; that is, if $b = (p_j \cdots p_j)^2$, then 
-		\[ a = (p_1 \cdots p_n)^2 \longrightarrow \underbrace{(p_1 \cdots p_j)^2}_{b} \cdot \underbrace{(p_k \cdots p_n)^2}_{z}. \]
-		Notice that no matter how we group the factors, we are left with a second term which is also square.
-		This is a direct coneqsuence of the restriction that $b$ be square.
-	\end{proof}
-	\begin{proof}[Proof of~\ref{prob:p-root-rat}]
-	This follows directly from the above lemma. Since $p$ is prime it cannot be square, and so there are no square integers for which $a^2 = pb^2$.
-	\end{proof}
 	
-	\begin{problem}[Szemerédi, p. 42]
-		Determine which of the following functions are well defined.
-		\begin{parts}\relax
-			\part\relax $f(a/b) = a$;
-			\part\relax $f(a/b) = a^2/b^2$.
-		\end{parts}
-	\end{problem}
+	\section{Useful Environments}
+	Part of well crafted notes is having a visually intuitive design for your document.
+	Text should be easy to read, groups of ideas should flow nicely, and there should be a clear heirarchy of the different parts of the document.
+	The \texttt{notes} class provides several related document environments to help make formatting consistent and visually compelling, as shown in~\cite{greenwade93}.
+
+	\subsection{Theorems, Proofs, and More}
+	The core of any mathematical text is the \emph{theorem} and the \emph{lemma}.
+	These are blocks of text which encapsulate the ``building blocks'' of mathematical arguments; theorems for the greatest hits and lemmas for the foundational arguments made along the way. The \texttt{notes} class provides environments which come pre-formatted for using these tools. The \texttt{lemma} environment italicizes text, with a bold head and an optional parenthetic name.
+	\begin{lemma}[Poincaré]
+		If $B$ is an open ball in $\bbr^n$, any smooth closed $p$-form $\omega$ defined on $B$ is exact for any integral $1 \leq p \leq n$.
+	\end{lemma}
+	Lemmas are visually quite similar to paragraphs, just with some special formatting thrown in.
+	This reflects how they are usually integrated closely with the surrounding text.
+	Closely related to the lemma is the \texttt{theorem}, which has the same formatting as a lemma with a different name.
+	\begin{theorem}
+		Let $(X, d)$ be a non-empty complete metric space, and let $T : X \to X$ be a contraction.
+		Then there exists a unique fixed point $x^\ast \in X$ such that $T(x^\ast) = x^\ast$.
+	\end{theorem}
+	Of course, theorems and lemmas on their own lack a certain conclusion; usually we want to give some proofs or answers to the questions we pose.
+	The \texttt{notes} class provides two closely related environments for this; the cannonical \texttt{proof} and the derivative \texttt{solution}. Both have the exact same formatting, with an italic head and roman body, capped with a \textsc{qed} symbol at the end. The default \textsc{qed} symbol is a black square, but you can redefine it to be whatever you'd like.
+	\begin{proof}
+		Here we offer an abbreviated proof by induction.
+	\end{proof}
 	\begin{solution}
-		Sometimes, instead of a proof, it's more appropriate to submit a solution.
+		Here we offer a solution to the problem posed above.
 	\end{solution}
-	\begin{example}[Non-analytic smooth functions]
-		Consider the functions 
-		\[ f(x) = \begin{cases}
-						e^{1/(x+1)} & x < -1 \\
-						0 & -1 \leq x \leq 1 \\
-						e^{-1/(x-1)} & x > 1
-		           \end{cases},\qquad g(x) = 0. \]
-		Both functions are $C^\infty$ and equal one another if and only if $x \in [-1,1]$.
-	\end{example}
-	In addition to the more typical theorem-like environments, \texttt{notes} also defines some more unusual environments which may be more or less useful to you depending on your classes.
-	\begin{notation}[$\times$]
-		The \emph{cartesian product} of two sets. For two sets $A$ and $B$, let $A \times B$ be defined as $A \times B \coloneqq \{(a,b) \mid a \in A \land b \in B\}$.
+	Often it is helpful to define in precise language exactly what an object of interest is.
+	For example, the term \emph{contraction} from the above theorem might not be familiar to everyone.
+	In this case, \texttt{notes} provides the \texttt{definition} environment,
+	\begin{definition}[Contraction]
+		Let $(X,d)$ be a metric space. A \emph{contraction} is a map $f : X \to X$ for which there exists a $0 \leq k \leq 1$ such that for all $x,y \in X$,
+		\[ d(f(x), f(y)) \leq k\cdot d(x,y). \]
+		This is a special case of a Lipschitz function where the parameter is less than or equal to one.
+	\end{definition}
+	Definitions have larger margins than the surrounding text to help visually define them without making them seem altogether distinct from the paragraphs preceeding and following it.
+	This makes them jump out a bit without interrupting the flow of the text; since definitions are often meant to be read in conjunction with other nearby parts of the paper, it makes sense to not make them so distinct as to suggest that the reader stop and focus solely on the definition.
+
+	Closely related to definitions, \texttt{notes} provides the \texttt{notation} and \texttt{abuse} (of notation) environments.
+	These are meant to highlight particularly important (and/or bad) piece of notation which might be very new to people or are generally unfamiliar in the context of the course.
+	As such, they probably will be used a bit more sparingly than definitions, but there's no harm in having some consistency in how notation is introduced.
+	\begin{notation}
+		For groups $N$ and $G$, let $N \trianglelefteq G$ mean that $N$ is a \emph{normal subgroup} of $G$.
 	\end{notation}
-	Along with the \emph{notation} environment, we provide the closely-related \emph{abuse of notation} environment.
 	\begin{abuse}
-		We define $\sin^{-1}(x)$ to be the inverse $\sin$ function, and $\sin^2(x)$ to mean $(\sin(x))^2$. What does $\sin^{-2}(x)$ mean? Who knows.
+		Let $\sin^{-1}(x)$ be equal to $\arcsin(x)$, and let $\sin^2(x)$ mean $(\sin(x))^2$. 
 	\end{abuse}
 
-	\begin{lemma}[Sperner's]
-		This is a statement of Sperner's lemma.
-	\end{lemma}
+	\subsection{Problems and Examples}
+	Since this class is designed to be used in conjunction with the \href{https://www.github.com/jopetty/homework}{homework} class, it incorporates a lot of the same functionality.
+	Probably the most visually noticible aspect of this is the \texttt{problem} environment.
+	This is a block meant for homework-style problems which you (or your students) should work on to better understand the topic at hand.
+	\begin{problem}
+		Call a set $L \subset \bbr^2$ \emph{crystalline} if and only if it is a discrete set of vectors that's closed under addition and subtraction.
+		\begin{parts}
+			\part Prove there are crystalline subets of $\bbr^2$ that contain squares;
+			\part Prove there are crystalline subsets of $\bbr^2$ that contain regular hexagons;
+			\part Prove no crystalline subsets of $\bbr^2$ can contain regular octagons.
+		\end{parts}
+	\end{problem}
+	Problems are meant to be visually distinct from the surrounding text. Usually, they don't ``flow'' in the same way that paragraphs do; problems are their own thing, and they have a design which reflects that. Of course, problems aren't the only way to explore the specifics of a topic. We can also turn to the \texttt{example} environment.
+	\begin{example}[Smooth, non-analytic functions]
+		Consider the piecewise function 
+		\[ f(x) = \begin{cases} e^{-1/x} & x > 0, \\ 0 & x < 0. \end{cases} \]
+		This function is $C^\infty$ but not analytic since the remainder in the Taylor series is not zero. Thus, $f$ is smooth but non-analytic.
+	\end{example}
+	Just like problems, examples are set against the plain white backdrop of the rest of the text.
+	Examples are meant to be visually distinct and easily recognizable on a page at the expense of flowing well with the surrounding text.
+
+	As with lemmas and theorems, it often makes sense to follow up problems and examples with either a proof or a solution --- this is especially true in the \texttt{homework} class where the entire document broadly follows a problem/proof or problem/solution model with very little of the expository text found in lecture notes. 
 \end{document}
