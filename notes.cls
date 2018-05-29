@@ -380,6 +380,13 @@
 	postheadhook=\headpadding,
 	postfoothook=\footpadding
 ]{problem}
+\declaretheorem[
+	shaded={bgcolor={rgb}{0.95,0.95,0.95}},
+	style=definition,
+	postheadhook=\headpadding,
+	postfoothook=\footpadding,
+	sibling=problem
+]{exercise}
 
 % Break style theorems
 \declaretheoremstyle[

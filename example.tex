@@ -27,7 +27,7 @@ Really, the sky is the limit here. If you don't need it, you can just omit it.
 	\section{Useful Environments}
 	Part of well crafted notes is having a visually intuitive design for your document.
 	Text should be easy to read, groups of ideas should flow nicely, and there should be a clear heirarchy of the different parts of the document.
-	The \texttt{notes} class provides several related document environments to help make formatting consistent and visually compelling, as shown in~\cite{greenwade93}.
+	The \texttt{notes} class provides several related document environments to help make formatting consistent and visually compelling.
 
 	\subsection{Theorems, Proofs, and More}
 	The core of any mathematical text is the \emph{theorem} and the \emph{lemma}.
@@ -65,7 +65,7 @@ Really, the sky is the limit here. If you don't need it, you can just omit it.
 	These are meant to highlight particularly important (and/or bad) piece of notation which might be very new to people or are generally unfamiliar in the context of the course.
 	As such, they probably will be used a bit more sparingly than definitions, but there's no harm in having some consistency in how notation is introduced.
 	\begin{notation}
-		For groups $N$ and $G$, let $N \trianglelefteq G$ mean that $N$ is a \emph{normal subgroup} of $G$.
+		For groups $N$ and $G$, let $N \mathrel{\lhd} G$ mean that $N$ is a \emph{normal subgroup} of $G$.
 	\end{notation}
 	\begin{abuse}
 		Let $\sin^{-1}(x)$ be equal to $\arcsin(x)$, and let $\sin^2(x)$ mean $(\sin(x))^2$. 
@@ -83,6 +83,10 @@ Really, the sky is the limit here. If you don't need it, you can just omit it.
 			\part Prove no crystalline subsets of $\bbr^2$ can contain regular octagons.
 		\end{parts}
 	\end{problem}
+	If you want to call your problems ``exercises'' for whatever reason, there is the identically formatted \texttt{exercise} environment. Note that the numbering is shared between problems and exercises.
+	\begin{exercise}
+		Suppose that $f : \bbr \to \bbr$. Prove that $f$ is a continuous bijection if and only if it is a monotone bijection.
+	\end{exercise}
 	Problems are meant to be visually distinct from the surrounding text. Usually, they don't ``flow'' in the same way that paragraphs do; problems are their own thing, and they have a design which reflects that. Of course, problems aren't the only way to explore the specifics of a topic. We can also turn to the \texttt{example} environment.
 	\begin{example}[Smooth, non-analytic functions]
 		Consider the piecewise function 
@@ -92,5 +96,5 @@ Really, the sky is the limit here. If you don't need it, you can just omit it.
 	Just like problems, examples are set against the plain white backdrop of the rest of the text.
 	Examples are meant to be visually distinct and easily recognizable on a page at the expense of flowing well with the surrounding text.
 
-	As with lemmas and theorems, it often makes sense to follow up problems and examples with either a proof or a solution --- this is especially true in the \texttt{homework} class where the entire document broadly follows a problem/proof or problem/solution model with very little of the expository text found in lecture notes. 
+	As with lemmas and theorems, it often makes sense to follow up problems and examples with either a proof or a solution --- this is especially true in the \texttt{homework} class where the entire document broadly follows a problem/proof or problem/solution model with very little of the expository text found in lecture notes.
 \end{document}
