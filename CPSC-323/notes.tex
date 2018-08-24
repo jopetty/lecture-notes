@@ -1,5 +1,10 @@
 \documentclass{notes}
 
+% Bibliography
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Document Information
 \title{Introduction to Systems Programming and Computer Organization}
 \courseid{CPSC 323}
 \place{Yale University}
@@ -17,5 +22,60 @@
 \begin{document}
 
 \section*{Syllabus}
+
+\begin{center}
+\begin{tabular}{@{}rp{10cm}@{}}
+\toprule
+\textbf{Instructor} & Stanley C. Eisenstat, \url{sce@cs.yale.edu} \\
+\textbf{Lecture} & MW 1:00--2:15 \textsc{pm}, DL 220 \\
+\textbf{Recitation} & TBA \\
+\textbf{Textbooks} & \fullcite{CompA}; \\
+& \fullcite{BLP} \\
+\textbf{Midterms} & Monday, October 15, 2018 \\
+& Wednesday, December 5, 2018 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Coursework}
+The class will NOT meet during reading period. There will be 6 assignments requiring an average of 6-9 hours per week (or an
+average of 15-25 hours per C assignment, somewhat less per non-C assignment). There will be an in-class examination on Monday, October 15th, and a final on
+Wednesday, December 5th. Homework will constitute $\sim$70\% of the final grade; the examinations will
+constitute the remainder.
+
+Programs will be submitted electronically and checked using test scripts:  a
+public script, which will generally be available at least one week before the
+assignment is due; and a more comprehensive private script, which will be
+used to assign a grade.  C programs may also be evaluated for ``style''.
+
+Programs should be submitted electronically by 2:00 \textsc{am} on the day specified
+in the assignment.  Late work not authorized by a Dean's excuse will be
+assessed a penalty of 5\% per calendar day or part thereof and MAY not be
+graded at all if more than ten days late or after solutions are released.
+The submit-times of the sources determine when the program was completed.
+
+\subsection*{Schedule}
+\begin{tabular}{@{}rccccl@{}}
+\toprule
+\textbf{What} & \textbf{Points} & \textbf{Due} & \textbf{Spec} & \textbf{Script} & \textbf{Program} \\
+Homework \#1 & 60 & 09/14 (F) & 08/29 & 09/07 & farthing (C) \\
+Homework \#2 & 50 & 09/28 (F) & 09/12 & 09/21 & bshParse (C) \\
+Homework \#3 & 30 & 10/12 (F) & 09/26 & 10/05 & cpp2018 (script) \\
+Homework \#4 & 60 & 11/02 (F) & 10/10 & 10/26 & LZW2018 (C) \\
+Homework \#5 & 60 & 11/16 (F) & 10/31 & 11/09 & bshShell (C) \\
+Homework \#6 & 40 & 12/13 (R) & 11/14 & 12/06 & Networking (script) \\
+\bottomrule
+\end{tabular}
+
+\subsection*{Topics Covered}
+\textbf{Systems programming in a high level language:} user-level interfaces to a typical operating system (Linux), writing programs (e.g., a shell) that interact with the operating system;
+
+\textbf{Elementary machine architecture / computer organization:} computer arithmetic and general structure/organization of machines, approaches to parallelism (vector, SIMD, MIMD, networks), instruction set architectures and pipelining instruction execution;
+
+\textbf{Operating systems:} implications of concurrency, implementation of semaphores at machine level (a la Dijkstra), implementation and ramifications of virtual memory and caches;
+
+\textbf{Other:} data compression, error detection and correction, computer networks.
+
+\printbibliography
 
 \end{document}
