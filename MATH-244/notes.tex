@@ -2,6 +2,7 @@
 
 % Biblography
 \usepackage{biblatex}
+\addbibresource{references.bib}
 
 \title{Discrete Mathematics}
 \courseid{MATH 244}
@@ -25,11 +26,24 @@
 \begin{tabular}{@{}rp{10cm}@{}}
 \toprule
 \textbf{Instructor} & Ross Berkowitz, \url{ross.berkowitz@yale.edu} \\
-\textbf{Lecture} & 11:35 \textsc{am} -- 12:35 \textsc{pm}, ML 211 \\
-\textbf{Textbook} & --- \\
+\textbf{Lecture} & 11:35 \textsc{am} -- 12:35 \textsc{pm}, WLH 201 \\
+\textbf{Textbook} & \fullcite{JJ} \\
 \textbf{Final} & Sunday, December 16, 2018, 2:00 \textsc{pm} \\
 \bottomrule
 \end{tabular} \\[3ex]
 \end{center}
+
+Discrete  math  is  the  study  of  discrete,  and  frequently  finite,  mathematical  structures.   It  is  a broad subject, and is perhaps best understood by seeing the problems it considers.  In this course the three main topics we will cover are enumerative combinatorics, graph theory, and probability. Enumerative combinatorics is,  narrowly speaking,  the art of counting and estimating the size of various structures, sequences, or sets.  Graphs encode information about pairwise relations between objects (consider a network of people with a connecting line between them if they are friends), and their properties form a rich subject of study.  Finally, probability theory, the study of chances, both deals with finite objects directly, and is a surprisingly useful tool for studying discrete structures of all stripes. Just  as  important  as  the  material  itself,  this  course  will  serve  as  a  primer  in  mathematical thinking. We will see important problem solving methods and learn how to make rigorous arguments by seeing and by doing. We will break the course down into five sections,
+\begin{itemize}
+\item \textbf{Preperatory Material:}  Mathematical notation, functions, induction, proofs;
+\item \textbf{Enumeration:}  The binomial theorem, permutations, stars and bars, estimates, inclusion exclusion;
+\item \textbf{Graphs:} Eulerian graphs, connectivity, Turan’s theorem, trees, planar graphs, graph coloring;
+\item \textbf{Generating Functions:}  Recurrence relations, rational generating functions, algebraic manipulation;
+\item \textbf{Probability:}  linearity of expectation, first moment method.
+\end{itemize}
+
+\printbibliography
+
+\input{Lectures/1}
 
 \end{document}
