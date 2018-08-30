@@ -1,4 +1,4 @@
-\documentclass{notes}
+\documentclass[diagram]{notes}
 
 % Bibliography
 \usepackage{biblatex}
@@ -17,6 +17,32 @@
 	These notes live in my lecture notes respository at 
 	\[\text{\url{https://github.com/jopetty/lecture-notes/tree/master/CPSC-323}.}\] 
 	If you find any errors, please open a bug report describing the error, and label it with the course identifier, or open a pull request so I can correct it.
+}
+
+%% Custom Circuitikz commands
+\pgfdeclareshape{fadder}{
+	\anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+	
+	\anchor{text} % this is used to center the text in the node
+	{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+	\savedanchor\faddina{\pgfpoint{-.25cm}{.625cm}} % input a
+	\anchor{in1}{\faddina}
+	\savedanchor\faddinb{\pgfpoint{.25cm}{.625cm}} % input b
+	\anchor{in2}{\faddinb}
+	\savedanchor\faddsum{\pgfpoint{0.0cm}{-.625cm}} % sum
+	\anchor{sum}{\faddsum}
+	\savedanchor\faddcin{\pgfpoint{1.5cm}{0.0cm}} % carry int
+	\anchor{cin}{\faddcin}
+	\savedanchor\faddcout{\pgfpoint{-1.5cm}{0.0cm}} % carry out
+	\anchor{cout}{\faddcout}
+
+	\foregroundpath{
+		\pgfsetlinewidth{0.01cm}
+		 \pgfpathrectanglecorners{\pgfpoint{1cm}{.625cm}}{\pgfpoint{-1cm}{-.625cm}}
+		 \pgfusepath{draw} %draw rectangle
+	}
+
 }
 
 \begin{document}
@@ -77,5 +103,7 @@ Homework \#6 & 40 & 12/13 (R) & 11/14 & 12/06 & Networking (script) \\
 \textbf{Other:} data compression, error detection and correction, computer networks.
 
 \printbibliography
+
+\include{Lectures/1}
 
 \end{document}
