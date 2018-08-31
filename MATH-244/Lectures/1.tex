@@ -1,0 +1,105 @@
+\section{August 30, 2018}
+
+Course adminitrata. Ross made a plug for CPSC 202, the CS version of this class (essentially discount MATH 244). This class is focused on proofs. Talked about what the course will cover (*yawn*). For some reason there is a very large grand piano in our lecture hall. Probably because it's not actually a lecture hall but a recital hall. Ross was very confused when he walked in.
+
+\subsection*{What is Discrete Math?}
+It's kind of hard to pin down what discrete math really is. It's helpful to contrast it with continuous mathematics, where things can vary at will (like $\R$), where as we deal with finite or countable things (like $\N$). More than anything, it's characterized by problem solving techniques. Ross showed us some examples of problems we'll learn how to solve.
+
+\begin{problem}[Houses and Utilities]
+Suppose we have three homes, and each needs access to three different utilities: water, electricity, natural gas. Unfortunately, the pipes in this town are shoddy, and we need to connect the pipes from the utilities to the homes without letting them cross one another. Can it be done?
+\end{problem}
+
+\begin{problem}[Bridges of Königsburg]
+(Insert map of Königsburg here). Is there a way to walk across each of the seven bridges of Königsburg exactly once, without doubling back on any?
+\end{problem}
+
+\begin{problem}[Drawing problem]
+(Insert picture of an almost bipartite graph with the 2-6 connector missing, where vertices are numbered down first). Can you draw this graph without ever picking up your chalk?
+\end{problem}
+
+\begin{problem}[Confusing Names]
+Imagine you have a classroom wiht 60 students. The teacher has the roster for the class, but there are no pictures on the roster. How can she get the names right? Well, she could pick a name uniformly at random, and call each name as a student walked in. What's the probability that the teacher gets every name wrong?
+\end{problem}
+
+\begin{problem}[Art Gallery Guards]
+The Yale Art Gallery is an $n$-vertex polygon. (Not necessarily convex, perhaps it's a modernist gallery?) We want to place as few stationary guards as possible in the Gallery such that collectively they can see the entire Gallery --- where ``see'' means that they can turn around at will but can't see through the walls. There are a couple questions:
+\begin{parts}
+\part What's the best you can do? (Turns out it depends on the polygon's shape)
+\part Can you always do it with $n/3$ guards?
+\end{parts}
+\end{problem}
+
+\begin{problem}[Rational Approximation]
+Let $\alpha \in \R$. Prove that there are infinitely many integers $p,q$ such that $\abs{\alpha - p/q} < 1/q^2$.
+\end{problem}
+
+\begin{problem}[Casino Royale]
+A casino offers the following game: you flip a coin. If you get heads, you win \$2. If you get tails, you loose \$1. You begin with \$1 in your pocket, and you'll play as long as you can until you have no money left. What's the probability that you ever go broke?
+\end{problem}
+
+\subsection*{Introduction to Proofs}
+This course assumes only a passing familiarity with proof-based mathematics, so now Ross is gonna walk us through some basic concepts we'll need.
+
+\begin{definition}[Set]
+A set is just a collection of items. We'll use the naïve definition so as not to confuse things, so no paradoxes will be discussed here. An example is the set of all fruit, or all integers between 1 and 5. The elements could be mixed, so there could be both integers and fruits in the same set! Some prototypical examples of sets are 
+\begin{align*}
+\N &= \{1, 2,3, \dotsc\} \\
+\Z &= \{\dotsc, -2, -1, 0, 1, 2, \dotsc\}  \\
+\Q &= \{p/q \mid p,q \in \Z, q \not= 0 \} \\
+\R &= \{\text{~all real numbers~}\}
+\end{align*}
+\end{definition}
+
+Sets are often built with \emph{set-builder notation}. This is exactly what you think it is --- you can use variables on the left, a mid bar in the middle $\mid$, and quantifies on the right. Here's an example:
+\[ \{i \mid \exists k\in\N \text{ such that } k^2=i\} = \{i^2 \mid i \in \N\} = \{1, 4, 9, 16, \dotsc\}. \]
+
+\begin{example}[Spot the difference]
+Find the difference between these.
+\begin{align*}
+\{i \mid \exists k \in \Z \text{ where } i = 2k+2\}, \\
+\{i \mid \exists k \in \Z \text{ where } i = 2k-2\}, \\
+\{i \mid i^5 + 1 \text{ such that $i$ is even}\}.
+\end{align*}
+The first two are equivalent to the even integers, while the third is just the odd integers. Moral of the story: sets can look different when they're written in set-builder notation.
+\end{example}
+
+\begin{example}[Russel's Paradox]
+Consider the set $A$ defined by $A = \{S \mid S \notin S\}$. Is $A$ an element of $S$?
+\end{example}
+
+Ross talked about how intervals are sets, so $(a,b) = \{x \mid a < x < b\}$. Here's some non-standard notation: $[n] = \{1, 2, \dotsc, n-1\}$ is the set of all natural numbers less than $n$. The empty set is denoted $\emptyset$. And now, here are a ton of definitions about sets.
+
+\begin{definition}[Finite Cardinality]
+Given a set $S$, the cardinality $\abs{S}$ is the number of objects in $S$.
+\end{definition}
+
+\begin{definition}[Set Equality]
+Let $X$ and $Y$ be sets. We say that $X = Y$ if and only if $X$ and $Y$ have the same elements, so 
+\[ X = Y \iff (x \in X \iff x \in Y).  \]
+\end{definition}
+
+\begin{definition}[Subset]
+We say that $X \subset Y$ is a subset of $Y$ if $x \in X$ implies that $x \in Y$. Note that $X \subset X$ is always true, so subsets are not always smaller than their supersets, but cannot be bigger.
+\end{definition}
+
+\begin{definition}[Union]
+The union of $X$ and $Y$, written $X \cup Y$ means the set of all things which are either in $X$ or $Y$ or both.
+\end{definition}
+
+\begin{definition}[Intersection]
+The intersection of $X$ and $Y$, written $X \cap Y$ means the set of all things which are in $X$ and $Y$.
+\end{definition}
+
+\begin{definition}[Direct Product]
+The direct product of $X$ and $Y$, written as $X \times Y$, is the set of all ordered pairs $(x,y)$ where $x \in X$ and $y \in Y$.
+\end{definition}
+
+In case you don't know the definition of summations and products, this would be a good time to look them up. I'll include the definitions relating to functions here since Ross spent the last few minutes of classes covering these bases just so that everyone was up to speed on the basic notaion and concepts we'll need for the class.
+
+\begin{definition}[Injective and Surjective]
+Let $f : X \to Y$. We say that $f$ is injective, or one-to-one, if $f(a) = f(b) \implies a = b$. We say tht $f$ is surjective, or onto, if for all $y \in Y$ there exists an $x \in X$ such that $f(x) = y$. If $f$ is both injective and surjective, we say that $f$ is a bijection. 
+\end{definition}
+
+\begin{notation}[$\hookleftarrow$, $\twoheadrightarrow$]
+We write $f : X \hookleftarrow Y$ to mean that $f$ is injective, and $f : X \twoheadrightarrow Y$ to mean that $f$ is surjective.
+\end{notation}
