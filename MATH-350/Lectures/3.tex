@@ -1,0 +1,77 @@
+\section{4 September 2018}
+
+\begin{definition}
+For a set $\Omega$, the symmetric group on $\Omega$ is $S_\Omega = \{\text{bijective maps $\Omega \to \Omega$}\}$. For $n \in \N$, we say that $S_n = S_{\{1,\dotsc,n\}}$. This is usually called the symmetric group on $n$ letters.
+\end{definition}
+
+Let's consider this example for $S_4$ (warning, there's some cyclic decomposition for $g_1, g_2$?)
+
+\begin{example}
+Consider the following maps $g_1, g_2 \in S_4$,
+\[
+	\begin{array}{c}
+	g_1 \\
+	1 \to 2 \\
+	2 \to 1 \\
+	3 \to 4 \\
+	4 \to 2
+	\end{array} \qquad
+	\begin{array}{c}
+	g_2 \\
+	1 \to 3 \\
+	2 \to 1 \\
+	3 \to 2 \\
+	4 \to 4
+	\end{array}
+\]
+We can also write these as $g_1 = (12)(34)$ and $g_2 = (132)(4)$. In this notation, how to we multiply things? E.g., what is $g_2g_1$? Well, we can write this naïvely as $(132)(4)(12)(34)$, but we don't want to repeat any numbers. Let's see what happens to $1$:
+\[ (132)(4)(12)(34) \cdot 1 = (132)(4)(12) \cdot 1 = (132) \cdot 2 = 1. \] For $2$, we get 
+\[ (132)(4)(12)(34) \cdot 2 = 3. \] For $3$, this comes $g_2g_1 \cdot 3 = 4$, and for $4$ we have $g_2g_1 \cdot 4 = 2$. Then $g_2g_1 = (1)(234)$. Unfortunately, doing this sort of element-wise reduction is the fastest way to multiply anything.
+\end{example}
+
+\begin{problem}
+Someone asked the question ``does order matter?'' E.g., is it true that $(12)(34) = (34)(12)$ always?
+\end{problem}
+\begin{solution}
+No. They are the same. Also, $(abc) = (bca)$; as long as the sign of the permutation of the cycle elements is $+1$, it won't matter how you order the elements of a cycle.
+\end{solution}
+
+\begin{problem}
+Does order matter when there is a number repeated (when the cycles are not disjoint)? E.g. does $g_1g_2 = g_2g_1$?
+\end{problem}
+\begin{solution}
+Yeah, order does matter. Consider that $(12)(13) \not= (13)(12)$. This means that, in general, $S_n$ is not abelian.
+\end{solution}
+
+\begin{problem}
+Consider $S_5$, where $g = (123)(45)$ and $h = (12345)$. Find $g^2, g^{-1}, h^{-1}$. Fun fact, it's easy.
+\end{problem}
+
+These facts lead us to an interesting and useful conclusion.
+\begin{proposition}
+For any $g \in S_n$, we can write $g$ as a product of disjoint cycles.
+\end{proposition}
+
+This gives us an interesting observation for $S_n$.
+
+\begin{proposition}
+Let $g \in S_n$ be written as the product of disjoint cycles. Then the order of $g$ is the least common multiple of the orders of the disjoint cycles.
+\end{proposition}
+
+\subsection*{Fields $n$ stuff}
+
+\begin{definition}
+A field $k$ is a triple $(F, +, \times)$ where $(F,+)$ and $(F \setminus \{0\},\times)$ are groups where $F^\times = F \setminus \{0\}$ and where multiplication distributes over addition. Some cannonical examples are $\Q$, $\R$, $\C$, $\F_p = \Z/p\Z$ for prime $p$.
+\end{definition}
+
+A brief note on finite fields: for a finite field $\F$, we know that $\abs{\F} = p^n$ for some prime $p$ and some $n \geq 1$.
+
+Now that we have fields, we can get matrices for free. Consider the cannonical matrix group $\mathrm{GL}_n(k)$ of invertible matrices with entries in $k$.
+
+\begin{example}
+Consider $\mathrm{GL}_2(\F_2)$ where $\F_2 = \{\bar{1}, \bar{2}\}$ (note that this is just $\Z / 2\Z$). What is the order of $\mathrm{GL}_2(\F_2)$?
+\end{example}
+
+\begin{proof}
+There are six. Any element cannot have three or four zeros in it, nor two zeros in the same row or column. Then just count the total possibilities.
+\end{proof}
