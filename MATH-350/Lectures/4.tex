@@ -1,0 +1,69 @@
+\section{September 7, 2018}
+
+Some facts about finite fields.
+\begin{enumerate}
+\item For all prime $p$, there exists a field $\F_p$ where $\abs{\F_p} = p$;
+\item For all prime $p$ and $n > 0$, there exists a field $\F$ where $\abs{\F} = p^n$;
+\item Every finite field has order $p^n$ for some prime $p$ and some $n > 0$.
+\end{enumerate}
+
+From last time, we know for for all prime $p$ and all $n > 0$, there exists a field with $p^n$ elements. However, the naïve choice for this field isn't always right.
+
+\begin{example}
+Consider $\F_4$; what could it be?
+\end{example}
+
+\begin{solution}
+It can't be $\Z/4\Z$, since inverses aren't unique as $4$ isn't prime, and so $(\Z/4\Z \setminus \{0\}, \times)$ isn't a group. However, it could be the direct product of $\Z/2\Z$ with itself; i.e., $\F^4 \cong \Z_2 \cross \Z_2$. Whatever it is, we know it has elements $\{\bar{0},\bar{1}, x, x+1\}$ which satisfies $x^2 + x + 1 = 0$, $\bar{1} + \bar{1} = 0$, and $x + x = 0$. Then $x^2 = -x-1 = x+1$.
+\end{solution}
+
+\subsection{Homomorphisms}
+
+\begin{definition}[Homomorphism]
+A group homomorphism is a map $\varphi : (G, \ast) \to (H, \times)$ which preserves the operations between the groups, so $\varphi(a \ast b) = \varphi(a) \times \varphi(b)$. Usually, this is just abbreviated into $\varphi(ab) = \varphi(a)\varphi(b)$.
+\end{definition}
+
+\begin{lemma}
+Let $\varphi$ be a homomorphism. Then $\varphi(1_G) = 1_H$, and $\varphi(a^{-1}) = \varphi(a)^{-1}$.
+\end{lemma}
+
+\begin{proof}
+We know that $1 \cdot 1 = 1$. Then $\varphi(1 \cdot 1) = \varphi(1)\varphi(1) = \varphi(1)$. Then multiply by $\varphi(1)^{-1}$, and we have that $\varphi(1) = 1$. Consider then that $1 = aa^{-1}$, so $\varphi(1) = \varphi(a)\varphi(a^{-1}) = 1$ (by the previous result). Then $1 = \varphi(a)\varphi(a^{-1})$, so $\varphi(a^{-1}) = \varphi(a)^{-1}$ since inverses are unique.
+\end{proof}
+
+\begin{example}[Examples of Homomorphisms]
+\begin{enumerate}
+\item The identity map $g \mapsto g$;
+\item The determinant $\det : \mathrm{GL}_n(\R) \to (R^\times, \times)$;
+\item The map $(\Z, +) \to (\Z_n, +)$ where $a \mapsto \bar{a}$;
+\item Let $g \in G$. Then we have a map $(\Z, +) \to G$ where $n \mapsto g^n$.
+\end{enumerate}
+\end{example}
+
+\begin{definition}[Isomorphism]
+An isomorphism is a bijective homomorphism. Note that the inverse of an isomorphism is also a group isomorphism.
+\end{definition}
+
+What does it mean for two things to be isomorphic? Well, it means that anything you care about can be preserved under a sufficiently good map, so two isomorphic groups aren't the same, but they're ``the same.'' As an example of why they aren't actually the same, consider that $(\Z_2, +)$ and $(\Z_3^\times, \times)$ are isomorphic. These groups don't have the same elements or the same operations, but they are isomorphic to one another.
+
+\begin{lemma}
+Let $\phi : G \to H$ be a homomorphism where $g_i \mapsto h_i$. Then any relation on $\{g_i\}$ is satisfied by $\{h_i\}$. For example, if $G$ is abelian then $H$ is abelian as well.
+\end{lemma}
+
+\begin{corollary}
+If $G = \langle g_1,\dotsc,g_n \mid \text{relations } \rangle$, and if $h_1,\dotsc,h_n \in H$ satisfy the same relations, then there exists a homomorphism $\phi : G \to H$ where $g_i \mapsto h_i$. However, any map which does preserve these relations need not be surjective nor injective. This means that presentations aren't enough to determine group isometry. Worse, minimal generating sets may not even have the same size for distinct generators. For example $\{1\}$ and $\{2,3\}$ both generate $\Z_6$.
+\end{corollary}
+
+\begin{corollary}
+Homomorphisms don't actually preserve order, since if $g^n = 1$ then $\phi(g^n) = 1$, but the order of $\phi(g^n)$ might just be a divisor of $n$, not $n$ itself.
+\end{corollary}
+
+\begin{definition}[Subgroup]
+A subgroup $H$ of $G$ is a group where the set of $H$ is a subset of $G$
+ and $H$ inherits its operation from $G$. Formally, $H$ is a subgroup of $G$ if the following are satisfied:
+ \begin{itemize}
+ \item $e \in G$;
+ \item $a \in H \implies a^{-1} \in H$;
+ \item $a,b \in H \implies ab \in H$.
+ \end{itemize}
+\end{definition}
