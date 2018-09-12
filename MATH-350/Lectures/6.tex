@@ -1,0 +1,80 @@
+\section{September 12, 2018}
+
+\epigraph{``Oh, I erased my smiley face. How sad.'' (she did not sound sad)}{Miki}
+
+Today we'll officially state something we covered last time.
+
+\begin{theorem}[Caley's Theorem]
+Every finite group $G$ is isomorphic to a subgroup of $S_n$ for some $n$.
+\end{theorem}
+\begin{proof}
+Let $n = \abs{G}$.
+\end{proof}
+
+\subsection{Kernels}
+
+Let's discuss formally the idea of a kernel of a homomorphism and a kernel of a group action.
+
+\begin{definition}[Kernel]
+Let $\phi : G \to H$ be a homomorphism. Then the kernel of $\phi$, written $\ker \phi$, is the set of all elements in $G$ which are mapped to the identity in $H$; i.e., $\ker \phi = \{g \mid \phi(g) = 1_h \}$.
+\end{definition}
+
+\begin{definition}
+Suppose $G$ acts on $A$ by $\pi$. Then the kernel of the action is the set of all elements of $g$ which act trivially on $A$; i.e., $\ker \pi = \{g \mid ga = a \text{ for all $a \in A$}\}$.
+\end{definition}
+
+\begin{example}
+Consider the action $\phi : \mathrm{GL}_2(\R) \to (\R^\times, \times) : A \mapsto \det A$. Then the kernel of $\phi$ are all matricies with determinant $1$, called $\mathrm{SL}_2(\R)$.
+\end{example}
+
+\begin{definition}[Stabalizer]
+Let $\pi : G \times A \to A$ be a group action, and fix $a \in A$. The \emph{stabalizer} is $G_a = \{g \in G \mid ga = a\}$. By this definition, the kernel is contained within any stabalizer, and in fact is equal to the intersection of all stabalizers.
+\end{definition}
+
+\begin{example}
+Let $G = \mathrm{GL}_2(\R)$ and let $A = \R^2$ defined with the usual action (vector-matrix multiplication). What is the kernel of this action? Then let $c = (0,1)^\top \in \R^2$. What is the stabalizer of $c$?
+\end{example}
+
+\begin{corollary}
+The kernel of an action is a subgroup of $G$, and $G_a$ is a subgroup of $G$ for any fixed $a \in A$.
+\end{corollary}
+
+\begin{definition}[Orbit]
+Fix $a \in A$. The orbit of $a$ is the image of $a$ under the group action; i.e., $O_a = \{ga \mid g \in G\}$. Intuitively, it's everywhere $a$ can go under a specific group action. Notice that the orbits partition $A$, and so are equivalence classes in $A$.
+\end{definition}
+
+\begin{example}
+Let $G = \mathrm{GL}_2(\R)$ and let $A = \R^2$ defined with the usual action (vector-matrix multiplication). What is the orbit of $(1,0)^\top$?
+\end{example}
+
+\begin{definition}[Faithful]
+An action is faithful if the kernel is the identity. This means that the base element of the action must be the identity. This tells us that $G$ is injective into $S_A$.
+\end{definition}
+
+\begin{example}
+Consider $D_8$ acting on a square (technically the set $A = \{1,2,3,4\}$). The orbit $O_1$ is all possible vertices, since you can rotate any vertex to any position. The stabalizer is $\{1, s\}$.
+\end{example}
+
+\begin{lemma}
+As it turns out, for a fixed $a \in A$, we see that $\abs{O_a}\abs{G_a} = \abs{G}$. We'll prove this later. (Orbit-Stabalizer Theorem I think?)
+\end{lemma}
+
+\begin{definition}[Conjugation]
+Consider the action $\pi : G \times G \to G : (g,a) \mapsto gag^{-1}$. This action is known as \emph{conjugation}.
+\end{definition}
+
+\begin{definition}[Centralizer]
+Let $S \subset G$. The \emph{centralizer} of $S$ in $G$, written $C_G(S) = \{g \in G \mid gsg^{-1} = s \text{ for all $s \in S$}\}$. This is the set of things that fix $S$ in $G$ pointwise under conjucation. By definition, this is the set of elements in $G$ which commute with all elements in $S$. In the case that $S = \{s\}$ we see that $C_G(S) = G_S$. 
+\end{definition}
+
+\begin{definition}[Normalizer]
+Let $S \subset G$. The \emph{normalizer} of $S$ in $G$ is $N_G(S) = \{g \in G \mid gSg^{-1} = S\}$. Essentially, this is just a centralizer on a set, except that it may permute the elements of $S$. Then $C_G(S) \subset N_G(S)$.
+\end{definition}
+
+\begin{example}
+Suppose that $G$ is abelian. For any $S \subset G$, we see that $C_G(S) = N_G(S) = G$.
+\end{example}
+
+\begin{example}
+Let $G = S_3$, and let $S = G$. What is the normalizer of $S$? (It's the whole thing since $G$ is closed under its operation.) What is the centralizer of $S$? (It's the identity.)
+\end{example}
