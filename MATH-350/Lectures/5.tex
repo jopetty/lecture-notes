@@ -1,0 +1,47 @@
+\section{September 10, 2018}
+
+A useful fact about orders a generated subgroups.
+
+\begin{lemma}
+Let $x \in G$, and let $\langle x \rangle \subset G$. Then $\abs{x} = \abs{\langle x \rangle}$.
+\end{lemma}
+
+Today, we're gonna connect the notion of a homomorphism and the notion of a group. Let $\phi : H \to G$ be a homomorphism. Then the image $\phi(H)$ is a subgroup of $G$. Why is this true? Well, trivially, $\phi(H)$ is a subset of $G$. Since $\phi$ is a homomorphism, we know that $\phi(1) = 1$ and so $1 \in \phi(H)$. Since $\phi$ is multiplicative, $\phi(a),\phi(b) \in \phi(H) \implies \phi(a)\phi(b) \in \phi(H)$. And since $\phi(a)^{-1} = \phi(a^{-1})$, $\phi(H)$ contains inverses for all $\phi(a) \in \phi(H)$. However, there's not much that we can say about $\phi(H)$ in relation to $G$, other than the fact that it must not be larger than $G$. However, if $\phi : H \xhookrightarrow{} G$ is injective, then $H$ and $\phi(H)$ are isomorphic, so there's a copy of $H$ inside of $G$.
+
+\subsection{Representation Theory}
+
+Miki says that she's not supposed to talk about representation theory in this class but she can't resist mentioning it here when we discuss group actions.
+
+\begin{definition}[Group Action]
+Let $G$ be a group. A group action is a map $\phi : G \times A \to A$, where $A$ is a set on which $G$ is acting, which obeys the following axioms.
+\begin{enumerate}
+\item The identity in $G$ becomes the identity map, so $\phi(1_G, a) = a$ for all $a \in A$;
+\item The action $\phi$ is associative, so $\phi(g, \phi(h,a)) = \phi(gh, a)$.
+\end{enumerate} 
+\end{definition}
+
+The simplest example of a group action is the \emph{trivial action}, which is simply the map $\phi(g,a) = a$ for any $a \in A$ and any $g \in G$. Another example is \emph{translation}, where we map each $a$ to $a + n$ from some $n$. \emph{Reflection} is where we map $a$ to $-a$.
+
+\begin{example}
+Some food for thought: the group operation is also an action on that group.
+\end{example}
+
+Some facts about group actions.
+\begin{lemma}
+For all $g \in G$, we get a map $\sigma_g : A \to A$ where $a \mapsto g\cdot a$; then $\sigma_g$ is bijective since it's just a permutation of $a$; then we have a map $\pi : G \to S_A : g \mapsto \sigma_g$.
+This map $\pi$ is a group homomorphism. However, we don't know that $\pi$ is necessarily injective.
+\end{lemma}
+\begin{proof}
+We know that $\sigma_g$ is bijective since it has an inverse in $\sigma_{g^{-1}}$. Since it's bijective, we know that $\sigma_g$ is a permutation, and so is an element of $S_A$. Then consider that $\pi(gh)(a) =  (gh)(a) = g \cdot (h \cdot a) = \pi(g)\pi(h)(a)$, so $\pi$ is multiplicative.
+\end{proof}
+
+\begin{example}
+Let $A = G$, so our action is left multiplication $\ast : G \times G \to G : (g,a) \mapsto ga$. Since multiplication already fulfills the requirements for group actions, we know this forms a valid action. For this action, look at the map $\pi : G \to S_G$. We know $\pi(g) = \sigma_g$ is bijective. Then $\pi$ is injective. This fact gives us that every finite group is isomorphic to a subgroup of $S_n$ for some $n$, since $G \cong \pi(G) \subset S_n$ for $n = \abs{G}$.
+
+\begin{proof}
+Suppose $\sigma_g = \sigma_h$. Then $\sigma_g(a) = \sigma_h(a)$ for all $a \in A = G$. In particular, let $a = 1$. The $g = g \cdot 1 = h \cdot 1 = h$, so $g = h$. Then $\pi(g) = \pi(h)$ if and only if $g = h$.
+\end{proof}
+\end{example}
+
+\subsection{Isomorphisms and Equality}
+Why do we bother saying that groups are isomorphic instead of just saying that groups are ``equal.'' Consider $D_{8}$ acting on a square $\square$. There is a subgroup $H_1 = \langle r^2 \rangle = \{1, r^2\}$. We know that $H_1 \cong \Z/2\Z$. There is also the subgroup $H_2 = \langle s \rangle = \{1,s\}$. We know that $H_2$ is also isomorphic to $\Z/2\Z$. However, it's pretty clear that $H_1 \not= H_2$ even though $H_1 \cong H_2$. Then isomorphic groups can be distinguished by their group actions.
