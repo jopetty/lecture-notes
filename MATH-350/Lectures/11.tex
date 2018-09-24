@@ -1,0 +1,52 @@
+\section{September 24, 2018}
+
+\epigraph{``This is where the fun begins.'' (slightly paraphrased)}{Miki}
+
+\subsection{Quotient Groups}
+
+For the rest of this section, keep in mind the example of $\Z/n\Z$. This is kind of like the prototypical example for quotient groups.
+
+\begin{definition}[Coset]
+Let $H \leq G$. The left coset of $H$ in $G$ is a set of the form $aH = \{ah \mid h \in H\} \subset G$ for a fixed $a \in G$. The right coset of $H$ in $G$ is a set of the form $Hb = \{hb \mid h \in H\} \subset G$ for a fixed $b \in G$.
+\end{definition}
+
+We said previously that left multiplication permutes the elements of $H$ (this was called the left regular action), and in particular we know that $\abs{aH} = \abs{H}$. We can see this trivially by simply multiplying each $ah$ by $a^{-1}$. Note that this coset is usually \emph{not} a subgroup; if $a^{-1} \notin H$ then $e \notin aH$.
+
+\begin{example}
+Let $G = \Z$, and let $H = 2\Z$. Consider the cosets $0 + H$ and $1 + H$ (these are just the even integers and the odd integers). In particular, $0 \notin 1 + H$ and so $1 + H \not\leq G$.\note{The Right and Left cosets here are equal, which is always true of $G$ is abelian.}
+\end{example}
+
+Notice that in the above example, the cosets are disjoint and partition the group into equivalence classes. In general this is a true statement.
+
+\begin{lemma}
+The costs of $H$ partition $G$ into equivalence classes, with the relation $a \sim b$ if and only if $a = bh$ for some $h \in H$. In particular, $a \sim b$ if and only if $aH = bH$, and so the cosets defined by those elements are identical.
+\end{lemma}
+
+\begin{corollary}
+The order of the cosets divides the order of $G$. In particular, $\abs{G} = \abs{H} \cdot [G : H]$ where $[G : H]$ is the \emph{index} of $H$ in $G$ and is the number of (left OR right) cosets of $H$ in $G$.
+\end{corollary}
+
+In the example with $\Z$ and $2\Z$, lets try to make these cosets behave like groups. Consider that $(0 + H) + (1 + H) = (1 + H)$ (which just says that and even plus an odd equals an odd). We also have a homomorphism $\pi : \Z \to 2\Z : n \mapsto \bar{n} = n+H$. This maps integers to cosets. Note that $\pi$ respects the operations in each group! This is kind of what defines ``adding even and odd integers'' in the languages of sets.
+
+\begin{notation}
+Let $0+H = \pi^{-1}(\bar{0}) = \{n \in \Z \mid \pi(n) = \bar{0}\}$; this is the preimage of $\pi$ or the fiber of $\pi$ above $0$. Yes this is overloaded notaiton, and no $\pi$ does not have an inverse (it's pretty clearly \emph{not} injective.)
+\end{notation}
+
+Note that it doesn't really matter which elements we send into $\pi$ as long as they are both of the same coset, so $\pi(a) = \pi(b)$ if and only if $a \sim b$. Additionally, note that since $\pi$ is a homomorphism we can say that $\pi(\bar{1} + \bar{20}) = \pi(\bar{1}) + \pi(\bar{20})$.
+
+Now, in making these cosets into groups we want them to inherit their operation from the parent group (so we can't just make up multiplications to suit our needs).
+
+\begin{definition}
+Let $A,B \subset G$. Then $AB = \{ab \mid a \in A, b \in B\} \subset G$. In particular, note that $HH = H$ and $(1H \cdot 1H = 1H)$.
+\end{definition}
+
+\begin{example}[Things Go Wrong]
+Let $G = S_3$ and let $H = \langle (23) \rangle = \{1, (23)\}$. The cosets of $H$ are $1H = (23)H$, $(12)H = (123)H = \{(12), (123)\}$, and $(13)H = (132)H = \{(13), (132)\}$. Now consider $1H \cdot (12)H = \{(12), (123), (132), (13)\}$. In particular, note that this isn't a coset (it has too many elements!). We would have wanted that $1H \cdot (12)H = (12)H$ but this doesn't happen. Then there is not quotient group $G / H$.
+\end{example}
+
+What just happened? Why can't we create a group out of the cosets of $S_3$? We wanted that $aH \cdot bH = abH$ but this didn't happen; essentially, we want $b$ and $H$ to commute, so we want that the left and right cosets to be equal to one another.
+
+\begin{example}
+Let $G = S_3$ and let $H = \langle (123) \rangle = A_3$. This is the alternating group on three letters. As always, $1H = H1 = H$. Note that $(12)H$ contains \emph{the only other elements of $G$} which aren't in $1H$, and so $(12)H = H(12) = G \setminus 1H = G \setminus H1$. This happens when $[G : H] = 2$ even though $G$ is not abelian. Then $S_3 \setminus A_3 = G \setminus H$ and $\bar{a}\bar{b} = \bar{ab}$ so multiplication is well defined.
+\end{example}
+
