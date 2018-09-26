@@ -1,0 +1,62 @@
+\section{September 26, 2018}
+
+\epigraph{Let $N$ be a group...I'll call it $N$ suggestively}{Miki}
+
+Recall from last class that we found and example of a non-abelian group and a subgroup for which the left and right cosets of the group were the same; in this case, it was $G = S_3$ and $H = A_3$.
+
+\begin{definition}[Quotient Group]
+Let $H \leq G$. The \emph{quotient group} $G/H$ is a group whose elements are the left cosets of $H$. The set for this group is known as the quotient set, and the operation for the group is inherited from $G$ such that $gH \star kH = gk H$. Note that $(gH, \star)$ does not always form a group, so it isn't guaranteed that $G/H$ exists for any $G,H$. 
+\end{definition}
+
+\subsection{Mapping from \texorpdfstring{$G$}{G} to \texorpdfstring{$G/H$}{G/H}}
+
+Given a group $G$ and a quotient group $G/H$ we can find a very natural mapping $\pi : G \to G/H$ where $g \mapsto gH$. This map sends elements to their coset, and $\pi(a) = \pi(b)$ if and only if $aH = bH$; thenthe fibers of $\pi$ are the left cosets of $H$, and $\ker \pi = H$. This is why we call it the quotient group --- it's like we're dividing out by $H$. Note that this homomorphism is always going to be surjective since there's no member of $G$ which isn't in some coset of $H$ as they partition $G$.
+
+\begin{definition}[Normal Subgroup]
+Let $N \leq G$. Then $N$ is normal if and only if the left and right cosets are the same, so $gN = Ng$. If $N$ is normal then $G/N$ forms a quotient group. Note that this does not mean that $gn = ng$ so $g$ and $n$ do not commute necessarily, but the cosets are preserved. This is equivalent to saying that $\mathrm{N}_N(G) = G$ but $\mathrm{C}_N(G)$ is not necessarily $G$.
+\end{definition}
+
+\begin{notation}[$\normal$]
+We write $N \normal G$ to mean that $N$ is a normal subgroup of $G$.
+\end{notation}
+
+\begin{theorem}
+The quotient group $G / N$ exists if and only if $N \normal G$.
+\end{theorem}
+
+\begin{proof}[Proof that $N \normal G$ is sufficient]
+Observe that $(aN)(bN) = abN$ if $N$ is normal. Then group multiplication is well defined. Observe also that $(aN)^{-1} = a^{-1}N$, so the group is closed under inversion, and by definition our multiplication is associative. Then $G/N$ forms a group if $N$ is normal in $G$.
+\end{proof}
+
+\begin{proof}[Proof that $N \normal G$ is necessary]
+Suppose $H \leq G$ is not normal. Then there is some $g \in G$ for which $gH \not= Hg$. Then we know that $1HgH \not= gH$, and our group operation $\star$ cannot hold.
+\end{proof}
+
+Not that $\abs{G/N} = \abs{G} / \abs{N} = [G : N]$ if $G$ is finite, which we already knew but it's worth remembering it.
+
+\subsection{Testing Normality}
+
+\begin{proposition}
+The following are equivalent:
+\begin{itemize}
+\item $N \normal G$;
+\item $gNg^{-1} \subset N$ for all $g \in G$ (note this implies they are equal since conjugation is injective);
+\item $N$ is the kernel of some homomorphism $\pi : G \to H$ for some $H \leq G$.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}[Proof that 1 $\implies$ 2]
+Let $g \in G$ and $n \in N$. We know that $gN = Ng$, so there exists $n' \in N$ such that $ng = n'g$. Multiply on the right by $g^{-1}$ and we see that $gng^{-1} = n'$, and so $gng^{-1} \in N$ for all $g,n$.
+\end{proof}
+
+\begin{proof}[Proof that 2 $\implies$ 1]
+Literally just reverse the above procedure.
+\end{proof}
+
+\begin{proof}[Proof that 1 $\implies$ 3]
+Let $H = G / N$. Then we know that $\ker \pi = N$ where $\pi : G \to G/N : g \mapsto gN$. Then, rather trivially, we know $N$ is the kernel for some homomorhpism if $N \normal G$.
+\end{proof}
+
+\begin{proof}[Proof that 3 $\implies$ 2]
+We know that $N = \ker \pi$ for some $\pi : G \to H$. Then take any $g \in G$ and $n \in N$, and consider that $\pi(gng^{-1}) = \pi(g)\pi(n)\pi(g^{-1}) = \pi(g)\pi(g^{-1})$ since $n \in \ker \pi$, and then we conclude that $\pi(g)\pi(g^{-1}) = 1$ and so we know that $gng^{-1} \in \ker\pi$ so $gng^{-1} \in N$ for all $n \in N$ and for all $g \in G$.
+\end{proof}
