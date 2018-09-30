@@ -1,0 +1,74 @@
+\section{Friday, 28 September 2018}
+
+\epigraph{``I'll leave the cosets for later, where later means 15 seconds from now.''}{Miki}
+\epigraph{``Continuous math is not allowed...don't tell anyone I said that.''}{Miki}
+
+Recall Lagrange's Theorem, where if $G$ is a finite group and $H \leq G$ then $\abs{H}$ divides $\abs{G}$; in fact, $\abs{G} / \abs{H} = [G : H]$.
+
+\begin{corollary}
+Let $G$ be a finite group and let $x \in G$. Then $\abs{x}$ divides $\abs{G}$ since $x$ generates a cyclic subgroup of order $\abs{x}$, so $\abs{x} = \abs{\langle x \rangle}$ which must divide $\abs{G}$ by Lagrange.
+\end{corollary}
+
+\begin{corollary}
+If $\abs{G} = p$ is prime, then $\abs{G} \cong Z_p$.
+\end{corollary}
+
+\begin{proof}
+Since $\abs{G} \not= 1$ there exists $x \in G$ which is not the identity. Then consider $\langle x \rangle$. The order of this cyclic group must divide $p$, and since $p$ is prime it must equal $p$, and so $G = \langle x \rangle$ which means it is isomorphic to $Z_p$.
+\end{proof}
+
+If we have some $n \in \Z_{>0}$ where $n$ divides $\abs{G}$ for some $G$, it isn't guaranteed that there exists some $H \leq G$ where $\abs{H} = n$, and/or there isn't always an $x \in G$ where $\abs{x} = n$. For example, consider $G = S_3$ and $n = 6$. However, if prime $p$ divides $\abs{G}$ then there exists an $x \in G$ where $\abs{x} = p$ --- Miki says she will prove this later.
+
+\subsection{Product Subgroups}
+
+Let $G$ be a group and let $H,K \leq K$. Let's consider the product of $HK$, which we recall is defined as \[ HK = \{ hk \mid h \in H, k \in K \}. \]
+This may or may not be a subgroup. In general it is not.
+\begin{example}
+Let $G = S_3$, and let $H = \langle (12) \rangle$ and let $K = \langle (13) \rangle$. Then $HK = \{1, (12), (13), (132)\}$ which is not a subgroup of $S_3$ since $4$ does not divide $6$.
+\end{example}
+What can we say about $HK$ anyways?
+\begin{proposition}
+The order of $HK$ is at most $\abs{H}\abs{K}$. In fact, 
+\[ \abs{HK} = \frac{\abs{K}\abs{K}}{\abs{H \cap K}}. \]
+\end{proposition}
+
+\begin{proof}
+We know that $HK$ is the union of left cosets of $K$ where 
+\[ HK = \bigcup_{h \in H} hK. \]
+Consider $a,b \in H$. We know that $aK = bK$ if and only if $a^{-1}b \in K$ which is true if and only if $a^{-1}b \in K \cap H$. This means that $a K \cap H = b K \cap H$. Then we've reduce the problem to counting the number of distinct cosets $hK$ which is just the index, so it is $\abs{H} / \abs{K \cap H}$. Multiplying through by the size of $K$, we find that 
+\[ \abs{HK} = \frac{\abs{H}\abs{K}}{\abs{K \cap H}}.\qedhere \]
+\end{proof}
+
+Now we can answer when $HK$ is a subgroup; it happens if and only if $HK = KH$. Intuitively, this happens only when $hkh'k' \in HK$ which can happen if and only if we can commute the $h$ and $k$ elements. It is sufficient to say that $H$ is in the normalizer of $K$ or vice-versa. Another sufficient condition is to say that $K \normal G$, or the other way around. Note that neither of these conditions is necessary. 
+\[ H \leq N_G H \implies hK = Kh \implies hk = k'h, \]
+but we only need that $hk = k'h'$. That is, we only need that $hK = Kh'$ which is a weaker condition than being in the normalizer.
+
+\subsection{Isomorphism Theorems}
+
+\begin{theorem}[First Isomorphism Theorem]
+Given a surjective homomorphism $\phi : G \to H$, we know that $H \cong G/\ker\phi$.
+\end{theorem}
+\begin{proof}
+This was the definition of $G / \ker\phi$, since $\ker\phi \normal G$. See the previous lecture notes for a more in-depth explanation.
+\end{proof}
+
+\begin{example}
+Consider $\mathrm{GL}_2(\F_3)$ and let $\phi = \det : G \to \F_3^\times$. Then $\ker \phi = \mathrm{SL}_2(\F_3)$, and $\mathrm{GL}_2(\F_3) / \mathrm{SL}_2(\F_3) \cong \F_3^\times$. Since $\mathrm{GL}_2(\F_3)$ has $48$ and $\F_3^\times$ has $2$ elements then we know that $\mathrm{SL}_2(\F_3)$ is of order $2$.
+\end{example}
+
+\begin{theorem}[Second Isomorphism Theorem]
+Let $G$ be a group with $H,K \leq G$ and let $H \leq N_GK$. Then $HK / L \cong H/H\cap K$.
+\end{theorem}
+
+\begin{proof}
+We know several things.
+\begin{itemize}
+\item $HK \leq H$ since $H \leq N_G K$;
+\item $K \leq HK$, since we know that $H \leq N_G K$ and $K \leq N_G K$ so $K \leq HK$;
+\item Now we can take the quotient $HK/K$, which is the left cosets of $K$ in $HK$. We have shown that $hK = h'K$ if and only if $h H \cap K = h' H \cap K$. Then define the map $\pi : H \to HK/K$ defined by $h \mapsto HK$. This is a homomorphism since $hKh'K = hh'K$ since that's how we defined multiplication. Then $\ker\pi$ is all elements $h$ of $H$ which map to the identity coset which happens if and only if $h \in K$, so $\ker \pi = \{h \in H \cap K\}$. Then by the First Isomorphism Theorem, $H/H \cap K \cong HK/K$. \qedhere
+\end{itemize}
+\end{proof}
+
+\begin{example}
+Let $G = S_3$, let $K = A_3$, and let $H = \langle (12) \rangle$. We know that $HK = S_3$ and $H \cap K = \{e\}$. Then we know that $HK/K = S_3/A_3 \cong \langle (12) \rangle / 1 \cong Z_2$.
+\end{example}
