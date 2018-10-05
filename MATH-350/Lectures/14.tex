@@ -1,0 +1,47 @@
+\section{Monday, 1 October 2018}
+
+\epigraph{``I've got H's on the brain.''}{}
+
+\epigraph{``That's the third isomorphism theorem, I knew you wouldn't like it. It should take you anywhere from a day to seven years to become comfortable with it.''}{Miki}
+
+\epigraph{``It's math....it keeps doing things like that.''}{Miki}
+
+\subsection{Isomorphism Theorems Continued}
+
+Recall from last lecture we developed the first two isomorphism theorems. Today, we'll cover the last two (or one, depending on your perspective).
+
+\begin{theorem}[Third Isomorphism Theorem]
+Let $G$ be a group and let $H,N$ be normal subgroups of $G$ with $N \subseteq H$. THen $G/N \big/ H/N \cong G/H$.
+\end{theorem}
+
+\begin{proof}
+Consider a map $\phi : G/N \to G/H : gN \mapsto gH$. We need this map to be well-defined. Suppose that $g_1N = g_2N$. Then $g_1^{-1}g_2 \in N$, but $N \subseteq H$, and so $g_1H = g_2H$ and $\phi$ is well defined. We also need to know that this is a homomorphism. Consider $\phi(g_1N)\phi(g_2H) = g_1g_2H = \phi(g_1g_2N)$, and in fact we also know that $\phi$ is surjective. Consider $gH \in G/H$ and suppose that $gH = \phi(gN)$. Since $N \subset H$ this is well defined. Consider then that $\ker \phi : \phi(gN) = gH$. This happens if and only if $g \in H$ so $gN \subset H$ is a coset of $N$ in $H$ and $gN \in H/N$, so $\ker\phi = H/N$. Then by the First Isomorphism Theorem, we know that $G/N \big/ \ker\phi \cong G/H$.
+\end{proof}
+
+\begin{example}
+Let $G = \Z$ with $N = \langle 10 \rangle$ and $H = \langle 2 \rangle$. Then $G/N = \{0 + N,\dotsc,9+N\}$ and $G/H = \{0 + H, 1 + H\}$. Then $H / N = \{0 + N, 2 + N,\dotsc,8 + N\}$. The idea here is that if you take $\Z \pmod{10}$, and then modulo the result by $2$, then it didn't really matter than we modded out by $10$ to begin with.
+\end{example}
+
+\begin{theorem}{The Totally not fourth isomorphism theorem}
+Let $N \normal G$. THere is a correspondence (bijection) between subgroups of $G$ which contain $N$ and subgroups of $G/N$. That is,
+\[ \pi : H \mapsto \pi(H), \quad \bar{H} \mapsto \pi^{-1}(\bar{H}). \]
+Note that for any $H \leq G$ we know that $\pi(H) \leq G/N$. We require normality to ensure that $\pi$ is injective.
+\end{theorem}
+
+\begin{example}
+Consider $G = S_3$ with $N = A_3$. Then $\pi(S_3) = G/N$ and $\pi(A_3) = N$. What is $\pi(\langle (12) \rangle )$? It's all of $G/N$.
+\end{example}
+
+\subsection{Why do people care about normal groups?}
+
+\begin{definition}[Simple]
+A group $G$  is simple if $\abs{G} > 1$ and $G$ contains no proper normal subgroups.
+\end{definition}
+
+\begin{definition}[Composition Series]
+Consdier something like $1 = N_0 \normal N_1 \normal \cdots \normal N_r = G$ where $N_{i+1}/N_i$ is simple for all $0 \leq i \leq r-1$. As an example, $1 \normal A_3 \normal S_3$. Then $S_3/A_3 \cong Z_2$ and $A_3 / 1 \cong Z_3$. These series allow us to construct large groups whose multiplication is unknown, since normal subgroups multiply to form subgroups of something larger. For more information on this, see the \emph{Holder Program}, which was started in 1890 to classify simple groups and it took 103 years to actually classify them all. These series are \emph{almost} unique, where the quotient groups are unique up to a permutaiton, so the set of quotient groups are unique.
+\end{definition}
+
+\begin{definition}[Solvable groups]
+A group $G$ is solvalble is $1 = N_0 \normal \cdots N_r = G$ and $N_{i+1}/N$ is abelian. This kind of object shows up a lot in Galois Theory. As it turns out, $A_1$ through $A_4$ are solvalble but $A_5$ and higher is not solvable, which is why we can't solve arbitrary quintics.
+\end{definition}

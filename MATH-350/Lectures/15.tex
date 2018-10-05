@@ -1,0 +1,49 @@
+\section{Wednesday, 3 October 2018}
+
+\epigraph{``I will not try to decide whether that was happy or sad.''}{Miki}
+
+\epigraph{``Try it if you don't believe me.''}{Miki}
+
+\epigraph{``If you don't have surjectivity, you have nothing.''}{Miki}
+
+Recall from last time that we defined a simple group to be a non-trivial group which has no proper normal subgroups. Observe that if $G$ is abelian and simple then it has no proper subgroups at all, since all subgroups would be normal.
+
+\subsection{Permutations}
+
+We'll take a shortcut throught linear algebra to talk about the signs of permutaitons; the book constructs the notion from scratch. Recall that we can switch the rows of a matrix using the permutation matrix $P_{mn}$, by which left multiplication swaps the rows $m$ and $n$. Now, we talk about this as the cycle $(mn)$, so for example
+\[ \begin{pmatrix}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \sim \sigma = (12) \in S_3. \]
+Essentially, we start with $I_n$ and permute the rows according to $\sigma$ to yield the corresponding permutation matrix $P_\sigma$.
+
+\begin{definition}[Sign of Permutation]
+Let $\varepsilon : S_n \to \{\pm 1\} \cong Z_2$ by $\varepsilon(\sigma) = \det P_\sigma$. Then $\varepsilon$ is the \emph{sign} of $\sigma$.
+\end{definition}
+
+Note that $\varepsilon$ is actually a group homomorphism since the determinant is multiplicative; that is $\varepsilon(\tau\sigma) = \det(P_{\tau\sigma}) = \det(P_\tau)\det(P_\sigma) = \varepsilon(\tau)\varepsilon(\sigma)$. Then we can quite naturally ask, what is the kernel of $\varepsilon$. We define the terms \emph{even} and \emph{odd} to mean permutations whose sign is $+1$ and $-1$ respectively. Then $\ker\varepsilon = A_n \leq S_n$ is the set of all even permutations. This gives us a rigorous definition of the alternating group.
+
+Let's note that a two-cycle in $S_n$ is a transposition, and we have already proven on homework that every element in $S_n$ can be written as the product of two-cycles. We can quite easily conclude that every transposition has a sign of $-1$.
+
+\begin{proposition}
+Let $\sigma \in S_n$ be a $k$-cycle. Then $\varepsilon(\sigma) = (-1)^{k-1}$.
+\end{proposition}
+
+\begin{problem}
+How large is $A_n$?
+\end{problem}
+
+Since $\varepsilon$ is surjective, we know by the First Isomorphism Theorem that $S_n / A_n \cong Z_2$ (since $\Im\varepsilon = Z_2$), so $\abs{A_n} = n!/2$.
+
+\begin{theorem}
+The alternating group on $n$ letters is simple if $n \geq 5$. This was proven by Galois in the 1830's and is the reason for quintic insolubility.
+\end{theorem}
+
+\subsection{Actions}
+
+Recall that an action is a map $\phi : G \times A \to A$ by $\phi(g,a) = g \cdot a$. This yields a homomorphism $G \to S_A$ by $g \mapsto \sigma_g$, where $\sigma_g$ is bijective for a fixed $g \in G$. Recall also for $a \in A$ the stabalizer $G_a$ is the set of $g$ for which $ga = a$, and the kernel of the action is the set of $g \in G$ for which $ga = a$ for all $a \in A$. We said that an action is \emph{faithful} if the kernel of the action is the identity; that is, different elements of $g$ give different permutaitons on $A$. Furthermore, the orbit of $a$ is the set of $ga$ for all $g \in G$. We proved on homework that the orbits partition $A$.
+
+\begin{definition}[Transitive]
+An action is transitive if all elements of $A$ are in a single orbit; i.e., $a \sim b$ for all $a,b \in A$.
+\end{definition}

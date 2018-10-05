@@ -1,0 +1,18 @@
+\section{Wednesday, 29 August 2018}
+
+Most of today's lecture was administrata covering how the course will be run.
+
+Towards the end of the period we began to play with the very basic concepts of group theory. First and foremost is the definition of a group.
+
+\begin{definition}[Group]
+A group is an ordered pair $(G, \star)$, where $G$ is a set and $\star$ is a binary operation on $G$, which obeys the following axioms.
+\begin{itemize}
+\item There exists an element $e \in G$ known as the \emph{identity} with the property that $e \star g = g \star e = g$ for all $g \in G$.
+\item For all $g \in G$ there exists a $g^{-1} \in G$ known as the \emph{inverse} of $g$ which has the property that $g \star g^{-1}= g^{-1} \star g = e$.
+\item The operation $\star$ is associative.
+\end{itemize}
+\end{definition}
+
+You will sometimes see a fourth axiom included in this list, namely that $G$ is closed under $\star$, but since $\star$ is a binary operation on $G$ which definitionally means it is a map $\star : G \times G \to G$, and so $G$ is always implicitly closed under $\star$. When \emph{checking} whether or not $(G, \star)$ is a group, though, it is a very good idea to check that $\star$ actually is a binary operation.
+
+You're probably already familiar with lots of groups already. Consdier the rational numbers $\Q$, the real numbers $\R$, the set of symmetries of the square, and the integers (under addition, which is important).

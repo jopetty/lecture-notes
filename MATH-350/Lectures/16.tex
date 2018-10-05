@@ -1,0 +1,43 @@
+\section{Friday, 5 October 2018}
+
+\epigraph{``I mean, $\infty!$ is a big number!''}{Miki}
+\epigraph{``Oh well, we'll cry later.''}{Miki}
+
+\subsection{Orbits and Stabalizers}
+
+Miki introduced a new proposition today which I think is just the Orbit-Stabalizer theorem.
+
+\begin{proposition}
+Given an action $G \times A \to A$ and an $a \in A$ we know that $\abs{O_a} = [G : G_a]$ which tells us that $\abs{G} = \abs{O_a}\abs{G_a}$.
+\end{proposition}
+
+\begin{proof}
+Define a map $\pi : \{\text{cosets of $G_a$ in $G$}\} \to O_a$.  Note that this is just a map, not a homomorphism. Define $\pi$ to be $gG_a \mapsto g \cdot a$. We'll show it's well-defined and injective at the same time. Suppose we have that $gG_a = hG_a$ which happens if and only if $g^{-1}h \in G_a$ or $g^{-1}h \cdot a = a$, so $ha = ga$. Since anything in the orbit is $g \cdot a$ for some $g$, we also know that $\pi$ is surjective; then $\pi$ is a bijection and so $\abs{O_a} = [G : G_a]$.
+\end{proof}
+
+\subsection{Cycles in \texorpdfstring{$S_n$}{Sn}}
+
+Let $\sigma \in S_n$ be or order $k$. We want to write it as the product of disjoint cycles.
+Consider the set $A = \{1,\dotsc,n\}$ and let $G = \langle \sigma \rangle$. We construct the action $\langle \sigma \rangle \times A \to A$. Consider the orbit $O_a$ of $a \in A$ under $\langle \sigma \rangle$. We know by the orbit-stabalizer theorem that there is a bijection between the cosets $G_a$ and the orbit of $a$. Since $\langle \sigma \rangle$ is cyclic we know that $G_a = \langle \sigma^r \rangle$ is also cyclic. By the definition of our map $\pi$ from the Orbit-Stabalizer theorem, we know that $\pi(\sigma^iG_a) = \sigma^i a$. Then $O_a = \{a, \sigma a, \dotsc, \sigma^{r-1}a\}$ then on $O_a$ we can say that $\sigma$ acts as an $r$-cycle. Since the orbits collectively partition $A$ we know that they are disjoint, and so we know that we can write $\sigma$ as the product of disjoint cycles, which is unique up to the order of the cycles and up to cyclic permutation within each cycle.
+Note that since $\langle \sigma \rangle$ is cyclic (and therefore abelian) the cosets $G_a$ are simply $G/G_a$.
+
+\subsection{Actions of \texorpdfstring{$G$}{G} on itself}
+
+Previously we defined two cannonical actions of $G$ on itself, via \emph{left multiplication} where $G \times G \to G : (g,a) \mapsto g\cdot a$, and \emph{conjugation}, where $G \times G \to G : (g,a) \mapsto gag^{-1}$. In the first case, we know that the action of left multiplication is faithful, and gave us an injective homomorphism from $G$ to $S_G$ (i.e., finite $G$ always is isomorphism to a subgroup of $S_n$).
+
+\begin{example}
+Let $G = \Z$ and our action is $(i,j) \mapsto i+j$, so $\sigma_i(j) = i+j$. Let's consider the orbits of $0$ and $1$ under $\sigma_2$. Observe that $\cdots -4 \to -2 \to 0 \to 2 \to 4 \to \cdots = O_0$ while $O_1$ is just the odd integers. Now consider $H = 4\Z \subset G$, and let's consider  how $\sigma_2$ acts of $G/H$, or on the cosets of $H$ in $G$. Well, we know that $H = \{\bar{0}, \bar{1},\bar{2},\bar{3}\}$. Note that $\sigma_2$ becomes $(\bar{0}\bar{2})(\bar{1}\bar{3})$.
+\end{example}
+
+\begin{theorem}
+Consider $G \times G \to G$ via left multiplication, and consider how this action acts on $H \leq G$. We know it acts like $g \cdot (aH) = gaH$. We can show this is well defined by noting that if $aH = bH$ then we know that $ga = gbh$ and so our action is well defined. Let $A$ be set set of cosets of $H$ in $G$, and we get a map $\pi : G \to S_A$. We know the following things.
+\begin{enumerate}
+\item $G$ acts transitively on $A$;
+\item $G_{1H} = H$;
+\item The kernel of $\pi$ is the intersection of all $gHg^{-1}$ for all $g \in G$. This is actually the largest normal subgroup of $G$ contained in $H$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Left as an exercize to the reader (me).
+\end{proof}
