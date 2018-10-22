@@ -1,0 +1,50 @@
+\section{Monday, 15 October 2018}
+
+\epigraph{``Perfectly balanced, as all things should be.'' (when referring to left and right actions)}{Miki}
+\epigraph{``Our theorem is gone! Oh no!''}{Miki}
+
+\begin{problem}
+Does right multiplication define an action of $S_4$ on itself?
+\end{problem}
+\begin{solution}
+No, since we can find two elements for which $g_1(g_2(x)) \not= x \cdot (g_1g_2)$. Consider $(12)$ and $(23)$ acting on the identity. In general, right multiplication is an action if and only if the group is commutative since we are ``switching the order of the multiplication.''
+\end{solution}
+
+\subsection{Right Actions}
+In order to fix this ``unfairness,'' we often define something called a right action $A \times G \to A$, where the associativity of the action is specified as $a \cdot (gh) = (a \cdot g) \cdot h$. This turns right multiplication into a ``right action.'' There really isn't any distinction between the two, which is why we just speak of ``the action.''
+
+How do we turn left actions into right actions? Suppose we have a left action $g \cdot a$. Define $a \cdot g = g^{-1} \cdot a$; that is, the right action of $g$ on $a$ is just the left action by the inverse of $g$. This works since $(gh)^{-1} = h^{-1}g^{-1}$ so the order follows the rules for right multiplication/action.
+
+\begin{problem}
+Consider $\Z$ acting on itself through left addition, where $m \cdot n \mapsto m + n$, and consider that when we turn this into a right action. Then $n \cdot m \mapsto -m + n = n - n$, and we've just invented subtraction.
+\end{problem}
+
+\begin{example}
+Consider $A_3 \normal S_3$, and consider conjugating $(123) \in A_3$ by something in $S_3$. We know we'll get either another three cycle or the identity, since we know that $gNg^{-1} = N$. Then if $g \in S_3$ there there exists a $\sigma_g : S_3 \to S_3$ which acts on $g$ by conjugation. The consider $\sigma_g |_N$ restricted to acting on $N$. Then we have a map from $N$ to itself. If $g \in N$ then we get the trivial map (since this is just $Z_3$), and otherwise we must not get the trivial map and so $(123) \mapsto (132)$ and \emph{vice versa}. In the latter case, we've created not just a random map but a homomorphism from $N$ to itself. This homomorphism $x \mapsto x^3$ in the group $\langle x \mid x^3 = 1 \rangle$, which is both injective and surjective and we know that this is a homomorphism since the generators satisfy the relations under the map since $x^6 = 1$.
+\end{example}
+
+\subsection{Group Automorphisms}
+
+\begin{definition}[Automorphism]
+A group automorphism is an isomorphism from $G$ to itself.
+\end{definition}
+
+For every group $G$ there is a group $\operatorname{Aut}(G)$ which is the group of all automorphism of $G$ under composition. Miki told us to prove for ourselves that this is actually a group. Now consider $G$ acting on itself through conjugation where $g \mapsto \sigma_g : x \mapsto gxg^{-1}$. For an normal subgroup of $G$ we know that $\sigma_g|_N : N \to N$, and so we have a homomorphism $\psi$ from $G$ to $\operatorname{Aut}(N)$ where $g \mapsto \sigma_g |_N$. The kernel of $\psi$ is the set of all elements in $G$ which commute with $N$, and so $\ker \psi = C_G(N)$. Then $G/C_G(N)$ is isomorphic to a subgroup of $\operatorname{Aut}(N)$ by the First Isomorphism Theorem.
+
+There are two things to unpack here. First, how to we know that $\psi$ is actually a homomorphism? That is, why is $\sigma_g|_N \in \operatorname{Aut}(N)$? Well, consider that $\sigma_g(nn') = gnn'g^{-1} = gng^{-1} \cdot gn'g^{-1} = \sigma_g(n)\sigma_g(n')$, and so $\sigma_g |_N$ preserves the group operation. Next, how to we know that the map $g \mapsto \sigma_g$ is a homomorphism? That is, why does $\sigma_{gg'} = \sigma_{g}\sigma_{g'}$. Well, since conjugation is a well-defined action on $G$, this forms a homomorphism. Note that the restriction to $N$ isn't important here, but the reason we require normality since we won't we able to compose the conjugations since $gHg^{-1} \not= H$.
+
+\begin{corollary}
+Take $G = N$. Then we get a homomorphism from $G$ to its own automorphism group, and so $G/C_G(G) = G/Z(G)$ is isomorphism to a subgroup of $\operatorname{Aut}(G)$.
+\end{corollary}
+
+\begin{corollary}
+Let $H \leq G$ be any subgroup of $G$. Then for all $g \in G$, $gHg^{-1} \cong H$, but they are not necessarily equal to one another.
+\end{corollary}
+
+\begin{corollary}
+Let $H \leq G$ be any subgroup of $G$. Then $N_G(H) / C_G(H)$ is isomorphic to a subgroup of $\operatorname{Aut}(H)$, since the centralizer is always normal in the normalizer. This is really just a general case of the preceeding statements.
+\end{corollary}
+
+\begin{proof}
+Since $H \normal N_G(H)$, we just let $G' = N_G(H)$ and apply the result.
+\end{proof}

@@ -1,0 +1,42 @@
+\section{Friday, 12 October 2018}
+
+\epigraph{``We have hope. But hope doesn't mean much.''}{Miki}
+
+Let's return to the proposition we described last time, where we said that the equivalency classes in $S_n$ under conjugation are exactly the sets of permutations with the exact same cycle decomposition structure. That is, all elements of the form $(\cdot \cdot \cdot \cdot \cdot) \in S_n$ are conjugates with one another, and the same holds for $(\cdot \cdot \cdot)(\cdot \cdot)$ and all other cycle structures.
+
+\begin{proposition} \hfill
+\begin{parts}
+\part[prf:cda] If $\sigma \in S_n$ is a $k-cycle$ where $\sigma = (a_1,\cdots,a_k)$, and $\tau \in S_n$, then $\tau\sigma\tau^{-1} = (\tau(a_1), \dotsc, \tau(a_k))$.
+\part[prf:cdb] If $\sigma$ is a product of disjoint cycles $\sigma_i \cdots \sigma_r$ then $\tau\sigma\tau^{-1}$ is the product of disjoint cycles $\tau \sigma_i \tau^{-1}$.
+\part[prf:cdc] Cycles $\sigma, \sigma'$ are conjugate if and only if they have the same cycle structure.
+\end{parts}
+\end{proposition}
+
+\begin{proof}[Proof of\/~\ref{prf:cda}]
+Let $A = \{1, \dotsc, n\}$ so that $\tau A = A$. Then $A = \{\tau(1), \dotsc, \tau(n)\}$. \note{FINISH THIS}
+\end{proof}
+
+\begin{proof}[Proof of\/~\ref{prf:cdb}]
+Let $\sigma = \sigma_1 \cdots \sigma_r$. Then $\tau\sigma\tau^{-1}$ can be written as $\tau\sigma_1(\tau^{1}\tau) \cdots (\tau^{1}\tau) \sigma_r \tau^{-1}$, and by associativity the proposition holds. Since the cycles were disjoint to begin with, permuting each $\sigma_i$ under $\tau$ ensure that the products are still disjoint.
+\end{proof}
+
+\begin{proof}[Proof of\/~\ref{prf:cdc}]
+The forward direction follows immediately from the previous two proofs.
+Next, assume $\sigma, \sigma'$ have the same cycle structure. Then \[\sigma = (a_1^1 \cdots a_{k_1}^1)(a_1^2 \cdots a_{k_2}^2) \cdots (a_1^r \cdots a_{k_r}^r),\] and \[\sigma' = (b_1^1 \cdots b_{k_1}^1)(b_1^2 \cdots b_{k_2}^2) \cdots (b_1^r \cdots b_{k_r}^r).\] Then $A = \{1, \dotsc, n\} = \{a_i^j\} = \{b_i^j\}$. Then take $\tau(a_i^j) = b_i^j$, since this is just a permutation on the elements in $A$, so by \ref{prf:cda} and \ref{prf:cdb} this holds.
+\end{proof}
+
+\subsection{Proving the simplicity of \texorpdfstring{$A_5$}{A5}}
+
+This is a big deal.
+
+\begin{proof}
+We want to show that $A_5$ (or any $A_n$, for that matter) has no proper normal subgroups. Recall the orbit stabalizer theorem, where $\abs{G} = \abs{G_x} \cdot \abs{O_x}$ for any $x \in G$. Recall also that if $N \normal G$ then $N$ is the union of conjugacy classes. Let's start by finding the class equation for $A_5$. Since $A_5$ must have even sign, we know that the only cycles in $A_5$ are of the form $e$, $(\cdot \cdot)$, $(\cdot \cdot \cdot)$, and $(\cdot \cdot \cdot \cdot \cdot)$. Let $O_{x}^{S_5}$ be the orbit of an element $x$ in $S_5$ while $O_{x}^{A_5}$ is the orbit in $A_5$. Note that $\abs{O_x^{A_5}} \leq \abs{O_x^{S_5}}$. Similarly, anything in $A_5$ which fixes $x$ must also fix $x$ in $S_5$ so $\abs{(S_5)_x} \geq \abs{(A_5)_x}$. We also know by Orbit-Stabalizer that $\abs{(A_5)_x} \cdot \abs{O_x^{A_5}} = \abs{A_5} = 60$ while $\abs{(S_5)_x} \cdot \abs{O_x^{S_5}} = \abs{S_5} = 120$. Combining these inequalities with the Orbit-Stabalizer theorem (and recognizing that everything here is an integer), we are left with the option that either the orbits are the same size and the centralizer in $A_5$ is half of the centralizer in $S_5$, or that the centralizers are the same and the orbits in $A_5$ are half that of the orbits in $S_5$.
+
+Let's figure out which of these cases is true. Consider $x = (\cdot \cdot \cdot) = (123) \in S_5$ without a loss of generality. What is the size of the orbit of $x$ in $S_5$? Well, it's all three-cycles, so there are $2 \cdot {5 \choose 3} = 20$ elements in the orbit of $x$ in $S_5$. By Orbit-Stabalizer, the size of the sabalizer is then $120/20 = 6$. Note that $(45) \in (S_5)_x$ since it doesn't move $x$, but because $(45)$ is not in $A_5$ since it has the wrong sign, we know that it is the stablizer which has shrunk and the orbits have the same size.
+
+Let's do the same thing with $x = (\cdot \cdot)(\cdot\cdot) = (12)(34)$ without a loss of generality. Then $\abs{O_x^{S_5}} = {5 \choose 1} \cdot 3 = 15$ elements in the orbit of $x$ in $S_5$. Since this is odd, we know that the orbit can't shrink so it \emph{again} must be the case that the stabalizer has shrunk.
+
+Now let $x = ( \cdot \cdot \cdot \cdot \cdot)$. The orbit of $x$ is then of order $5!/5 = 4!$ while the stabalizer is of order $5!/4! = 5$. In this case, it is now the \emph{orbit} which has shrunk.
+
+Then $\abs{A_5} = 1 + 20 + 15 + 2\cdot 12$ where $20$ comes from the $3$-cycles, $15$ comes from the double $2$-cycles, and the $24$ comes from the two $5$-cycles. Now suppose that $N \normal A_5$. We know it is the union of conjugacy classes and it contains the identity, so $\abs{N} = 1 + \{\text{some of }12,12,15,20\}$, and it must divide $\abs{A_5} = 60$. Note that this can happen \emph{only} if $\abs{N} = 1$ or $\abs{N} = 60$, so $A_5$ contains no proper normal subgroups and is simple.
+\end{proof}

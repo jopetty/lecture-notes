@@ -1,0 +1,55 @@
+\section{Monday, 8 October 2018}
+
+\epigraph{``Remember that $1+1 = 2$.''}{Miki}
+\epigraph{``This proof should make you feel better after your exam.''}{Miki}
+
+Recall from last lecture we described how $G$ can act on itself by either left multiplication or conjufgation. Today we'll cover in detail conjugation.
+Remember that conjugation is an action defined as 
+\[ G \times G \to G : ga \mapsto gag^{-1}. \]
+We define the orbit $O_a$ of $a$ under conjugation to be the \emph{conjugacy class} of $a$. This is an equivalence relation (since we already know this holds for orbits). Then consider $S_1, S_2 \subset G$. There are conjugate if there exists a $g \in G$ such that $gS_1g^{-1} = S_2$. Note that these subsets better have the same cardinality. 
+
+For any $x \in G$, we know that $\abs{O_x} = [G : G_x]$ where $G_x = G_G(x)$ is the centralizer of $x$ in $G$, as it turns out.
+
+\begin{example}[Conjugacy Classes]
+\begin{enumerate}
+\part Consider $G = C_6$. Since $G$ is abelian, we know that $gxg^{-1} = x$ for all $x,g \in G$ so the orbit of $x$ is simply $\{x\}$.
+\part Consider $D_8 = \langle r,s \mid \cdots \rangle$. What is the center of $G$? It's $Z(G) = \{1,r^2\}$. Let's consider that orbit of $1$ is $1$ and the orbit of $r^2$ is just $r^2$. This tells us that if $x \in Z(G)$ then $O_x = \{x\}$ under conjugation. Then let's consider some $x \notin Z(G)$. The size of the orbit must be strictly greater than $1$ (since otherwise it would commute with everything). Consider that the sabalizer must have at least three elements ($1,r^2,x$), and so must have at least order four. It can't have order eight since the identity will not be in the centralizer, and so we know that $\abs{O_x} = 2$. This tells us that the orbit of \emph{any non-center} element has order two, which tells us that we can find the orbits of any elements \emph{super quickly} since we just need to conjugate it \emph{once} and get a new element and we are done!
+\end{enumerate}
+\end{example}
+
+\begin{theorem}[Class Equation]
+Let $G$ be a group. The center of the group contains all conjugacy classes of size $1$. List the classes of size greater than or equal to $2$ as $)_{x_1} ,\dotsc,O_{x_n}$. Then 
+\[ \abs{G} = \abs{Z(G)} + \sum_{i=1}^n \abs{O_{x_i}} \]
+since the orbits partition $G$.
+\end{theorem}
+
+\begin{theorem}
+Let $\abs{G} = p^n$ where $p$ is prime. We know a few things about such a group.
+\begin{enumerate}
+\item $\abs{Z(G)} > 1$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of 1]
+We know from the class equation that \[ \abs{G} = \abs{Z(G)} + \sum_{i=1}^n \abs{O_{x_i}}. \] For all $i$ we know that $O_{x_1} \geqslant 2$ and we know that it divides the order of the group. Then $\abs{O_{x_1}} = p^k$ for some $1 \leqslant k \leqslant n$. Then $p$ divides the order of the sum of the orders of the orbits, and so $p$ must divide the order of the center. In fact, this tells us that $\abs{Z(G)}$ is at least $p$.
+\end{proof}
+
+\begin{proposition}
+For prime $p$, if $\abs{G} = p^2$ then
+\begin{enumerate}
+\item[(a)] $G$ is abelian, and 
+\item[(b)] $G \cong C_{p^2}$ or $C_p \times C_p$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of~\textup{(a)}]
+Let $x \in G$, and assume by way of contradiction that $x \notin Z(G)$. Consider $H = \langle Z(G), x \rangle$. Since $G$ is a $p$ group, we know that the center cannot be one, and so $\abs{G} = p$ (since it must divide $p^2$ and if $\abs{G} = p^2$ then $x \in Z(G)$). And we know that $\abs{H} \geqslant \abs{Z(G)}$ so we know that $p \leqslant \abs{H} \leqslant p^2$ and the order must divide $p$, and so we know that $H = G$. But since $x$ commutes with everything in $H$ we know that $x \in Z(G)$.
+\end{proof}
+
+\begin{proof}[Proof of~\textup{(b)}]
+Left as an exercise to us.
+\end{proof}
+
+\subsection{Conjugation in \texorpdfstring{$S_n$}{Sn}}
+
+If you take an arbitrary element $\sigma$ of $S_n$, what can we reasonably expect the conjugacy class of $\sigma$ to look like? For example, consider $\sigma = (123)$. Well, $(14)(123)(14) = (423)$. We also know that $(256)(123)(652) = (153)$. Notice that we've found two $3$-cycles! We can hypothesis that $\abs{\tau \sigma \tau} = \abs{\sigma}$, and in fact we just replace the elements of the $3$-cycle with ``where the numbers in the conjugating cycles get sent.'' That is, if $\sigma = (a_1,\dotsc,a_k)$ then $\tau\sigma\tau^{-1} = (\tau(a_1)),\dotsc,\tau(a_k))$. We can infer a slightly stronger link here; in fact, $\sigma$ is conjugate to $\sigma'$ if and only if they have the same cycle structure.
