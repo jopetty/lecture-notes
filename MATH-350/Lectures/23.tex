@@ -1,0 +1,55 @@
+\section{Monday, 20 October 2018}
+
+\epigraph{``Let's write down all finitely generated abelian groups. What fun.''}{Miki}
+
+We have two goals for today.
+\begin{enumerate}
+\item Is $Z_{20} \times Z_{18} \cong Z_{36} \times Z_{10}$?
+\item How do we classify \emph{all} finitely generatred abelian groups?
+\end{enumerate}
+
+To start answering these, we'll begin with a proposition.
+
+\begin{proposition}
+$Z_n \times Z_m \cong Z_{mn}$ if and only if $\gcd(m,n) = 1$.
+\end{proposition}
+
+\begin{proof}
+Let $d = \gcd(m,n)$, and let $Z_m = \langle x \rangle$ and let $Z_n = \langle y \rangle$. Consider $G = Z_m \times Z_n = \{(x^a, y^b)\}$. Consider $(c,f) \in G$. Then $\abs{(c,f)} = \lcm (\abs{c}, \abs{f})$. If $d = 1$ then $\abs{(x,y)} = \lcm (m,n) = mn$, so $Z_{mn} \cong \langle (x,y) \rangle \leq G$. Since the orders are the same, it is isomorphic to the whole thing.
+On the other hand, if $d > 1$, let $(c,f) \in G$, and consider $(c,f)^{mn/d} = (c^{mn/d}, f^{mn/d}) = (e,e)$, so every element has order strictly less than $mn$ since $d > 1$. Therefore $G \not\cong Z_{mn}$.
+\end{proof}
+
+\begin{example}
+Consider $Z_9 \times Z_6 \not\cong Z_{54}$. Note that $Z_9 \times Z_6 \cong Z_9 \times Z_3 \times Z_2 = Z_{18} \times Z_3$.
+\end{example}
+
+\begin{example}
+Use the proposition we just proved to ``factor'' the groups into the same decomposition. Ta-Da!
+\end{example}
+
+fdas
+
+\subsection{Classifying Finitely-Generated Abelian Groups}
+
+\begin{definition}[Free Abelian Group]
+Let $\Z^r = \Z \times \cdots \times \Z$ ($r$ times) be the free abelian group of rank $r$.
+\end{definition}
+
+\begin{theorem}[Classification Theorem for Finitely Genreated Abelian Groups]
+Let $G$ be a finitely generated abelian group. Then there is a unique decomposition of $G$ satisfying
+\begin{enumerate}
+\item $G \cong \Z^r \times Z_{n_1} \times \cdots Z_{n_s}$ for $r,n_i \in \Z$,
+\item $n_i > 2$ for all $i$, and 
+\item $n_{i+1}$ must divide $n_i$ for all $1 \leq i \leq s-1$.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Classifying Finitely-Generated Abelian Groups 2, Electric Boogaloo}
+
+\begin{example}
+Consider $Z_{60} \cong Z_{2^2} \times Z_{3} \times Z_{5}$. Notice now that all the components are $p$-subgroups.
+\end{example}
+
+\begin{theorem}
+Let $\abs{G} = n = \prod p_i^{a_i}$, where $a_i \geq 1$. Then we can write $G$ uniquely (up to order of primes) as $G \cong A_1 \times \cdots \times A_k$ where $\abs{A_i} = p_i^{a_i}$, and for all $A = A_i$ where $\abs{A} = p^a$, we know that $A \cong Z_{p^{b_1}} \times \cdots \times Z_{p^{b_\ell}}$ where $b_1 \geq b_2 \geq \cdots \geq b_\ell$, where the sum of all $b_i$ is $a$.
+\end{theorem}
