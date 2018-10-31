@@ -1,0 +1,72 @@
+\section{Wednesday, 31 October 2018}
+
+\epigraph{``Oh. You are a gamer.''}{Miki}
+
+\subsection{FGAGs for Dayyyyysssss}
+
+Miki started us off with some exercises to apply what we learned last lecture about classifying finite abelian groups.
+
+\begin{exercise}
+Conver $G = Z_{36} \times Z_{12}$ into elementary divisor notation.
+
+\begin{solution}
+$G \cong (Z_{2^2} \times Z_{3^2}) \times (Z_{2^2} \times Z_3) \cong (Z_{2^2} \times Z_{2^2}) \times (Z_{3^2} \times Z_3)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Convert $(Z_{16} \times Z_{4} \times Z_2) \times (Z_9 \times Z_3)$ into invariant factor notation.
+
+\begin{solution}
+Group up the $i$\textsuperscript{th} terms in each parenthetical term, so $G \cong (Z^{16} \times Z_9) \times (Z_4 \times Z_3) \times Z_2 \cong Z_{144} \times Z_{12} \times Z_{2}$. 
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Classify all abelian groups of order $24$.
+
+\begin{solution}
+Let's use the invariant factor notaion. If $p$ divides the order of $\abs{G}$ then $p$ divides $n_1$. The factorization of $24$ is $2^3 \times 3$. Then $n_1$ could be $24$, and $G_1 \cong Z_{24}$. It could be that $n_1 = 4 \cdot 3$, so $n_2 = 2$ and $G_{2} \cong Z_{12} \times Z_2$. It could be that $n_1 = 2 \cdot 3$, so $n_2 = 2$ and $n_3 = 2$, (can't be $n_2 = 4$ since $4$ doesn't divide $6$), so $G_3 \cong Z_6 \times Z_2 \times Z_2$.
+\end{solution}
+
+\begin{solution}
+Let's use the elementary divisor notation. Let $\abs{H} = 24$. Then $H \cong A_1 \times A_2$ where $\abs{A_1} = 2^3$ and $\abs{A_3} = 3$. Then $A_2 \cong Z_3$. For $A_1$, we must take all non-increasing partitions of $3$, so $3 = 3, 2 + 1, 1+1+1$. The the possibilities for $A_1$ are $Z_{2^3}$, $Z_{2^2} \times Z_2$, and $Z_2 \times Z_2 \times Z_2$. Then $H$ is either $Z_3 \times Z^{2^4} \cong Z_24$ or $Z_3 \times Z_{2^2} \times Z_2 \cong Z_{12} \times Z_2$ or $Z_3 \times Z_2 \times Z_2 \times Z_2 \cong Z_6 \times Z_2 \times Z_2$.
+\end{solution}
+\end{exercise}
+
+\subsection{The Shape of Things to Come}
+
+Over the next few lectures, we'll cover how to take the product of groups which aren't abelian, and understanding how we can ``factor'' non abelian groups in the same way that we now know how to factor abelian groups.
+Warning: it'll be the hardest single thing we do in this class.
+
+\subsection{Commutators}
+
+Let $G$ be a group with $x,y \in G$. We defined the \emph{commutator} to be $[x,y] = xyx^{-1}y^{-1}$. The commutator of any two elements of $G$ is one if and only if $xy = yx$. The commutator subgroup $G' = \langle [x,y] \mid x,y \in G \rangle$, which is normal in $G$ and the quotient $G/G'$ is abelian.
+
+Suppose we had a homomorphism $\phi$ from $G$ to $H$, where $H$ is abelian. Then it must be that $G' \leq \ker \phi$, since $\phi(x)\phi(y) = \phi(y)\phi(x)$, so $[\phi(x),\phi(y)] = \phi([x,y])$ for all $x,y \in G$.
+
+The quotient of $G$ by $G'$ is the largest abelian quotient of $G$, which means that the commutator group is the smallest subgroup for which the quotient is abelian.
+
+\begin{example}
+Let $G = S_3$. What is $G'$? Given the sign map $\pi : S_3 \to Z_2$, we know that $\ker \pi = A_3$, so we know that $G' \leq A_3$ since $Z_2$ is commutative. Then $G' = A_3$.
+\end{example}
+
+\begin{example}
+Let $G = D_{12}$. Is it a direct product of some proper subgroups? Consider $K = \langle r^3 \rangle \leq Z(G)$ and let $H = \langle s, r^2 \rangle$. Notice that $\langle H,K \rangle \leq G$ and $\langle H,K \rangle$ contains $s$ and $r$, so it is equal to the whole group. It's also true that $H$ and $K$ commute with one another. As it turns out (note quite a proof yet) $G \cong K \times H$. 
+\end{example}
+
+\begin{theorem}
+Let $G$ be a group and let $H,K$ be subgroups of $G$ satisfying
+\begin{enumerate}
+\item $H \normal G$ and $K \normal G$, 
+\item $H \cap K = \{e\}$, and 
+\item $\langle H,K \rangle = HK = G$.
+\end{enumerate}
+Then $G \cong H \times K$.
+\end{theorem}
+
+\begin{proof}
+First, we show that $H$ and $K$ commute with one another. Consdier $[h,k]$. Notice that $(hkh^{-1})k^{-1} \in K$ and  $h(kh^{-1}k^{-1}) \in H$, so it's in both $H$ and $K$, but the intersection of $H$ and $K$ is $\{e\}$ which means that the commutator is the identity, which happens if and only if $H$ and $K$ commute with one another. Next, consider that $\abs{HK} = \abs{H}\cdot\abs{K}/ \abs{\{e\}} = \abs{H} \cdot \abs{K}$. Next, create a map $\phi : H \times K \to G$ where $(h,k) \mapsto hk$. We show that this is a homomorphism (and an isomorphism). Notice that $\phi(h,k)\phi(h',k') = hh'kk' = \phi(hh',kk')$ so $\phi$ is a homormphism. It is also injective. Suppose that $\phi(hk) = 1$, which tells us that $h = k^{-1}$, which means that $h = k = 1$ since $h \in H \cap K$. It is surjective, since the sizes of the groups are the same. Then $G \cong H \times K$ through $\phi$.
+\end{proof}
+
+
