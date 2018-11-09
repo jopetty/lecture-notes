@@ -1,0 +1,103 @@
+\section{Friday, 9 November 2018}
+
+\epigraph{``I'm an advertisement for Czech people.''}{Miki}
+
+\subsection{Warmups}
+
+\begin{exercise}
+Are the following objects rings?
+\begin{parts}
+\part The set of all even integers with the operations you expect.
+\part The set of all odd integers with the operations you expect.
+\end{parts}
+\end{exercise}
+
+\begin{solution}
+The even integers do form a ring (we don't require a ring to have identity) while the odd integers don't (there is no additive identity and it isn't even closed).
+\end{solution}
+
+\subsection{Quaternions, Division Rings, and Fields, Oh My!}
+
+\begin{exercise}
+What is $\C$?
+\end{exercise}
+
+\begin{solution}
+We can think of it as a vector space over $\R$ with a basis $\{1,i\}$, which gives us how to multiply and add things in $\C$ if we keep in mind that $i^2 = 1$.
+\end{solution}
+
+We can extend this idea of $\C$ into a higher-dimensional object $\mathbb{H}$, known as the \emph{Hamiltonian quaternions}. This forms a vector space over $\R$ with a basis $\{1,i,j,k\}$ where the ring multiplication is defined by the group $Q_8$. Some ``fun'' facts about $\mathbb{H}$:
+\begin{enumerate}
+\item $\mathbb{H}$ is not commutative;
+\item $\mathbb{H}$ is a ring with identity. For any $a + bi + cj + dk$, the inverse is $(a - bi - cj - dk)/(a^2+b^2+c^2+d^c)$.
+\end{enumerate}
+
+We can extend these definitions even further.
+
+\begin{definition}[Division Ring]
+A ring $R$ with identity $1$ is a \emph{division ring} if for all nonzero $a \in R$ there exists an $a^{-1} \in R$
+\end{definition}
+
+\begin{definition}[Field]
+A \emph{field} is a commutative division ring.
+\end{definition}
+
+About all rings we can make some claims.
+
+\begin{proposition}
+Let $R$ be a ring. Then
+\begin{enumerate}
+\item $0a = a0 = 0$ for all $a \in R$;
+\item $(-a)b = a(-b) = -(ab)$ for all $a,b \in R$;
+\item $(-a)(-b) = ab$ for all $a,b \in R$;
+\item If $R$ has an identity the it is unique and satisfies $(-a)1 = 1(-a) = -a$ for all $a \in R$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+If you took 230, you've already done this. If not, it's a good if somewhat tedious exercise.
+\end{proof}
+
+\begin{definition}[Zero Divisor]
+An nonzero $a \in R$ is a zero divisor if there exists a nonzero $b \in R$ for which $ab = 0$ or $ba = 0$.
+\end{definition}
+
+\begin{definition}[Unit]
+Let $R$ be a ring with identity. A unit is any element $x \in R$ if there exists a $u = x^{-1} \in R$ for which $xu = ux = 1$. We denote the set of units of $R$ by $R^\times$.
+\end{definition}
+
+\begin{example}
+Consider $R = \Z/6\Z$. Find all units and zero divisors.
+\end{example}
+
+\begin{solution}
+The units are $1,5$, and the zero divisors are $2,3,4$.
+\end{solution}
+
+\begin{proof}[Proof that $2$ is not a unit]
+Suppose by way of contradiction that there exist $x \in R$ such that $2x = 1$. Then $3(2x) = 3 = (3 \cdot 2)x = 0$, which is a contradiction. Generally, if $x \in R$ is a zero divisor then it is not a unit. However, the converse is not true (consider $2 \in \Z$, which is neither a unit nor a zero divisor).
+\end{proof}
+
+\begin{definition}[Integral Domain]
+A commutative ring $R$ with identity is an integral domain if it has no zero divisors. This gives us the cancellation law! [The proof is super short and intuitive.]
+\end{definition}
+
+\begin{proposition}
+Any finite integral domain is a field. The proof is pretty chill. Check it out some time!
+\end{proposition}
+
+\begin{definition}[Subring]
+A subring $S \subseteq R$ is an object where $(S,+) \leq (R,+)$ and $S$ is closed under multiplication. For example, $2\Z \subset \Z$, $\Z \subset \Q$, $\Q \subset \R$, $\R \subset \C$, the set of continuous functions from $\R$ to $\R$ is a subring of all functions from $\R$ to $\R$.
+\end{definition}
+
+\begin{example}
+Consider $\Q(i) = \{a + bi \mid a,b \in \Q\}$ where $i^2 = 1$. We know how to add and multiply this from middle school. This is actually a field equal to $\Q[i]$, where $\Q[i]$ is actually the field of rational polynomials over $1$ and $i$. Now consider $\Z[i]$ (this won't be a field), which is integral polynomials in $1$ and $i$. This isn't a field since $2$ has no inverse.
+\end{example}
+
+\begin{definition}[Norm]
+Let the norm of $\Q(i)$ be a map $N : \Q(i) \to \Q$ defined by $a + bi \mapsto (a+bi)(a-bi) = a^2+b^2$. This map is multiplicative.
+\end{definition}
+
+\begin{proposition}
+$N(x) \in \Z$ for all $x \in \Z[i]$, and $x$ is a unit if and only if $N(x) = \pm 1$.
+\end{proposition}

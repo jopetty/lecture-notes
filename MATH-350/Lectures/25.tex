@@ -1,0 +1,26 @@
+\section{Friday, 2 November 2018}
+
+\epigraph{``You're not going to like this.''}{Miki}
+
+\subsection{Semidirect Products}
+We want to generalize our understanding of the direct product to non-commutativity.
+
+\begin{example}
+Let $G = D_6$, and let $H = \langle r  \rangle \cong Z_3$ and let $K = \langle s \rangle \cong Z_2$. Notice $H \normal G$. Since their intersection is trivial, $HK = G$. Here, we know that $G \not\cong H \times K$ (since then it would be abelian) but it's really similar, since we can write any $g$ as a product of $h$ and $k$.
+\end{example}
+
+We kinda cheated with this example since we already know how $r$ and $s$ relate to one another, but what if we don't know how to ``conjugate'' them? What if we don't know how to multiply words?
+
+\begin{definition}[Semidirect Product]
+Let $H$ and $K$ be groups, and let $\phi : K \to \Aut(H)$ be a homomorphism (aside from the trivial one, this may not exist). Then $\phi$ defines an action of $K$ on $H$ where $k \cdot h = \phi(k)(h)$. Then $G = H \rtimes_\phi K$ is called the semidirect product, where $g \in G = (h,k)$ and $(h_1,k_1)(h_2,k_2) = (h_1(k_1 \cdot h_2), k_1,k_2)$. This is a generalization of conjugation.
+\end{definition}
+
+There are some important properties of this. First, $G$ is a group where $\abs{G} = \abs{H} \cdot \abs{K}$. Second, $H \leq G$ via $h \mapsto (h,1)$ and $K \leq G$ via $k \mapsto (1,k)$. Third, $H \cong \langle (h,1) \rangle \normal G$. Fourth, $H \cap K = \{e = (1,1)\}$. Finally, for all $k \in K$ and $h \in H$ we know that $k \cdot h = khk^{-1}$.
+
+\begin{example}
+Let $K = \langle k \rangle \cong Z_2$ and $H = \langle h \rangle  \cong Z_3$. What could $H \rtimes K$ be? First, let's find $\Aut(H) \cong (\Z/(3))^\times$, so there are only two possible choices for our defining homorphism; it can be either the identity, or one other map. Then let $\phi : k \mapsto e$, so $h \cdot h = h$ and the groups commute, so $H \rtimes_\phi K \cong H \times K$. Or, we could take that $\psi : k \mapsto \chi$ where $k \cdot h = h^2$ and where $\chi$ is the other element of $\Aut(H)$, and so $H \rtimes_\varphi K \cong S_3$. Notice that $H \rtimes_\phi K \not\cong H \rtimes_\varphi K$.
+\end{example}
+
+\begin{example}
+What if we keep $H$ and $K$ but make $H \cong Z_2$ and $K \cong Z_3$ (i.e., we flip the group order)? Well, $k \cdot 1 = 1$ and then, by exhaustion, $k \cdot h = h$ (since that's all we can do with a homomorphism), so $H \rtimes K \cong H \times K$. This tells us that $H \rtimes K$ is, in general, not the same thing as $K \rtimes H$.
+\end{example}

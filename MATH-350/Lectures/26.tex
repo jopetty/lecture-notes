@@ -1,0 +1,49 @@
+\section{Monday, 5 November 2018}
+
+\epigraph{``Now everybody is happy. Or not, but it works.''}{Miki}
+
+\subsection{More Semidirect Products}
+
+A continuation of the discussion from last lecture.
+
+\begin{example}
+Suppose $H \cong Z_{20} \times Z_{45}$ (or any abelian group $\abs{H} > 2$). Since $H$ is abelian we know that the map $\gamma \in \Aut(H) : x \mapsto x^{-1}$ is a homomorphism. Then $\gamma$ is of order two. Let's take some semidirect products. Consider 
+\begin{parts}
+\part[prt:sd:a] $H \rtimes Z_2$ where $\phi(k) = \gamma$. Then $k \cdot h = h^{-1}$ for all $h \in H$.
+\part[prt:sd:b] $H \rtimes Z_4$. Here we could also send $k$ to $\gamma$ since $\gamma^4 = 1$. Then $\phi(k^2) = 1$, so $k \cdot h = h^{-1}$, and $k^2 \cdot h = h$. This sends $Z_4$ to $Z_4 / \langle k^2 \rangle \cong Z_2$ to $\langle \gamma \rangle$.
+\part[prt:sd:c] $H \rtimes S_3$. We can quotient $S_3$ by $A_3$, which is isomorphic to $Z_2$, and then we map this into $\Aut(H)$. Composition of these maps yields a nontrivial homomorphism $\phi$. Here, $\psi : S_3 \to S_3/A_3$ is the sign map, so for all $\sigma in \S_3$, we say that $\psi :\sigma \mapsto \gamma$ if the sign of sigma is $-1$, and $\sigma \mapsto 1$ if the sign of sigma is positive. 
+\end{parts}
+\end{example}
+
+\subsection{Identitfying Groups as Semidirect Products}
+
+Given a group $G$, how can we tell what its semidirect product decomposition could be?
+
+\begin{theorem}
+Let $G$ be a group with $H,K \leq G$ such that 
+\begin{enumerate}
+\item $H \normal G$,
+\item $H \cap K = \{1\}$, and 
+\item $G = HK$.
+\end{enumerate}
+Then $G \cong H \rtimes K$ where $k \cdot h = khk^{-1}$ for all $h \in H$ and for all $k \in K$.
+\end{theorem}
+
+This is really similar to the requirements for $G$ being the \emph{direct product} of $H$ and $K$; we just drop the requirement that $K \normal G$.
+
+\begin{proof}
+We know that $H \cap K = \{1\}$ so $\abs{H}\abs{K} = \abs{G}$, so for every $g \in G$ there is a unique way of writing it as $hk$. Then we can create a well-defined map $HK = G \to H \rtimes K$ via $\pi : g \mapsto (h,k)$. To show that this map is onto, observe that we can get all elements of the form $(1,k)$ and $(h,1)$, so any $(h,k)$ is in the image of $hk$ under our map. We know that $\abs{HK} = \abs{H \rtimes K}$ so they are isomorphic if we can show that $\pi$ is a homomorphism (turns out, it is). Proof of this is left as an exercise to the reader.
+\end{proof}
+
+\subsection{Classification}
+
+Let $\abs{G} = pq$ where $p \leq q$. We showed with the Sylow theorems that $P \in \Syl_p(G)$ and $Q \in \Syl_q(G)$ imply that $Q \normal G$. We also showed that if $p$ doesn't divide $q - 1$ then $n_p = 1$ and $P \normal G$. In these cases, $G \cong Z_{pq}$. What happens if $p$ \emph{does} divide $q-1$? In this case we don't need to create a $Z_{pq}$, and this is where semidirect products come in. Here, we can apply the previous theorem to construct groups of the form $Q \rtimes_\phi P$ for some $\phi$.
+
+Let's look at $\Aut(Q)$, which we know is isomorphic to $(\Z_q)^\times$ so the order is $q-1$. We also know\footnote{since $q$ is prime} that $\Aut(Q)$ is cyclic, so $\Aut(Q) \cong Z_{q-1}$. We know that $p$ divides $q-1$, so there is a unique subgroup $\langle \gamma \rangle \leq \Aut(Q)$ which is isomorphic to $Z_p$. We need to map a generator of $P$ into $\Aut(Q)$, so it must have order $1$ or $p$. Let $P = \langle x \rangle$. We have a few options. We know that $\phi(x) = \gamma^i$ for some $0 \leq i \leq p-1$ since we need $\phi(x)^p = 1$.
+\begin{enumerate}
+\item The case where $i = 0$, wherein have the trivial action. Then $P$ and $Q$ commute one another since $x \cdot y = y$, and so $G \cong Q \times P$.
+
+\item The case where $i = 1$. Then $G \cong Q \rtimes_{\phi_1} R$ where $x \cdot y = \gamma(y)$. This involves mapping $x$ to $\gamma$. This semidirect product is nonabelian. What exactly $\gamma$ is depends on $P$ and $Q$, but we konw that it does exist since $p$ divides $q-1$, and so a $p$-order subgroup of $\Aut(Q)$ must exist.
+
+\item The case where $i > 1$. We know that $x \mapsto \gamma^i$ since $P \cong \langle \gamma \rangle$. Then call $x'$ the element which is mapped to $\gamma$. Then we revert to the case where we defied $\phi_1$ by $x'$, so all cases where $i \not= 0$ are isomorphic, and the exact value depends on which $x'$ you choose. 
+\end{enumerate}
