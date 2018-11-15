@@ -1,0 +1,70 @@
+\section{Monday, 12 November 2018}
+
+\begin{example}
+Consider $\Z[\sqrt{5}] \subset \Q(\sqrt{5})$ where $N(a+b\sqrt{5}) = a^2 + 5b^2$. Then $(a+b\sqrt{5})^{-1} = (a-b\sqrt{5})/(a^2-5b^2)$ for anything where $a+b\sqrt{5} \not=0$. Then $x \in \Z[\sqrt{5}]$ is a unit if and only if the norm is $\pm 1$. Notice that this method depended on the fact that $5$ was square-free (no repeated primes).
+\end{example}
+
+\subsection{Polynomial Rings}
+
+Polynomial rings are the focus of Galois Theory which will be covered in depth next semester. Let $R$ be a commutative ring with identity, and form $R[x]$. This is the ring of polynomials with coefficients in $R$. Let $p(x) \in R[x]$ be a nonzero polynomail, and let ${\partial p} = n$ be the degree of the polynomial. We say that $p(x)$ is monic if $a_n = 1$.
+
+\begin{example}
+\begin{enumerate}
+\item Let $R = \Z/2\Z$. Then all polynomials have coefficient $1$ or $0$. Then there are $2^n$ distinct polynomials of degree $5$.
+
+\item Let $R = \Z/4\Z$. This ring has zero devisors, so $(2x)^2 = 0$. Also consider $(2x+1)^2 = 1$, so $2x + 1$ is a unit in $R[x]$.
+
+\item Notice that $R$ is a subring of $R[x]$ since it's just the ring of constant polynomails.
+\end{enumerate}
+\end{example}
+
+\begin{proposition}
+Let $R$ be a commutative unital ring which is an integral domain, and let $p,q \in R[x]$. Then the following hold.
+\begin{enumerate}
+\item $\partial (pq) = \partial p + \partial q$.
+\item $R[x]^\times = R^\times$.
+\item $R[x]$ is also an integral domain.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of (1.) and (3.)]
+Let $p = a_0 + \cdots + a_nx^n$ and let $q = b_0 + \cdots + b_nx^m$. Notice that $pq = a_0b_0 + \cdots + a_nb_mx^{n+m}$, and since $a_nb_m \not= 0$ then $\partial(pq) = \partial p + \partial q$.
+\end{proof}
+
+\begin{proof}[Proof of (2.)]
+Notice that $R^\times \subset R[x]^\times$ trivially, since we didn't do anything to inverses. To show the other direction, we show that all units of $R[x]$ have degree zero. Suppose $p \in R[x]^\times$, so there exists a $q \in R[x]$ such that $pq = 1$. Since degrees are additive, it must be the case that $\partial(pq) = \partial p + \partial q = 0$ so $\partial p = 0$.
+\end{proof}
+
+\subsection{Matrix Rings}
+
+Pick a ring $R$, any ring! Also let $n \in \Z_{>0}$. Then $M_n(R)$ is the ring of matricies with entries in $R$. Notice that even in $R$ is commutative, $M_n(R)$ won't be for all $n \geq 2$. Fun fact, if $R \not= 0$ then this ring \emph{will have} zero divisors so it cannot be an integral domain. As an example, consider 
+\[
+\begin{pmatrix}
+0 & 1  \\ 0 & 0
+\end{pmatrix}^2 = 0,
+\]
+for $n = 2$. Just as $R \subset R[x]$ is a subring, so to $R \subset M_n(R)$, where $r \in R$ is isomorphic to the diagonal matrix with all nonzero entries $r$. The units of $M_n(R)$ form a ring $\mathrm{GL}_n(R) = \left(M_n(R)\right)^\times$.
+
+\subsection{Group Rings}
+
+\begin{example}
+Let $G = Z_2$ be a group. Consider a ring $R = \Z$. We're gonna stick them together to form $RG$ by ``forming a vector space of $G$ over $R$'' (pretty sure this is actually a module). Then $RG = \{a1 + bx \mid z,b \in \Z\}$ where component addition is inherited from $R$, and components add only if they are the same ``variable,'' and multiplication is inherited from $G$.
+\end{example}
+
+Let $(G, \cdot) = \{g_1, \dotsc, g_n\}$ be any finite group, and let $R$ be any commutative ring with identity. Then we form $RG = \{a_1g_1 + \cdots + a_ng_n \mid a_i \in R\}$ where we add and multiply in the expected way.
+
+\begin{problem}
+What is the copy of $R$ inside of $RG$? It's $\{r1_G\}$, so exactly the constant terms just like in the polynomials.
+\end{problem}
+
+\begin{example}
+Let $G = D_6$ and let $R = \Z$. Consider $(3s + 2rs)(r^2 + s) = 3sr^2 + 3s^2 + 2rsr^2 +2rs^2 = 3rs + 4r + s + 3$. This actually has zero divisors! Consider $(1+s)(1-s) = 0$.
+\end{example}
+
+In general, for $g \in RG$ where $\abs{g} = m$, we have that $(1-g)(1 + g + \cdots + g^{m-1}) = 1 - g^{m} = 0$. Then if $m > 0$, $1-g$ is a zero divisor.
+
+I want to know that the analogous concept to a group action will be. Miki says to ask again in four lectures.
+
+\subsection{Why doesn't \texorpdfstring{$\mathbb{H} = \R Q_8$}{H = RQ8}?}
+
+Check the orders. Notice that $\abs{\R Q_8} = 8$ while $\abs{\mathbb{H}} = 4$. This problem arises because $\R Q_8$ treats $i$ and $-i$ as \emph{different variables}. Also, note that there are zero divisors in $\R Q_8$, but there are no zero divisors in $\mathbb{H}$ since it is a division ring. In fact, since we already proved that $RG$ contains zero divisors in $\abs{G} > 1$ then we know that $\mathbb{H} \not= RG$ for \emph{any} ring $R$ and group $G$.
