@@ -37,13 +37,13 @@ For any ring $R$ and any homomorphism $\phi$, then $\ker \phi$ is an ideal in $R
 
 \subsection{Quotient Rings}
 
-Consider $\phi : \Z \mapsto \Z/2\Z$. Then let $\ker\phi = I$, so $(I,+) \leq (\Z/+)$. We know that we have two cosets, $0 + I$ and $1 + I$ which are derived from our cosets of $\Z/2\Z$. Then we can form a new object, $\Z/I$. We know from group structure that the multiplication is well defined, and multiplication also works since $\textsc{odd} \times \textsc{even} = \textsc{even}$ and $\textsc{even} \times \textsc{even} = \textsc{even}$.
+Consider $\phi : \Z \mapsto \Z/2\Z$. Then let $\ker\phi = I$, so $(I,+) \leq (\Z,+)$. We know that we have two cosets, $0 + I$ and $1 + I$ which are derived from our cosets of $\Z/2\Z$. Then we can form a new object, $\Z/I$. We know from group structure that the multiplication is well defined, and multiplication also works since $\textsc{odd} \times \textsc{even} = \textsc{even}$ and $\textsc{even} \times \textsc{even} = \textsc{even}$.
 
 \begin{example}[Example where this doesn't work]
 Let $R = \Z[x]$ and $S \subset R$ be the polynomials in $x^2$, so $s = 1 + x^2 + 3x^6$, for example. Notice that $R/S$ doesn't work. For example, we want that $\bar{1} \cdot \bar{x} = \bar{x}$. But $(1 + x^2) \cdot x = x + x^3$ which is not in $x + S$.
 \end{example}
 
-The puchline for this is that quotient rings only work when $S$ is an ideal. This is kind of like the condition for normality for groups. For any $S \subseteq R$ we know that $(R/S,+)$ is okay since $(S,+) \normal (R,+)$ since $R$ is commutative in addition, but the multiplication is where we get tripped up. For any $r_1,r_2 \in R$ and any $a \in S$ we want that $r_1(r_2 + a) \in r_1r_2 + S$. But $r_1(r_2 + a) = r_1r_2 + r_1a$ which means that $r_1a$ must be in $S$ for \emph{any} $r_1$ which happens only if $S$ is a left  ideal. Similarly, we need that $(r_1 + a)r_2 = r_1r_2 + ar_2$, which tells us that $S$ must be a right idea, so it must be an idea.
+The punchline for this is that quotient rings only work when $S$ is an ideal. This is kind of like the condition for normality for groups. For any $S \subseteq R$ we know that $(R/S,+)$ is okay since $(S,+) \normal (R,+)$ since $R$ is commutative in addition, but the multiplication is where we get tripped up. For any $r_1,r_2 \in R$ and any $a \in S$ we want that $r_1(r_2 + a) \in r_1r_2 + S$. But $r_1(r_2 + a) = r_1r_2 + r_1a$ which means that $r_1a$ must be in $S$ for \emph{any} $r_1$ which happens only if $S$ is a left  ideal. Similarly, we need that $(r_1 + a)r_2 = r_1r_2 + ar_2$, which tells us that $S$ must be a right idea, so it must be an idea.
 
 \begin{proposition}
 If $I \subseteq R$ is an ideal then $R/I$ is a ring and $(r + I) + (s + I) = (r+s) + I$ and $(r+I) + (s + I) = rs + I$.
