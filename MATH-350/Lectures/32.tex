@@ -1,1 +1,89 @@
 \section{Wednesday, 28 November 2018}
+
+\epigraph{``You have nothing.''}{Miki}
+
+\subsection{Prime Ideals}
+
+Recall the following results from last lecture about commutative unital rings.
+\begin{itemize}
+\item $R$ is a field if and only if $R$ has exactly two ideals, $0$ and $R$.
+\item $I \subset R$ is maximal if and only if $R/I$ is a field.
+\end{itemize}
+
+\begin{definition}[Prime Ideal]
+An ideal $I \subset R$ is \emph{prime} if $I \not= R$  and if $a,b \in R$ and $ab \in R$ then $a \in I$ or $b \in I$.
+\end{definition}
+
+\begin{example}
+\begin{parts}
+\part Consdier that $I = (6) \subset \Z$ is not prime since $2 \cdot 3 = 6 \in I$ but $2,3 \notin I$.
+\part Consider that $I = (2) \subset \Z$ is prime since if a number is even it is divisible by two (you can't ``factor'' two into anything).
+\end{parts}
+\end{example}
+
+There is a direct correspondence between integral domains and prime idals. For example, consider that $\Z/6\Z$ is not an integral domain since $\bar{2}\cdot\bar{3} = \bar{0}$ while $\Z/2\Z$ is an integral domain.
+
+\begin{proposition}
+Let $R$ be a commutative ring with unit, and let $I \subseteq R$ be an ideal. Then $I$ is prime if and only if $R/I$ is an integral domain.
+\end{proposition}
+
+\begin{proposition}
+Every maximal ideal of a nonzero commutative ring is prime.
+\end{proposition}
+
+\begin{proof}
+We proved last time that $M$ is maximal if and only if $R/M$ is a field, which is an integral domain. Then this follows from the above proposition.
+\end{proof}
+
+\subsection{The Chinese Remainder Theorem}
+
+\begin{theorem}
+If $m,n$ are relatively prime then $\Z/mn\Z$ is isomorphic to $\Z/m\Z \times \Z/n\Z$.
+\end{theorem}
+
+\subsection{Rings of Fractions}
+
+How do we make $\Q$ from $\Z$. Well, we can define $\Q$ as $\{(a,b) \mid a,b \in \Z, b \not= 0\}$ with an equivalence relation that $(a,b) \sim (c,d)$ if and only if $ad = bc$.
+
+Can we do this with any (commutative) ring?
+
+\begin{example}
+Suppose that $R = \Z/6\Z$, and we generate a new ring analogously by how we made $\Q$. Notice that $2/1 = 2 \cdot 3 / 3 = 0 / 3 = 0$ which is really terrible. Now Miki is sad.
+\end{example}
+
+We get around this problem by just not using any zero divisors.
+
+\begin{definition}[Multiplicative Subset]
+A subset $D \subseteq R$ is \emph{multiplicative} if 
+\begin{itemize}
+\item $D$ is closed under multiplication;
+\item $D$ does not contain $0$;
+\item $D$ does not contain any zero divisors from $R$.
+\end{itemize}
+\end{definition}
+
+\begin{theorem}
+Let $R$ be a commutative ring and let $D \subset R$ be multiplicative and nonempty.Then there exists a commutative ring $Q = D^{-1}R$ which contains $R$ and for all $a \in D$ there exists an $a^{-1} \in Q$. We construct this as 
+\[ D^{-1}R = \{(a,b) \mid a \in R, b \in D\}, \]
+along with the equivalence relation $(a,b) \sim (c,d)$ if and only if $ad = bc$. Then we define multiplication as $(a,b)(c,d) = (ac,bd)$ and addition as $(a,b) + (c,d) = (ad + bc, bd)$.
+\end{theorem}
+
+How do we construct an injection from $R$ to $D^{-1}R$? We let $d \in D$ be arbitrary, and use the map $r \mapsto (rd,d)$. This is a general case of $r \mapsto (r,1)$ with $d = 1$, which only works if $R$ is unital.
+
+\begin{definition}[Field of Fractions]
+If $R$ is an integral domain and $D = R \setminus \{0\}$ then $D^{-1}R$ is known as a \emph{field of fractions}, denoted $\operatorname{Frac}(R)$.
+\end{definition}
+
+\begin{corollary}
+$\operatorname{Frac}(R)$ is the smallest field containing $R$.
+\end{corollary}
+
+\begin{example}
+\begin{parts}
+\part $\operatorname{Frac}(\Z) = \Q$.
+\part $\operatorname{Frac}(\Q) = \Q$ since $\Q$ is already a field.
+\part Let $R = \Z[x]$. Then $\operatorname{Frac}(R) = p(x),q(x) \in \Z[x]$ where $q \not= 0$.
+\part Let $R = 2\Z$. Then $\operatorname{Frac}(2\Z) = \Q$.
+\part Let $R = \Q[x]$. Then $\operatorname{Frac}(\Q[x])$ is the same as $\operatorname{Frac}(\Z[x])$.
+\end{parts}
+\end{example}

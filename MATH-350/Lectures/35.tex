@@ -1,0 +1,46 @@
+\section{Wednesday, 5 December 2018}
+
+\epigraph{``I'm trying to think of how this is \emph{good} news...''}{Miki}
+
+\epigraph{``You cannot send your computer to have tea with the bank's computer and discuss encryption.''}{Miki}
+
+\subsection{A Sketch of Real Life}
+The fact that authors define rings differently can really screw things up. For example, if a subring doesn't need to have the same identity as $R$, we could get something like $x$ is the identity in $S = \Z[x]/(x^2-x)$ but $x$ is not the identity in $\Z[x]$. In Galois Theory, it's common to say that $2x+2$ is irreducible even though by our definition it is reducible into $2(x+1)$ since our definition coincides with definitions of what ``prime'' means. 
+
+\textsc{tl;dr:} Real life is messy. 
+
+\subsection{Cryptography and RSA}
+
+RSA is a security protocol that we use to communicate securely, and it hopefuly won't be broken any time soon (spoiler, it probably will). The advantage is that it allows us to choose our encryption scheme in a very public manner while still remaining secure.
+
+\begin{theorem}
+Let $m$ and $n$ be relatively prime to one another. Then $m^{\varphi(n)} = 1 \pmod{n}$. Recall that $\bar{m} \in (\Z/n\Z)^\times$.
+\end{theorem}
+
+\begin{proposition}
+If $n = p$ is prime, and you take $k \in \Z$, then $m^{k\varphi(n) + 1} = m \pmod{n}$.
+\end{proposition}
+
+\begin{example}[Non RSA Example]
+Let $n = p = 11$, and let $\lambda = \varphi(n) = 10$. Pick a unit $e \in (\Z/\lambda\Z)^\times = \{1,3,7,9\}$ (say $e = 7$). Calculate the inverse of $e$. sp $d = e^{-1} = 3$ in our example.
+
+\noindent
+Let $(n,e)$ be \textsc{public information} and keep $d$ as \textsc{private information}.
+
+\noindent
+Let your message be an integer $0 \leq m < n$, and encode it by $c = m^e$.
+
+\noindent
+Decode it by $c^d = m^{ed}$. Since $ed \equiv 1 \pmod{\varphi(n)}$, $c^d = m$.
+
+\noindent
+This is really stupid from a security perspective since we can easily calculate $d$ from $(n,e)$, but it illustrates how the encryption-decryption scheme works.
+\end{example}
+
+\begin{proposition}
+Let $n = pq$ where $p,q$ are prime, and let $k \in \Z$. Then $m^{k \varphi(n) + 1} \equiv m \pmod{n}$. This is very similar to the previous proposition except that now we don't care that $m$ and $n$ are relatively prime.
+\end{proposition}
+
+\begin{theorem}[RSA]
+Let $n = pq$ where $p,q$ are distinct primes with very many digits. Note that $\lambda = \varphi(n) = (p-1)(q-1)$, which is very easy to calculate if you know that $p$ and $q$ are but very hard otherwise. Then pick an $e \in (\Z/\lambda\Z)$. Picking this isn't always trivial since we don't know how to factor quickly, so we turn to the Euclidean algorithm to tell us if a chosen $e$ is actually relatively prime to $\lambda$. This is very efficient in the number of digits, so it's okay from a use perspective. Then, we need to find a $d = e^{-1} \in (\Z/n\Z)^\times$. Since we have the Euclidean Algorithm, we know that $1 = xe + y\lambda$, and modulo lambda we know that $d = x$. Then our \textsc{public information} is again $(n,e)$ and our \textsc{private information} is $d$, but now it is extremely hard to calculate $d$ from $(n,e)$. Then you can post your public key online and take your message $M$ and break it into $\{m\}$ where $0 \leq m < n$ for all $m$, and encrypt each part of the message in turn by $c = m^e$. Then we can decode it by $m = c^d$.
+\end{theorem}

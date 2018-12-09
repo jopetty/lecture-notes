@@ -1,0 +1,77 @@
+\section{Monday, 3 December 2018}
+
+\epigraph{``Proof: You just monkey around with it.''}{Miki}
+
+Suppose that $R$ is an integral domain.
+
+\begin{definition}[Reducible]
+ An element $r \in R$, $r \not= 0$, $r \in R^\times$ is reducible if there exist $a,b \in R \setminus R^\times$ such that $ab = r$. Otherwise, the element is irreducible.
+\end{definition}
+
+\begin{definition}
+An element $r \in R$ is prime if $(r)$ is a prime idea. This means that if $r$ divides $xy$ then it must divide $x$ or $y$.
+\end{definition}
+
+\begin{definition}
+An elemenet $r$ is associate to $s$ if there exists a $u \in R^\times$ such that $r=us$.
+\end{definition}
+
+\begin{proposition}
+Let $R$ be an integral domain. If $p \in R$ is prime then $p$ is irreducible.
+\end{proposition}
+
+\begin{proof}
+Suppose that $(p)$ is a prime ideal. Take any $a,b \in R$ such that $p = ab$. We want to show that at least one is a unit. If $ab = p$ then $ab \in (p)$, which means that either $a \in (p)$ or $b \in (p)$ since $(p)$ is a prime ideal. Without a loss of generality, let $a \in (p)$. Then $a = px$ for some $x \in R$. Then $p = ab = pxb$. Since $R$ is an integral domain, so $p(1-vb) = 0$ implies that $xb = 1$ which implies that $b \in R^\times$. 
+\end{proof}
+
+\begin{proposition}
+There exist irreducible elements which are not prime.
+\end{proposition}
+
+\begin{proof}
+Consider $\Z[\sqrt{-5}]$ with norm $N(a+b\sqrt{-5}) = a^2 + 5b^2$. First, we show that $3$ is irreducible. Suppose by way of contradiction that $3=ab$ for non-unit $ab$. Since this can't happen in $\Z$, we can assume that at least one of $a,b$ can be written as $x + y\sqrt{5}$ where $y \not=0$. Note that $N(3) = N(ab) = 9$, and since $b$ is not a unit its norm must be at least $2$, while the norm of $ab$ is then at least $10$, so $3$ is irreducible. Next, we show that $3$ is not prime. Note that $(1+\sqrt{-5})(1+\sqrt{-5}) = 6 \in (3)$, but $1 \pm \sqrt{-5} \notin (3)$ since $N(1 \pm \sqrt{-5}) = 6$ while $N((3)) = 9$.
+\end{proof}
+
+\begin{proposition}
+If $R$ is a PID then $p \in R^\times, p \not= 0$ is irreducible implies that $p$ is prime.
+\end{proposition}
+
+\begin{proof}
+Assume that $p$ is irreducible. We will show that $(p)$ is maximal which, in a PID, implies that it is prime. Let $I$ be an ideal such that $(p) \subset I \subset R$. Since $R$ is a PID, $I = (x)$ for some $x \in R$. If $p \in I$ then $p = rx$ for some $r \in R$. Since $p$ is irreducible, either $x$ or $r$ is a unit. Suppose that $r \in R^x$. Then $pr^{-1} = x \implies x \in (p)$, so $I \subset (p)$ and $I = (p)$. On the other hand, if $x \in R^\times$ and $(x) = I$ then $I = R$ since units generate the whole ring.
+\end{proof}
+
+\begin{definition}[Unique Factorization Domain]
+A Unique Factorization Domain (UFD) is an integral domain where for every nonzer0 element $a \in R \setminus R^\times$ can be written as a finite product of irreducible elements, and this decomposition is unique up to order and associates.
+\end{definition}
+
+\begin{example}
+\begin{parts}
+\part $\Q$ and $\Q[x]$ are both UFDs.
+\part $\Z[\sqrt{-5}]$ is \emph{not}, since $6 = 2 \times 3 = (1+\sqrt{-5})(1-\sqrt{-5})$.
+\part $\Q[x_1, x_2, \dots]/(x_1-x_2^2, x_2-x_3^2, \dots)$ is \emph{not} a UFD since $x_1$ has \emph{no irreducible decomposition oh god why is this allowed to happen???} 
+\end{parts}
+\end{example}
+
+\begin{proposition}
+If $R$ is a UFD then every irreducible element is prime.
+\end{proposition}
+
+\begin{proof}
+Suppose that $x$ is irreducible, and suppose that $x$ divides $ab$, where neither are units. We can factor $a$ and $b$ into irreducible $a = a_1 \cdots a_k$ and $b = b_1 \cdots b_\ell$, and $x$ divides $a_1 \cdots a_k b_1 \cdots a_\ell$. Since this is unique, and $x$ is irreducibe, $x$ must be associate to one of these elements, it must divide either $a$ or $b$.
+\end{proof}
+
+\begin{proposition}
+All PIDs are UFDs.
+\end{proposition}
+
+\begin{proposition}
+$\Z$ is a UFD.
+\end{proposition}
+
+\begin{proof}
+$\Z$ is a PID.
+\end{proof}
+
+\begin{proposition}
+GCDs don't imply a Euclidean Domain.
+\end{proposition}

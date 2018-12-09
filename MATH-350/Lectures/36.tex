@@ -1,0 +1,44 @@
+\section{Friday, 7 December 2018}
+
+\epigraph{``$a$ is a bad person who lies to you.''}{Miki}
+
+The last day of class :(
+
+\subsection{RSA Continued}
+
+The real security of RSA is the fact that it is very hard to factor large numbers, so long as we can choose our initial primes in a good manner. This involves determining if a number is prime, which is suprisingly nontrivial. There are a couple of ways to do this. One is due to Fermat:
+\begin{enumerate}
+\item Take $n$ and hope it's prime.
+\item if $n$ is prime, then for any $a \in \Z$ where $(a,n) = 1$ then $a^{n-1} \equiv 1 \pmod{n}$.
+\item Suppose on the other hand that $n$ is composite. Take $0 \leq a \leq n$ and evaluate $a^{n-1} \pmod{n}$. If you get something other than $1$, you know that $n$ isn't prime, and you call $a$ a Fermat witness. If you \emph{do} get $1$, then you don't know that it's not prime, and you call $a$ a Fermat liar since it lies to you that $n$ is prime, like a little liar.
+\item Repeat this process a bunch of times. If you keep getting $1$, then maybe $n$ is prime after all.
+\end{enumerate}
+This is a probabalistic test for how likely it is that $n$ is prime. How good of an estimate this is relates to how many liars there could be. For ``most'' $n$, at most half of the numbers in the range $0 < a < n$ are liars, so the chance of picking $k$ liars is around $(1/2)^k$. We should qualify what ``most $n$'' actually means. In fact, there exist $n$ called \emph{Carmichael numbers}, which have the terrible property that any $a$ which is relatively prime to $n$ is a Fermat liar. This means that if you choose such an $n$ your kinda screwed if you use this test.
+
+\begin{theorem}
+A number $n$ is Carmichael if and only if it is square-free and if $p$ is a prime which divides $p-n$ then $p-1$ divides $n-1$.
+\end{theorem}
+
+This classification doesn't help you if you can't factor $n$, but it does give us an idea of how many Carmichael numbers there are.
+
+\subsection{Fermat's Theorem}
+
+\begin{theorem}
+Let $p$ be an odd prime. Then there exist integers $a,b$ such that $p = a^2 + b^2$ if and only if $p \equiv 1 \pmod{4}$.
+\end{theorem}
+
+\begin{proof}[Forward direction]
+Suppose that $p$ is a sum of squares. If $x \in \Z$ then $x^2 \equiv 1$ or $0$ modulo $4$, which we check by squaring all $\bar{x} \in \Z/4\Z$. Since $p$ is the sum of two squares, $p$ is either $0$, $1$, or $2$ modulo $4$, and since $p$ is odd it must be $1 \pmod{4}$.
+\end{proof}
+
+Brief interlude. Recall when we constructed numbers like $\Z[\sqrt{D}] = a + b\sqrt{D}$, and wiht then we had a norm $N(a + b\sqrt{D}) = (a + b\sqrt{D})(a - b\sqrt{D}) = a^2-b^2D$. We showed that $N$ might not be a norm since $N(x)$ could be less than $0$, but we can fix this by just taking the absolute value of this. We also showed that $N$ is multiplicative and that $N(x) = \pm 1$ if and only if $x$ is a unit. It's also worth remembering that not every norm makes $\Z[\sqrt{D}]$ a Euclidean domain.
+
+\begin{proof}[Reverse Direction]
+Assume that $p \equiv 1 \pmod{4}$. First, let's construct $R = \Z[i]$ and $N(a+bi) = a^2 + b^2$. We claim that $p$ is nor a prime element in $R$, so there exist $x,y$ such that $p$ divides $xy$ but neither one individually. We know that $p \equiv 1 \pmod{4}$ so $4$ divides $p-1$. Consdier $(\Z/p\Z)^\times \cong Z_{p-1}$. Then there exists an $n \in \Z$ such that $\bar{n}$ has order $4$ in $(\Z/p\Z)^\times$. Then if $\abs{\bar{n}} = 4 \pmod{p}$ then $\abs{\bar{n}^2} = 2 \pmod{p}$ so $\bar{n}^2 = -1 \pmod{4}$ and $p$ divides $n^2 + 1$. In the Gaussian integers, then we know that $p$ divides $n^2 + 1 = (n-i)(n+i)$ but $p$ does not divide $n \pm i$.
+
+Note that $R$ is a PID, which implies that all irreducible elements are prime, so $p$ is not irreducible in $R$, o there exist $x,y \in R$ such that $x,y \notin R^\times$ but $xy = p$. Recall that $N(p) = p^2 = N(x)N(y)$, and we know that $N(x),N(y) \not= \pm 1$. Then both are either $+p$ or $-p$. We can write $x$ as $a+bi$, so $N(x) = a^2 + b^2 = p$.
+\end{proof}
+
+\subsection{The End}
+
+That's all, folks. Thanks to Miki for a great semester!
