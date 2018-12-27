@@ -6,3 +6,10 @@ I type up these notes as a means of learning the material and figuring out where
 These notes are not official, and haven't been proofread by the instructor for each course. As such, they're liable to contain errors or typos. If you find such an error, I'd greatly appreciate it if you could open a pull request to fix the issue (if you are proficient in LaTeX) or open an issue (so that I can fix it).
 
 If you like the formatting of the notes, you are free to use my `notes` class from my [`coursework-latex`](https://github.com/jopetty/coursework-latex) repository.
+
+## Courses
+| Course | Course ID | Instructor | Term |
+|--------|-----------|------------|------|
+|Abstract Algebra | MATH 350 | Miki Havlickova | Fall 2018 |
+| Galois Theory | MATH 370 | Asher Auel | Spring 2019 |
+| Intensive Algorithms | CPSC 366 | Yang Cai | Spring 2019 |
