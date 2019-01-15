@@ -1,0 +1,58 @@
+% !TEX root = ../notes.tex
+
+\section{January 15, 2019}
+
+\epigraph{``Daddy, the bears is wubbing his back!''}{Noah Auel}
+
+Asher's kids came up and they are soooooo cuuuuuuttteeeeee! That's so adorable. He also says that the course is really fun but honestly the kids are by far my favorite part of the course so far. Hi Noah! Sorry your great-grandfather died :(
+
+\subsection{What is Galois Theory?}
+
+Galois theory is an explanation of a trajectory we started in grade school. We start with the positive integers $\Z_{>0}$ and we learn to make bijections (bijections between apples on the table and positive integers). Then we discovered (or invented) the concept of zero which led us to $\N$. Then we started using negative numbers to arrive at $\Z$, and from there on to $\Q \subset \R \subset \C$ and so on. Each jump is necessitated by wanting or needing to solve some kind of equation. Galois theory mainly focuses on that last jump from $\R$ to $\C$.
+
+\subsection{Moving from \texorpdfstring{$\R$ to $\C$}{R to C}}
+
+We usually think of $\C$ in the presentation of $\C = \R[i] = \{x+iy \mid x,y \in \R\}$. This value $i$ is a root of the equation $x^2+1$, one we can't solve with just real numbers. One could ask ``what is so special about this polynomial?'' Why is $i$ the thing that builds complex numbers? What about $x^2 + x + 1$? That is also rather fundamental, with roots $\omega = (-1 \pm \sqrt{-3})/2$. If you draw the unit circle in the complex plane, these roots divide the circle into three pieces along with $(1,0)$. We could form an object $\R[\omega]$ and call that the complex numbers. We don't use this construction because $\R[\omega] = \C$, since 
+\[ x + y\qty(-\frac{1}{2} + \frac{\sqrt{3}}{2}i) = \qty(x-\frac{1}{2}y) + \frac{\sqrt{3}}{2}yi, \]
+by associativity via the substitution $x' = x-\frac{1}{2}y$ and $y' = \frac{\sqrt{3}}{2}y$. These transformations are always solvable, so the two systems are in fact equivalent.
+
+\begin{exercise}
+Let $f\colon x \mapsto ax^2+bx+c$ where $a,b,c \in \R$ where $b^2-4ac < 0$. Prove that $\C = \R[\alpha]$ where $\alpha$ is a root of $f$.
+\end{exercise}
+
+But even if you do choose to ordain $x^2+1$ as special, there's still nothing special about $i$ since it factors into $(x+i)(x-i)$. Then there are really two roots, $+i$ and $-i$. We have arbitrarily chosen $i$ over $-i$, probably because it was invented by nineteenth century German mathematicians living in the Northern Hemisphere. Algebraically, there is no way to distinguish between $i$ and $-i$. However moving \emph{between} the roots is special: it's a map $\sigma \colon \C \to \C : x + iy \mapsto x-iy$ called an $\R$-automorphism of $\C$, meaning that restricting $\sigma$ to $\R$ is the identity. It's also a (unital) ring homomorphism, so $\sigma(z_1 + z_2) = \sigma(z_1) + \sigma(z_2)$ and $\sigma(z_1 \cdot z_2) = \sigma(z_1) \cdot \sigma(z_2)$ and $\sigma(1) = 1$.
+
+There are more such automorphisms! We already saw that we can write complex numbers as $\C = \R[\omega]$. We could create the map $\sigma\colon x + y\omega \mapsto x + y\bar{\omega}$. Notice that all these automorphisms are doing is exchanging the roots of the generating polynomials. We can check that this is in fact a valid automorphism by look at what it does to $i$.
+\[ \sigma\colon i = \frac{1}{\sqrt{3}} + \frac{2}{\sqrt{3}}\omega \mapsto \frac{1}{\sqrt{3}} + \frac{2}{\sqrt{3}}\bar{\omega} = -i, \]
+so it's actually just complex conjugation! In fact, $\Aut_{\R}(\C) = \{\operatorname{id}_{\C}, \sigma\}$. 
+
+\begin{example}
+Notice that $\abs{\Aut_{\R}(\C)} = 2 = \dim_{\R}\C = [\C : \R]$. We'll be seeing a lot of this later.
+\end{example}
+
+This shows that the special part of the complex numbers is not $i$ or $\omega$, but rather complex conjugation. This is actually the defining property of the complex numbers irrespective of how you define them. 
+
+\begin{proposition}
+More generally, given a field $F$ and a polynomial $f(x) = ax^2 + bx + c$ for some $a,b,c \in F$ satisfying $f(x)$ has no root in $F$ then there exists a field $k$ with the following properties:
+\begin{enumerate}
+\item $F$ is a subfield of $k$;
+\item $\dim_Fk = [k : F] = 2$; 
+\item $\abs{\Aut_Fk} = 2$; and 
+\item the polynomial $f$ is separable which for us means that $b^2-4ac \not=0$.
+This is called the quadratic extension of $F$.
+\end{enumerate}
+\end{proposition}
+
+This will lead us to a new $\sigma$ which will exchange the roots analogously to conjugation. We'll also need that the characteristic of $F$ is not $2$, since otherwise the quadratic formula doesn't work since we divide by $2a$. Implicit in the quadratic formula is the statement that $k = F[\sqrt{b^2-4ac}]$.
+
+\subsection{Going Cubic}
+
+We have a similar story for cubic equations where $f(x) = x^3 + px - q$ (the negative is there for historical reasons). This also leads us to the cubic formula. The Babylonians discovered the quadratic formula, and Italian mathematicians in the 16\textsuperscript{th} century developed the cubic formula,
+\[ \text{seriously, just look it up.} \]
+because they had these betting games where two mathematicians had to compete to find the roots of a cubic equation. Eventually, a guy named Cardano and his students started winning everything and then one of his students defected to a competitor. The important part is that this formula is a nested formula of certain finitely many operations depending just on the coefficients. There is a similar story for quartic equations.
+
+\begin{theorem}[Abel-Ruffini]
+Given a general polynomial $f \in \Q[x]$ with $\deg(f) \geq 5$, there is no explicit closed form formula for the roots of $f$ only depending on taking nested roots.
+\end{theorem}
+
+Galois theory is about understanding polynomials by looking at the symmetry of their roots.
