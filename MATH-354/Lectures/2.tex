@@ -1,0 +1,96 @@
+% !TEX root = ../notes.tex
+
+\section{January 16, 2019}
+
+\subsection{Review from last time}
+Some definitions from last time.
+
+\begin{definition}[Divisibility]
+We say that $a$ divides $b$ if $b = ac$ for some $c \in \Z$.
+\end{definition}
+
+\begin{definition}[Division Algorithm]
+Fix $a$ and $b$. We want to divide $a$ by $b$. Then there exists some unique $q$ and some $0 \leq r \leq a$ such that $b = aq + r$.
+\end{definition}
+
+\begin{definition}[Prime]
+A number is prime if its only positive divisors are $1$ and itself.
+\end{definition}
+
+These are things we learned in grade school.
+
+\begin{theorem}[Well-Ordering Principle]
+Every nonempty subset of $\Z_{<0}$ has a least element. This is the defining property of $\Z$.
+\end{theorem}
+
+\subsection{Today}
+
+\begin{definition}[GCD]
+Let $a,b \in \Z$. The greatest common divisor is the largest common divisor of $a$ and $b$, so $\gcd(a,b) = \max\{d \mid \text{$d$ divides $a$ and $b$}\}$. We know this exists because of well-ordering.
+\end{definition}
+
+\begin{definition}[GCD]
+Alternatively, the gcd of $a$ and $b$ is a $d$ such that all other common divisors of $a$ and $b$ divide $d$ as well. Eventually we'll prove that these are equivalent.
+\end{definition}
+
+\begin{definition}[GCD]
+Given $a$ and $b$ in some PID, we say that the GCD is he principal generator $d$ of the ideal $(a,b)$, so $(a,b) = (d)$. Alternatively, the gcd is the smallest positive number in $(a,b)$ if we're working in $\Z$.
+\end{definition}
+
+\begin{notation}[GCD]
+As a nod to the last definition, we often write the GCD of two numbers as $(a,b)$ to emphasize the relation to ideals.
+\end{notation}
+
+Some properties of greatest common divisors:
+
+\begin{lemma}
+Let $d$ be the greatest common divisor of $a$ and $b$. Then for any $x \in \Z$ we know that $(a, b+ax) = d$ as well. Then the GCD is unchanged under linear combinations.
+\end{lemma}
+
+\begin{proof}
+It's clear that $d$ still divides $b+ax$ if it divides $a$ and $b$, so its clear that $(a,b+ax) \geq (a,b)$. Independently, we know that there can't be a larger divisor since if $d'$ divides $b + ax$ then $d'$ divides $b$, and we already know that $d$ is the largest divisor of $b$ which also divides $ax$. Thus $(a,b+ax) \leq (a,b)$ so $(a,b+ax) = d$.
+\end{proof}
+
+\begin{lemma}
+Let $I = \{ax+by \mid x,y \in \Z\} = (a,b)$. Then $I = \{dx \mid x \in \Z\}$ where $d$ is the greatest common divisor of $a$ and $b$.
+\end{lemma}
+
+\begin{proof}
+We show containment each way. First we note that $I \subseteq d\Z$ since every element of $I$ is divisible by $d$ since if $d$ divides $a$ and $b$ then it divides $ax+by$. Then we show that $d\Z \subseteq I$ (this is sometimes called Bezout's Lemma). \note{This part could be proved with the Extended Euclidean Algorithm.} By the Well-Ordering property, we know that there exists some $c = \min(I \cap \Z_{>0})$. We know that $c \geq d$ since it must be the case that $d$ divides $c$. On the other hand, if we can show that $c$ is a common divisor of $a$ and $b$ then we know that $c \leq d$ as well. We know that $a = cq + r$ for $0 \leq r \leq c$. Then we know that $c \in I$ implies that $c = ax + by$ so $r = a-cq = a(1-xq) + b(-yq)$ so $r \in I$. Since $c$ is the minimum positive element we know that $c = 0$ and so $a = cq$ so it divides $a$. Repeat for $b$. Then $c \leq d$ and $c \geq d$ so $c=d$. This also gives us the definition of the GCD which is the divisor of $a$ and $b$ which is divisible by all other common divisors.
+\end{proof}
+
+\subsection*{Uniqueness of prime factorization}
+
+\begin{lemma}
+Let $a$ and $b$ be relatively prime. If $a$ divides $bc$ then $a$ divides $c$.
+\end{lemma}
+
+\begin{proof}
+Note that $(a,b) = 1$, so there exist some $x,y \in \Z$ such that $1 = ax + by$. Multiplying through by $c$, we get that 
+\[ c = cax + cby. \]
+Since $a$ divides $cb$ it divides $cby$ and it trivially divides $cax$ so $a$ divides $c$.
+\end{proof}
+
+\begin{corollary}
+If $p$ is prime and $p$ divides $ab$ then $p$ divides $a$ or $p$ divides $b$.
+\end{corollary}
+
+\begin{corollary}
+If $p$ divides $\prod a_i$ then for some $i$ we know that $p$ divides $a_i$ (this is the above corollary with induction).
+\end{corollary}
+
+\begin{theorem}
+All integers have a unique prime factorization. For every $n \in \Z_{\geq 2}$ there exists a unique set of primes $p_1, \cdots, p_k$ and positive integers $a_1 ,\cdots, a_k$ such that $n = \prod_{i=1}^k p_i^{a_i}$.
+\end{theorem}
+
+\begin{proof}
+Assume that we have two (more than one) such lists of primes and their powers. Denote them $P = p_1, \cdots, p_k$ (possible with repeats) and $Q = q_1, \cdots, q_\ell$. Assyme by way of contradiciton that the lists are disjoint (otherwise we cancel the like terms). We know that $p_1$ divides $\prod_{i=1}^\ell q_i$, so $p_1$ must divide $q_i$ for some $i$. This can happen if and only if $p_1 = q_i$. This contradicts the disjointness of our list and presents a contradiciton.
+\end{proof}
+
+\subsection{Before next class}
+
+\begin{enumerate}
+\item Read \S1.1 -- \$1.3 in \emph{Ireland and Rosen};
+\item Read \S3, \S4.1, and \S4.2 in \emph{Rosen};
+\item Think about which textbook is preferred.
+\end{enumerate}
