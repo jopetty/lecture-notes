@@ -12,4 +12,6 @@ If you like the formatting of the notes, you are free to use my `notes` class fr
 |--------|-----------|------------|------|
 |Abstract Algebra | MATH 350 | Miki Havlickova | Fall 2018 |
 | Galois Theory | MATH 370 | Asher Auel | Spring 2019 |
-| Intensive Algorithms | CPSC 366 | Yang Cai | Spring 2019 |
+| Number Theory | MATH 305 | Ross Berkowitz | Spring 2019 |
+| Modern Philosophy | PHIL 126 | Michael Della Rocca | Spring 2019 |
+| Introduction to Ethics | PHIL 175 | Shelly Kagan | Spring 2019 |
