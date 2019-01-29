@@ -1,0 +1,91 @@
+% !TEX root = ../notes.tex
+
+\section{Tuesday, January 22}
+
+Recall that there is a ring homomorphism from $\Z[x]$ to $\F_p[x]$ which is reduction modulo $p$ of the coefficients. There is subtlety when we talk about irreducibility in $\Z[x]$; consider that $2x-2 = 2 \cdot (x-1)$ is not irreducible as an element of the ring $\Z[x]$, but it is irreducible as a polynomial in a polynomial ring over a field in the sense that we cannot factor it as $g\cdot h$ where $\partial g, \partial h > 0$. This is why we care about nonconstant factors. This discrepancy occurs when we have $2$ appearing everywhere, which seems to present a problem. We need a way to distinguish between these two conflated notions.
+
+\begin{definition}[Primitive]
+A polynomial $f \in \Z[x]$ if its coefficients are \emph{all} relatively prime, so that the ideal $(a_0, \dotsc, a_n)$ is simply $\Z$, or equivalently that there exist $b_0,\dotsc,b_n \in \Z$ such that $\sum b_ia_i = 1$.
+\end{definition}
+
+\begin{example}
+The polynomial $4x^3 + 6x^2 + 15x + 9$ is primitive while $4x^3 + 6x^2 + 16x + 18$ is not, since every term is divisible by $2$.
+\end{example}
+
+\begin{proposition}
+A polynomial $f \in \Z[x]$ is primitive if and only if its reduction $\bar{f}$ modulo $p$ is not the zero polynomial for all prime $p$.
+\end{proposition}
+
+\begin{lemma}
+Let $f \in \Q[x]$. Then there exists a unique rational $c \in \Q$ and a unique primitive polynomial $f_0 \in \Z[x]$ such that $f = c \cdot f_0$.
+\end{lemma}
+
+\begin{proof}
+We first prove the existence, and then the uniqueness. Existence is given by clearing the denominators in a smart way, first be clearing the denominators and then by factoring out the \textsc{gcd} of the remaining integral coefficients. The uniqueness arises from the following. Suppose that $c \cdot f_0 = c' \cdot f_0'$ where $c,c' \in \Z$ and $f_0,f_0'$ are primitive. Then if we write $f_0 = aa_nx^n + \cdots + a_0$ and $f_0' = a'_nx^n + \cdots + a'_0$ and the original polynomial as $f = A_nx^n + \cdots + A_0$, then $\gcd(A_0, \dotsc, A_n) = \gcd(ca_0, \dotsc, ca_n) = \gcd(c'a_0', \dotsc, c'a_n')$. Since the \textsc{gcd} is multiplicative we know that these are $c \cdot \gcd(a_0, \dotsc, a_n)$ and $c' \cdot \gcd(a_0', \dotsc, a_n')$, and since these polynomials are primitive this \textsc{gcd} is $1$, so $c = c'$.
+\end{proof}
+
+\begin{lemma}
+If we start with a polynomial in $\Z[x]$, then the $c$ which we pull out will also be an integer.
+\end{lemma}
+
+\begin{lemma}
+Let $f,g \in \Z[x]$ be primitive. Then $f\cdot g \in \Z[x]$ is also primitive.
+\end{lemma}
+
+\begin{proof}
+If $f,g$ are primitive then $\bar{f}, \bar{g} \in \F_p$ are nonzero for all $p$. Since $\F_p$ has no zero divisors (integral domain) then we know that $\bar{f} \cdot \bar{g}$ is also nonzero in $\F_p$ for all $p$. Then $fg \in \Z[x]$ is primitive.
+\end{proof}
+
+\begin{lemma}
+If $f \in \Z[x]$ is primitive and $g \in \Z[x]$ is any polynomial, then if $f$ divides $g$ in $\Q[x]$ then $f$ divides $g$ in $\Z[x]$.
+\end{lemma}
+
+\begin{example}[Counter example when not primitive]
+Consider that $4x$ divides $x(x-1)$ in $\Q[x]$ but not in $\Z[x]$ because $4x$ is not primitive.
+\end{example}
+
+\begin{proof}
+There exists some unique way of writing $g$ as $c \cdot g_0$. Since $f$ divides $g$ in $\Q[x]$ then $g = f \cdot h$ for some $h \in \Q[x]$. Thus $f \cdot h = c \cdot g_0$, and we can write $h = d \cdot h_0$. Then $g = d \cdot f \cdot h_0$, and since $f$ and $h_0$ are primitive we know that $fh_0$ is primitive as well. Since this decomosition is unique, this implies that $c = d$ and $g_0 = f h_0$. Then $f$ divides $g_0$ and $g_0$ divides $g$ in $\Z[x]$, so $f$ divides $g$ in $\Z[x]$.
+\end{proof}
+
+\begin{lemma}[Gauss]
+Let $f \in \Z[x]$. If $f$ is an irreducible polynomial in $\Z[x]$ then $f$ is irreducible in $\Q[x]$.
+\end{lemma}
+
+\begin{proof}
+Assume $f = gh$ in $\Q[x]$ where $\partial g > 0$. Write $f = bf_0$, $g = cg_0$, and $h = dh_0$. Then $bf_0 = gh = cdg_0h_0$. Then $g_0h_0$ is primitive, so $f_0 = g_0h_0$ and $f = bg_0h_0$.
+\end{proof}
+
+\begin{lemma}[Eisenstein's Criterion]
+Let $f = \sum a_ix^i \in \Z[x]$. Fix a prime $p$ and assume the following:
+\begin{enumerate}
+\item $p$ does not divide $a_n$;
+\item $p$ divides all $a_i$ where $0 \leq i \leq n-1$; and 
+\item $p^2$ does not divide $a_0$.
+\end{enumerate}
+Then $f$ is irreducible in $\Z[x]$, and by Gauss' Lemma in $\Q[x]$ as well.
+\end{lemma}
+
+\begin{proof}
+Proof by contradiction. Assume $f$ has the requisite properties but $f$ is reducible in $\Z[x]$, so $f = gh$. Let $g = \sum_{0 \leq i \leq m} g_ix^i$ and $h = \sum_{0 \leq i \leq \ell} h_ix^i$. Consdier $\bar{f} = \bar{a}_nx^n = \bar{g}\bar{h}$. Recall that $a_n = g_mh_\ell$ and $a_0 = g_0h_0$. Then $p$ divides $g_0$ and $h_0$; then $p^2$ divides $g_0h_0 = a_0$ which is a contradiction.
+\end{proof}
+
+\begin{example}
+Consider that $x^2-p$ is irreducible in $\Q[x]$ by Eisenstein. Thus $\sqrt{p}$ is irrational. And just like that, most of ancient greek mathematics is solved.
+\end{example}
+
+\begin{example}
+Notice that $x^p - 1 = (x-1) \cdot x^{p-1} + x^{p-2} + \cdots + 1 = (x-1)\Phi_p(x)$. This is irreducible by Eisenstein.
+
+\begin{proof}
+Consider $\Phi_p(x+1)$, so $(x+1)^p - 1 = x \cdot \Phi_p(x+1)$. We can use the binomial theorem to say that 
+\[ (x+1)^p = \sum {p \choose i}x^i = x^p + px^{p-1} + \cdots + px + 1. \]
+Then 
+\[ \Phi_p(x+1) = x^{p-1} + px^{p-1} + \cdots + p. \]
+Recall that $p$ divides ${p \choose i}$ for all $1 \leq i \leq p-1$. Then $\Phi_p(x+1)$ is Eisenstein, and so $\Phi_p(x+1)$ is irreducible, and so $\Phi_p(x)$ is irreducible.
+\end{proof}
+\end{example}
+
+\begin{problem}[Challenge, find a better proof than the current one which is terrible]
+Prove that $x^n + x + 1 \in \F_2[x]$ is irreducible for $n \geq 2$.
+\end{problem}
