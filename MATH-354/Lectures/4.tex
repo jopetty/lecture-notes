@@ -1,0 +1,74 @@
+% !TEX root = ../notes.tex
+
+\section{Wednesday, January 23}
+
+Recall the uniqueness of prime factorization, where for all $n \in \N$ we have a unique list of primes $p_1, \dotsc, p_k$ and $a_i, \dotsc, a_k \in \Z_{>0}$ such that $n = \prod_{i=1}^k p_i^{a_i}$.
+
+\subsection{Infinitude of Primes}
+\begin{problem}
+How many primes are there?
+\end{problem}
+
+\begin{theorem}
+There are infinitely many primes.
+\end{theorem}
+
+\begin{proof}[Euclid's Proof]
+Assume by way of contradiction we have a finite list of primes $p_1, \dotsc, p_k$ of all primes. Let $M = \prod p_i$, and consider $M+1$. By the existence of prime factorization, we know that $M+1 = \prod_{i=1}^k p_i^{a_i}$. Without a loss of generality assume that $a_1 \not= 0$. Then $p_1$ divide $M+1$ and since $p_1$ divides $M$ it must be the case that $p_1$ divides $1$ as well which presents a contradiction.
+\end{proof}
+
+\textbf{Fact:} Let $p_1, p_2, p_3, \dotsc$ be a list of primes in order. By the uniqueness of prime factorization, there is an injective correspondence between vectors $(a_1, a_2, \dotsc) \in (\Z_{\geq0})^\infty$ with finitely many nonzero entries and $\N$. The correspondence is $n = \prod p_i^{a_i}$ with a lot of $a_i$ being zero.
+
+\textbf{NOTE: THE BELOW IS BY CONTRADCTION and (*) ONLY HOLDS FOR $k=\infty$.}
+If we assume that the list of primes is finite, then we would have an injective correspondence between $(a_1, \dotsc, a_k) \in (\Z_{\geq 0})^k$ and $\N$. Therefore
+\[ \prod_{i=1}^k\qty(\sum_{j=0}^\infty \frac{1}{p_i}) = \sum_{n=1}^\infty \frac{1}{n}. \tag{*} \]
+Then by uniqueness of prime factorization for each $n \in \N$ we know that $1/n$ appears exactly once when you expand this product. This is Euler's product for the $\zeta$ function?
+
+\begin{proof}[Euler's Proof]
+Assume by way of contradiction that there are finitely many primes. Then 
+\[ \sum_{n=1}^\infty \frac{1}{n} = \prod_{i=1}^k\qty(1 + \frac{1}{p_1} + \cdots) = \prod_{i=1}^k \qty(\frac{1}{1-1/p_i}) < \infty. \]
+Yet we know that $\sum 1/n$ diverges, which presents a contradiction.
+\end{proof}
+
+\begin{lemma}
+For any $n \in \Z$ there exists a unique $a,b \in \Z$ such that $a$ is square free (meaning that no square number divides it) and $n = ab^2$.
+\end{lemma}
+
+\begin{proof}[Erdős' Proof]
+Assume by way of contradiction that there are finitely many primes. Then any square-free number $n = \prod p_i^{a_i}$ where $a_i \in \{0,1\}$. Thus there are only $2^k$ square-free numbers. Now let's look at all numbers at most $N$ for some $N$. By the above lemma, they can be specified by $(a,b)$ where $a$ is square-free and $b^2$ is square. There are $2^k$ square-free numbers and at most $\sqrt{N}$ square numbers, so $N \leq 2^k\sqrt{N}$ for all $N$, so $2^k \geq \sqrt{N}$ for all $N$, which is very very false if $N > 2^{2k}$.
+\end{proof}
+
+\subsection{Congruence Equations \& Modular Arithmetic}
+
+\begin{definition}[Congruence]
+We say that $a \equiv b \pmod{m}$ if and only if $m$ divides $b-a$. Alternatively, we say that $a \equiv b \pmod{m}$ if and only if there exists some $k$ such that $a = b + mk$.
+\end{definition}
+
+\begin{theorem}[Some quick remarks] \hfill
+\begin{enumerate}
+\item Congruency is an equivalence relation on the integers (transitive, symmetric, and reflexive);
+\item For some fixed $m$, we define the congruence class $\bar{a}$ to be the set $\bar{a} = \{n \in \Z \mid n \equiv a \pmod{m}\}$;
+\item Arithmetic on these congruence classes holds; If $a \equiv b \pmod{m}$ and $c \equiv d \pmod{m}$ then $a+c \equiv b + d \pmod{m}$ and $ac \equiv bd \pmod{m}$. Thus $\bar{a} + \bar{b} = \overline{a + b}$ and $\bar{a}\bar{b} = \overline{ab}$. This forms the commutative ring $\Z/m\Z$.
+\end{enumerate}
+\end{theorem}
+
+\begin{problem}
+Let $a,b,m$ be fixed.
+When is the congruence $ax \equiv b \pmod{m}$ solvable?
+\end{problem}
+
+\begin{enumerate}[label=\textbf{Obs. \arabic*.}]
+\item If $(a,m)=1$ then we can use Bezout's theorem. This tells us that tehre exist some $X,Y$ such that $1 = aX + mY$. Then we multiply through by $b$ to get that $b = a(Xb) + m(Yb)$. Then $aXb \equiv b \pmod{m}$.
+\end{enumerate}
+
+\begin{lemma}
+The congruence $ax \equiv b \pmod{m}$ has solutions if and only if the \textsc{gcd} of $a$ and $m$ divides $b$.
+\end{lemma}
+
+\begin{proof}
+Let $d$ be the \textsc{gcd} of $a$ and $m$. By Bezout, there exists some $X_0, Y_0 \in \Z$ such that $d = aX_0 + bY_0$. Since $d$ divides $b$ there exists some $k$ such that $b = dk$. Then $b = aX_0k + mY_0k$ so $b \cong aX \pmod{m}$ for $X = X_0k$. In the other direction, just write it out. If there is a solution then $b \cong aX \pmod{m}$ so $b = aX + mY$. Since the \textsc{gcd} divides the right hand side it must divide the left as well, so $d$ divides $b$.
+\end{proof}
+
+\begin{problem}
+Can there be lots of different solutions? What do solutions look like?
+\end{problem}

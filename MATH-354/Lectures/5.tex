@@ -1,0 +1,47 @@
+% !TEX root = ../notes.tex
+
+\section{Monday, January 28}
+
+\subsection{Solving \texorpdfstring{$ax \equiv b \pmod{m}$}{ax = b (m)}}
+
+Recall from last lecture that $ax \equiv b \pmod{m}$ is solvable if and only if the \textsc{gcd} divides $m$. If we let $m' = m/d$ then the solutions are unique modulo $m'$.
+
+\begin{proof}
+Let $x_1,x_2$ be solutions to $ax_1 \equiv b \pmod{m}$ and $ax_2 \equiv b \pmod{m}$. Consider then that $a(x_1-x_2) \equiv 0 \pmod{m}$. Let $a' = a/d$. Then $da'(x_1-x_2) = dm'k$. We know that $m'$ divides $a'(x_1-x_2)$, and since $(m',a') = 1$ we know that $m'$ divides $x_1-x_2$.
+\end{proof}
+
+\begin{corollary}
+If $(a,m) = 1$ then there is a  unique solution to $ax \equiv b \pmod{m}$.
+\end{corollary}
+
+\begin{corollary}
+If $a \not\equiv 0 \pmod{p}$ for prime $p$ then there is a unique solution to $ax \equiv b \pmod{p}$ in $\Z/p\Z$.
+\end{corollary}
+
+\subsection*{Chinese Remainder Theorem}
+
+\begin{theorem}[Chinese Remainder Theorem]
+If we have $m_1, \dotsc, m_r$ all relatively prime and the system of equations 
+\[
+	x \equiv a_1 \pmod{m_1}, \dotsc, a \equiv a_r \pmod{m_r},
+\]
+then there is a unique solution modulo $M = m_1 \cdots m_r$. Alternatively, the rings
+\[ \Z/M\Z \cong \bigoplus_{i=1}^r \Z/m_i\Z \]
+are isomorphic.
+\end{theorem}
+
+\begin{lemma}
+If $a_1, \dotsc, a_r$ are pairwise relatively prime to $m$ then the product $a_1 \cdots a_r$ is also relatively prime to $m$ as well.
+\end{lemma}
+
+\begin{lemma}
+If $a_1, \dotsc, a_r$ all divide $m$ and are all pairwise relatively prime to $m$ then the product $a_1 \cdots a_r$ divides $m$.
+\end{lemma}
+
+\begin{proof}[Proof of CRT]
+Let $\hat{M}_i = M/m_i = \prod_{j \not= i} m_i$. We find a helper $y_i$ such that $y_i \equiv 0 \pmod{\hat{M}_i}$ and $y_i \equiv 1 \pmod{m_i}$. Then we'll have that $x = \sum a_iy_i$. Note that $(\hat{M_i}, m_i) = 1$ so we know that $1 = x_i\hat{M}_i + y_im_i$ has a solution. Let $y_i = x_i\hat{M}_i$. THis shows existence. To show uniqueness, just apply Lemma~5.2 above.
+\end{proof}
+
+\subsection{Algorithmic Speed for the Chinese Remainder Theorem}
+
+The Euclidean Algorithm runs in logarithmic time in the inputs $a,b$. The worst case is when we plug in two consecutive Fibonacci numbers since they are recursively defined in almost the exact opposite way that Euclid's algorithm reduces numbers.
