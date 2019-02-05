@@ -1,0 +1,44 @@
+% !TEX root = ../notes.tex
+
+\section{Tuesday, January 29}
+
+\begin{definition}[Algebraic]
+Let $k/F$ be a field extension and let $\alpha \in k$. Then $\alpha$ is algebraic over $F$ if there exists a nonzero $f \in F[x]$ such that $f(\alpha) = 0$. Otherwise, we say that $\alpha$ is trancendental over $F$.
+\begin{itemize}
+\item $\sqrt{2} \in \R$ is algebraic over $\Q$ since it satisfies $f(x) = x^2-2$;
+\item $\pi \in \R$ is trancendental over $\Q$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Simple Field Extension]
+Let $F$ be a field. Then $k/F$ is a \emph{simple} field extension if $k = F(\alpha)$ for some single $\alpha \in k$. 
+\end{definition}
+
+\begin{theorem}
+Let $F$ be a field, let $\Omega/F$ be a field extension, let $\alpha \in \Omega$, and let $k = F(\alpha)$. Then either 
+\begin{enumerate}
+\item $\alpha$ is trancendental, in which case $k/F$ is not finite; or
+\item $\alpha$ is algebraic, in which case $k/F$ has finite degree $n$, $F[\alpha] = F(\alpha)$, and there exists a unique monic irreducible polynomial $m_\alpha(x) \in F[x]$ of degree $n$ such that $m_\alpha(\alpha) = 0$. This $m_\alpha$ is called the minimal polynomial of $\alpha$ over $F$.
+\end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+If $\alpha$ is trancendental over $F$ then $k = F(\alpha)$ is infinite over $F$ and $F[\alpha] \cong F[x]$.
+\end{lemma}
+
+\begin{lemma}\label{lemma:minimal}
+The polynomial $m_\alpha$ is the unique monic polynomial of minimal degree which has $\alpha$ as a root; consequently, it is irreducible.
+\end{lemma}
+
+\begin{proof}[Proof of~\ref{lemma:minimal}]
+By the proof of $\textsc{euclidean} \implies \textsc{pid}$ (i.e., any element of minimal degree in an ideal of $F[x]$ generates the ideal). Hence $m_\alpha(x)$ generates the idea, and so it is the unique monic element of minimal degree. To show it is irreducible, suppose that $m_\alpha = fg$; then $m_\alpha(\alpha) = f(\alpha)g(\alpha) = 0$. Since $K$ has no zero divisors we know that $f(\alpha) = 0$ or $g(\alpha)=  0$. Assume without a loss of generality that $f(\alpha) = 0$. Assume (to get a contradiction) that $\partial f, \partial g < \partial m_\alpha$. However, if this is the case then we have a polynomial with $\alpha$ as a root with a smaller degree than $m_\alpha$, which we had already shown to be minimal. This presents a contradiction, and so $m_\alpha$ is irreducible.
+\end{proof}
+
+\begin{proof}[Proof of part 1]
+If $\alpha$ is trancendental then $f(\alpha) \not= 0$ for any $f \in F[x]$.
+There is a unique $F$-algebra homomorphism from $F[x] \to k$ such that $x \mapsto \alpha$. Since the kernel of this map is trivial (since nonzero polynomials don't satisfy $\alpha$) then this $F$-algebra homomorphism is injective. The image of this homomorphism is precisely $F[\alpha] \subseteq k$. Then by the First Isomorphism Theorem for Rings, we know that $F[x] \cong F[\alpha]$ since the kernel is trivial. But $F[\alpha]$ is an $F$-vector space with infinite $F$-dimension. Hence $F(\alpha)$ is also of inifinite dimension since $F[\alpha] \subset F(\alpha)$ is an $F$-subspace. Then the degree of $F(\alpha)$ over $F$ is infinite.
+\end{proof}
+
+\begin{proof}[Proof of part 2]
+Since $\alpha$ is alegebraic, we know that the homomorphism is not injective. Then its kernel is a nontrivial ideal $I \subseteq F[x]$, so by \textsc{pid}-ness $I = (g(x))$ for some nonzero $g \in F[x]$. We can call this polynomial $g = m_\alpha$.
+\end{proof}
