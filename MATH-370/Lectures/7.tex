@@ -1,0 +1,31 @@
+% !TEX root = ../notes.tex
+
+\section{Tuesday, February 5}
+
+\subsection{Ruler and Compass Construction}
+
+Euclid had this book which tried to lay the foundations for geometry. Among these are \emph{constructions}.
+
+\begin{enumerate}
+\item You have a set $S, \mathcal{P} \subseteq \C$ which contain $0$ and $1$.
+\item Given any two points $p,q$ in $S$, you can draw a line $\overline{PQ}$ through $p$ and $q$.
+\item Given any two points $p,q$ in $S$ you can draw the circle $C_p(q)$ centered at $p$ going through $q$.
+\item Any intersections of lines or circles which can be drawn are now points in $\mathcal{P}$.
+\end{enumerate}
+
+We call $\mathcal{P} \subseteq \C$ the set of constructable numbers which contains $0,1$ and is closed under this method of constructions. We can also create this idea algorithmicly. We proceed with induction for $n \geq 0$. Let $\mathcal{P}_0 = \{0,1\}$ and let $\mathcal{L}_0 = \mathcal{C}_0 = \emptyset$. Let $\mathcal{L}_{n+1} = \{\ell_{p,q} \mid p,q \in \mathcal{P}_n\}$ and let $\mathcal{C}_{n+1} = \{C_p(q) \mid p,q \in \mathcal{P}_{n}\}$. Then \[\mathcal{P}_{n+1} = \{z \in \C \mid z \in L \cap L', C \cap L, C \cap C', L,L' \in \mathcal{L}_{n+1},C,C' \in \mathcal{C}_{n+1}\}.\]
+Hence $\mathcal{P}_0 \subseteq \mathcal{P}_1 \subseteq \cdots \subseteq \mathcal{P}$, and each $\mathcal{P}_n$ are finite. Then $\bigcup_{n \geq 0} \mathcal{P}_n = \varinjlim \mathcal{P}_n = \mathcal{P}$. Then $\mathcal{P}$ is countable.
+
+\begin{theorem}
+The set $\mathcal{P} \subset \C$ is a field called Pythagorean closure of $\Q$ in $\Q$.
+\end{theorem}
+
+\subsection{Some Basic Constructions}
+
+\begin{enumerate}
+\item Given a `line segment' $\overline{PQ}$ we can bisect it by drawing the circles $C_p(q)$ and $C_q(p)$ and then drawing the line connecting the intersections of these circles.
+
+\item Given a line $\ell$ and a $p \in \ell$ we can draw the perpendicular line to $\ell$ at $p$. Draw a circle $C_p(q)$ where $q$ is any other point on $\ell$. Then draw two circles of twice the radius centered at the intersections of the smaller circle with $\ell$, and then connect their intersections.
+
+\item Give a line $\ell$ and a point $p \notin \ell$ we can draw the parallel line to $\ell$ through $p$. Draw a circle centered at $p$ intersecting $\ell$. Draw the perpendicular bisector of $\ell$ through $p$.
+\end{enumerate}

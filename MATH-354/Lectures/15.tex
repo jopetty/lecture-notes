@@ -1,0 +1,64 @@
+% !TEX root = ../notes.tex
+
+\section{Monday, 4 March 2019}
+
+It's been a while.
+
+Let $p$ be prime. Recall the following definitions:
+\begin{itemize}
+\item $\Pi(x) = \sum_{p \leq x} 1$;
+\item $\vartheta(x) = \sum_{p \leq x} \log p$;
+\item $\psi(x) = \sum_{p^n \leq x} \log p = \sum_{n \leq x} \Lambda(x)$.
+\end{itemize}
+
+We had two important results from these definitions.
+
+\begin{theorem}
+$\abs{\vartheta(x) - \psi(x)} \leq O(\sqrt{x}\log^2x)$.
+\end{theorem}
+
+\begin{theorem}
+$\Pi(x) = \vartheta(x)/\log x - \int_1^x \vartheta(x)/t\log^2x \dd{t}$.
+\end{theorem}
+
+\begin{theorem}
+The following are equivalent:
+\begin{itemize}
+\item $\psi(x) \sim x$,
+\item $\vartheta(x) \sim x$,
+\item $\Pi(x) \sim x/\log x$.
+\end{itemize}
+\end{theorem}
+
+\begin{lemma}
+$M_{\log x} = \sum_{n \leq x} \log n = x\log x - x + O(\log x)$.
+\end{lemma}
+
+\begin{proof}
+Consider 
+\[ \sum_{n \leq x} \log n \cdot 1. \]
+We apply Abel summation using $f(n) = 1$ and $\phi(x) = \log x$ to get that 
+\[ \sum_{n \leq x} \log n \cdot 1 = \lfloor x \rfloor \log x - \int_1^x \frac{\lfloor t \rfloor}{t} \dd{t}, \]
+noting that $M_1 = \lfloor x \rfloor$. Notice that 
+\[ \int_1^x \frac{\lfloor t \rfloor}{t} \dd{t} = \int_1^x 1 - \frac{t - \lfloor t \rfloor}{t} \dd{t} = x - 1 - O\qty(\int_1^x \frac{1}{t} \dd{t}) = x + O(\log x). \]
+This acheives the result we wanted.
+\end{proof}
+
+\begin{theorem}[Chebyshev]
+The inequality 
+\[ x \log 2 + O(\log x) \leq \psi(x) \leq x\log 4 + O(\log^2x) \] holds.
+\end{theorem}
+
+\begin{proof}
+Recall that $M_{\log(x)} = \sum_{n \leq x} \log n$, and that 
+\[ \log n = \sum_{d \mid n} \Lambda(d). \]
+Then 
+\[ M_{\log(x)} = \sum_{n \leq x} \sum_{d \mid n} \Lambda(d) = \sum_{dq \leq x} \Lambda(d) = \sum_{q \leq x}\sum_{d \leq x/q} \Lambda(d) = \sum_{q \leq x} \psi\qty(\frac{x}{q}). \]
+Define the quantity
+\[ D(x) = M_{\log}(x) - 2M_{\log}\qty(\frac{x}{2}) = \log {x \choose x/2}. \]
+On one had, we can show that 
+\[ D(x) = x\log(2) + O(\log x), \]
+and on the other had we know that 
+\[ D(x) = \sum \psi(x/q) - 2\sum\psi(x/2q) = \psi(x) - \psi(x/2) + \psi(x/3) + \cdots. \]
+Note that $\psi(x)$ is ``sorta monotone increasing''
+\end{proof}

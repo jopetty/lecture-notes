@@ -1,0 +1,137 @@
+% !TEX root = ../notes.tex
+
+\section{Thursday 7 March 2019}
+
+Recall that a Galois extension $K/F$ is one whose automorphism group has order equal to the degree of $K/F$. We also know that if $f$ splits in $K$ that $\Gal(f) = \Gal(K/F)$.
+
+\subsection{Galois Correspondence}
+
+Let $K/F$ be a finite Galois extension and let $H \leq G = \Gal(K/F)$ be a subgroup of the Galois group of this extension.
+
+\begin{definition}[Fixed Field]
+The fixed field $K^H = \{\alpha \in K \mid \sigma(\alpha) = \alpha\, \forall\sigma \in H\}$.
+\end{definition}
+
+\begin{claim}
+We have a tower of extensions $K/K^H/F$.
+\end{claim}
+
+\begin{proof}
+Let $\alpha,\beta \in K^H \subseteq K$. We konw that $\sigma(\alpha) = \alpha$ and $\sigma(\beta) = \beta$ for all $\sigma \in H$. Then $\sigma(\alpha + \beta) = \sigma(\alpha) + \sigma(\beta) = \alpha + \beta$ and $\sigma(\alpha \cdot \beta) = \sigma(\alpha) \cdot \sigma(\beta) = \alpha \cdot \beta$, so $\alpha + \beta$ and $\alpha\beta$ are in $K^H$. Furthermore, we know that $\alpha\alpha^{-1} = \sigma(\alpha)\sigma(\alpha^{-1}) = 1$, and so $\alpha^{-1} \in K$. Finally, since $\sigma$ is an $F$-automorphism then for any $\lambda \in F$ we know that $\sigma(\lambda) = \lambda$, and so $K^H$ is a field.
+\end{proof}
+
+\begin{claim}
+Given a tower $K/L/F$, there exists a subgroup of $\Gal(K/F)$ which fixes $L$.
+\end{claim}
+
+\begin{proof}
+Notes that $\Aut_L K \subseteq \Aut_F K = \Gal(K/F)$. Then simply define $H$ to be the subset of $\Gal(K/F)$ which does fix $L$, and by similar logic about compositions it will be a subgroup. Thus there is a one-to-one correspondence between subgroups of $\Gal(K/F)$ and subextensions of $K/F$.
+\end{proof}
+
+\[
+	\begin{matrix}
+	\left\{ \begin{matrix}
+		K \\ \mid \\ L \\ \mid \\ F
+	\end{matrix} \right\}
+	 & 
+	 \begin{matrix}
+	 L & \longrightarrow & \Aut_L K \\ \\
+	 K^H & \longleftarrow & H
+	 \end{matrix}
+	 &
+	 \left\{ \begin{matrix}
+		I \\ \mid \\ H \\ \mid \\ G
+	\end{matrix} \right\}
+	\end{matrix}
+\]
+
+Let's see how this works. We'll proceed through $K/L/F \rightsquigarrow H = \Aut_L K \rightsquigarrow K^H$. 
+
+\begin{claim}
+$L \subseteq K^{\Aut_L K}$. 
+\begin{proof}
+This just sorta falls out from the definition of what each thing is, since $L$ is obviously fixed by every single element of the automorphism group which fixes $L$.
+\end{proof}
+\end{claim}
+
+\begin{theorem}
+These fields are equal: $L = K^{\Aut_L K}$.
+\end{theorem}
+
+Now let's look at $H \leq G \rightsquigarrow K/K^H/F \rightsquigarrow \Aut_{K^H} K$.
+
+\begin{claim}
+$H \leq \Aut_{K^H} K$.
+\begin{proof}
+Again, just look at the definitions.
+\end{proof}
+\end{claim}
+
+\begin{theorem}
+These groups are equal: $H = \Aut_{K^H} K$.
+\end{theorem}
+
+\begin{warning}
+Given $K/L/F$, we could consider instead the automorphism group $\Aut_L F$ (instead of $\Aut_L K$). However, this is not a subgroup of $\Aut_F K$. \\
+
+\begin{example}
+Consider the extension $\Q(\sqrt[4]{2})$. There is a very nice extension $\Q \subseteq \Q(\sqrt{2}) \subseteq \Q(\sqrt[4]{2})$. Furthermore, we know that $\Q(\sqrt{2})$ is Galois with a Galois group of $\{\id_\Q, \sigma\}$, and $\Q(\sqrt[4]{2})$ is Galois \emph{over $\Q(\sqrt{2})$} with Galois group $\{1, \tau\}$ where $\tau(\sqrt[4]{2}) = -\sqrt[4]{2}$ and this group fixed $\Q(\sqrt{2})$. However, $\Aut_{\Q} \Q(\sqrt[4]{2}) = \{1, \tau\}$ as well, so there is no way to think of $\sigma$ as an automorphism of $\Q(\sqrt[4]{2})$.
+\end{example}
+\end{warning}
+
+\begin{question}
+How does this behave in towers?
+\[
+	\begin{matrix}
+	\left\{ \begin{matrix}
+		K \\ \mid \\ L_1 \\ \mid \\ L_2 \\ \mid \\ F
+	\end{matrix} \right\}
+	 & {\xrightarrow{\hphantom{looooooooong}}} & \Aut_{L_1} K \leq \Aut_{L_2} K \leq G
+	\end{matrix}
+\]
+
+Thus a smaller fields yield largers groups, and vice-versa.
+\end{question}
+
+\begin{theorem}[Fundamental Theorem of Galois Theory]
+Given $K/F$, a finite Galois extension with Galois group $G$ then there is an inclusion reversing bijection $\iota$ such that
+\[
+	\begin{matrix}
+	\left\{ \begin{matrix}
+		K \\ \mid \\ L \\ \mid \\ F
+	\end{matrix} \right\}
+	 & 
+	 \begin{matrix}
+	 L & \longrightarrow & \Aut_L K \\ & \iota & \\
+	 K^H & \longleftarrow & H
+	 \end{matrix}
+	 &
+	 \left\{ \begin{matrix}
+		I \\ \mid \\ H \\ \mid \\ G
+	\end{matrix} \right\}
+	\end{matrix}
+\]
+and if $\iota(L) = H$ then $[L : F] = [G : H]$. This means that the lattice of subfields is the inverse of the lattice of subgroups (flip it upside-down).
+\end{theorem}
+
+\subsection{Proofs}
+
+\begin{theorem}
+Let $K$ be a field and let $H \leq \Aut K$ be a finite subgroup. Then $K/K^H$ is finite and $[K : K^H] = \#H$.
+\end{theorem}
+
+\begin{proof}
+We already know that $H \leq \Aut_{K^H} K$. Now we only need to show that $[K : K^H] \leq \#H$. Suppose that $\#H = n$. Then given $\alpha_1, \dotsc, \alpha^m \in K$ with $m > n$ then $\alpha_1, \dotsc, \alpha^m$ are linearly dependent over $K^H$. WLOG, let $m = n+1$. Write 
+\[ H = \{\id = \sigma_1, \dotsc, \sigma_n\}, \]
+and consider the system of linear equations 
+\begin{align*}
+	\sigma_1(\alpha_1)x_1 + \cdots + \sigma_1(\alpha_{n+1})x_{n+1} &= 0 \\
+	&\vdots \\
+	\sigma_n(\alpha_1)x_1 + \cdots + \sigma_n(\alpha_{n+1})x_{n+1} &= 0
+\end{align*}
+This is a system of $n$ equations in $n+1$ unknowns, and so it has a solution. We take some $\vec{v} \in K^{n+1}$ with minimal number of non-zero entries (minimal Hamming weight) and do some tricks. We permute the entries of $\vec{v}$ by $\sigma_1$ and show that this infact has a smaller Hamming weight and is still a solution, which is a contradiciton.
+\end{proof}
+
+\begin{corollary}
+If $K/F$ is a finite Galois extension with Galois group $G$ and $H$ is a subgroup of $G$ then $[K : K^H] = \#H$. By the tower law, this says that $[K^H : F] = [G:H]$.
+\end{corollary}

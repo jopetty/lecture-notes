@@ -1,0 +1,67 @@
+% !TEX root = ../notes.tex
+
+\section{Tuesday, 5 March 2019}
+
+\epigraph{``Let's do more boring stuff.''}{Asher}
+
+Recall splitting fields. Let $K$ be the splitting field of $x^3 - 2$. We showed that $K = \Q(\sqrt[3]{2}, \omega)$ with the following structure.
+
+\begin{tikzcd}
+                                                & K \arrow[ldd, "3" description, no head] \arrow[rd, "2" description, no head] \arrow[rrd, "2" description, no head] \arrow[rrrd, "2" description, no head] &                                                         &                                                                &                                                                       \\
+                                                &                                                                                                                                                           & {\Q(\sqrt[3]{2})} \arrow[ldd, "3" description, no head] & {\Q(\sqrt[3]{2}\omega)} \arrow[lldd, "3" description, no head] & {\Q(\sqrt[3]{2}\bar{\omega})} \arrow[llldd, "3" description, no head] \\
+\Q(\omega) \arrow[rd, "2" description, no head] &                                                                                                                                                           &                                                         &                                                                &                                                                       \\
+                                                & \Q                                                                                                                                                        &                                                         &                                                                &                                                                      
+\end{tikzcd}
+
+We know that $\#\Aut_\Q(K) \leq 6$ since any $\phi\colon K \to K$ is determined by the three choices for $\phi(\sqrt[3]{2})$ and the two choices for $\phi(\omega)$.
+
+\paragraph*{Fact:} $K/\Q(\sqrt[3]{2}\omega^2)$ is a degree two extension.
+
+Consider $\sigma_i\colon K \to K$ where $\sigma\colon \omega \mapsto \bar{\omega}$. Then we get the following possible automorphisms:
+
+\begin{align*}
+	\sigma_0\colon &= \sqrt[3]{2} \mapsto \sqrt[3]{2}, \omega \mapsto \bar{\omega} \\
+	\sigma_1\colon &= \sqrt[3]{2}\omega \mapsto \sqrt[3]{2}\omega, \omega \mapsto \bar{\omega} \\
+	\sigma_2\colon &= \sqrt[3]{2}\bar{\omega} \mapsto \sqrt[3]{2}\bar{\omega}, \omega \mapsto \bar{\omega}
+\end{align*}
+
+Now consider 
+\begin{align*}
+	\rho = \sigma_2\sigma_0\colon &K \longrightarrow K \\
+	                              & \sqrt[3]{2} \mapsto \sqrt[3]{2} \mapsto \sqrt[3]{2}\omega \\
+	                              & \omega \mapsto \bar{\omega} \mapsto \omega
+\end{align*}
+and
+\begin{align*}
+	\tau = \sigma_1\sigma_0\colon &K \longrightarrow K \\
+	                              & \sqrt[3]{2} \mapsto \sqrt[3]{2} \mapsto \sqrt[3]{2}\bar{\omega} \\
+	                              & \omega \mapsto \bar{\omega} \mapsto \omega
+\end{align*}
+
+Then we've found six automorphisms $\{\operatorname{id}_K, \sigma_0, \sigma_1, \sigma_2, \rho, \tau\}$. Since our upper bound was six, we've found all possible automorphisms of $\Aut_\Q(K)$. Furthermore, note that every $\sigma_i$ has order $2$. Now we wan't to find some relations. Note that $\rho^2 = \tau$ and $\rho^3 = \operatorname{id}_K$. From this, we can tell that $\Aut_\Q(K) \isom D_6 \isom S_3$.
+
+Remember that $\Aut_\Q(K)$ permutes the roots of $x^3 - 2$. This is a general phenomenon. If $f$ is a polynomial over $F$ and $E$ is the splitting field of $f$ over $F$ then $\Gal(f) = \Aut_F(E)$. Assume $f$ is seperable of degree $n$ with roots $\{\alpha_i\}$ and so $E = F(\{\alpha_i\})$. Then $\Gal(f)$ acts on $\{\alpha_i\}$ and $\Gal(f)$ acts on $E$ by $F$-automorphism. The action of $\Gal(f)$ on $\{\alpha_i\}$ is faithful, so the kernel of the action is trivial.
+
+\begin{proof}
+If $\sigma \in \Gal(f)$ fixes all $\alpha_i$ then $\sigma = \operatorname{id}$ on $E$ since $\alpha_i$ generate $E$ over $F$.
+\end{proof}
+
+Recall if a group $G$ acts on a set $X$ of order $h$ then there is an induced permutaiton representation 
+\[ \rho\colon G \mapsto S_X = \operatorname{Bij}(x) \isom S_n : g \mapsto (x \mapsto g \cdot x), \]
+and so $\rho$ is a homomorphism of groups. This $\rho$ is injective if and only if $G$ acts faithfully on $X$.
+
+\begin{corollary}
+If $f$ is seperable of degree $n$ over $F$ then $\Gal(f)$ is isomorphic to a subgroup of $S_n$. We will soon prove that $[E : F] = \#\Gal(f)$, which gives immediately that $[E:F] \mid n!$ by Lagrange. Given any $K/F$ finite, we'll soon prove that $\#\Aut_FK \leq [K : F]$.
+\end{corollary}
+
+\begin{definition}[Galois Extension]
+A finite extension $K/F$ is Galois if \[\#\Aut_F K = [K : F].\]
+\end{definition}
+
+We'll soon see that the splitting field of any seperable polynomial is Galois.
+
+\begin{definition}
+Define the following set
+\[  \Hom_{F\text{-vs}}(K, \Omega) = \left\{ \varphi\colon K \to \Omega \mid \text{$\varphi$ is $F$-linear} \right\}. \]
+\end{definition}
+These aren't the field embeddings we've been dealing with. We require that $\phi(\lambda a) = \lambda\phi(a)$ and $\phi(a+b) = \phi(a) + \phi(b)$ but nothing more. THese are basically just matrices; if $[K:F] = n$ and $[\Omega:F] = m$ then $\Hom_{F\text{-vs}}\isom \operatorname{Mat}_{m\times n}(F)$. These aren't super nice but are very easy to describe. In particular, we know that it is an $F$-vector space of dimension $nm$. Something actually interesting and non-obvious about this is that it is also an $\Omega$-vector space.

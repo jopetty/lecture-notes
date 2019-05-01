@@ -1,0 +1,188 @@
+% !TEX root = ../notes.tex
+
+\section{Monday, 25 March 2019}
+
+Recall from last lecture (I don't) that we have a theorem:
+
+\begin{theorem*}
+	There are infinitely many primes $p$ satisfying $p \cong 3 \pmod{4}$.
+\end{theorem*}
+
+\begin{lemma*}
+	Let $q$ be prime. There are infinitely many primes $p \cong 1 \pmod{q}$.
+\end{lemma*}
+
+\begin{proof}
+	Look at $\Phi_q(x) = \frac{x^q-1}{x-1} = x^{q-1} + \cdots + 1$.
+	We know that if $p \mid \Phi_q(x)$ then $p \cong 1 \pmod{q}$.
+	Note that $p \mid x^q - 1$ or $x \cong 1 \pmod{p}$.
+	In the former case, we know that the order of $x$ is $q$, so $q \mid p-1$, 
+	which implies that $p \cong 1 \pmod{q}$.
+	In the latter case, we would get that $p \mid q$ which is really problematic 
+	since $p$ and $q$ are distinct primes.
+
+	To prove that there are infinitely many such primes, suppose we have some 
+	finite list of primes $p_1, \dotsc, p_\ell$.
+	Notice that $\Phi_q(x) \cong 1 \pmod{x}$ for all $x$, so let $x$ be
+	the product of these finite primes. Then any prime which divides $\prod p_i$
+	must itself be congruent to $1$ modulo $q$, and since these prime factors
+	must exist we know that there exist infinitely many primes which are 
+	congruent to $1$ modulo any prime $q$.
+\end{proof}
+
+\subsection*{Outline of Dirichlet's Proof}
+
+\begin{theorem}
+	For any $q$ and any $(a,q) = 1$ there are infinitely many primes of the form
+	$p = a + kq$.
+\end{theorem}
+
+First, some definitions:
+
+\begin{definition}[Character]
+	A character is a homomorphism from an Abelian group $G$ to the complex
+	numbers $\C$.
+\end{definition}
+
+\begin{example}[Example of a character]
+	Let $G \isom (\Z/m\Z, +)$.
+	There are $m$ characters of the form 
+	\[ \psi_a(x) = \zeta^{ax}, \]
+	where $\zeta$ is the $m$\textsuperscript{th} root of unity.
+	One may trivially check that this is, in fact, a homomorphism.
+\end{example}
+
+A list of facts:
+
+\begin{enumerate}
+	\item The characters of $G$ themselves form an Abelian group $\widehat{G}$, 
+	and there are exactly $\abs{G}$ of them.
+	\item Orthogonality relations.
+	\begin{itemize}
+		\item \[ \sum_{a \in G} \psi(g) = \begin{cases}
+			\abs{G} & \text{if $\psi \cong 1$,} \\
+			0 & \text{otherwise}.
+		\end{cases} \]
+		\item \[ \sum_{\psi \in \widehat{G}} \psi(g) = \begin{cases}
+			\abs{G} & \text{if $g = 0$,} \\
+			0 & \text{otherwise}.
+		\end{cases} \]
+	\end{itemize}
+\end{enumerate}
+
+Let $\chi$ be some character of the group $(\Z/q\Z)^\times$.
+
+\begin{definition}[Dirichlet Character]
+	The Dirichlet character is a map $\chi\colon \N \to \C$ which extends
+	a regular character by saying that
+	\[ \chi(m) = \chi(\bar{m}) \quad \text{if $m \cong \bar{m} \pmod{q}$}, \]
+	and that $\chi(m) = 0$ if $(m,q) \not= 1$.
+\end{definition}
+
+\begin{example} Let $q$ = 5.
+	\begin{itemize}
+		\item The trivial character: 
+		\[ \chi_o = 1,1,1,1,0,1,1,1,1,0,\dotsc \]
+		\item The Legendre symbol
+		\[ \qty(\frac{m}{5}) = \begin{cases}
+			-1 & \text{$m$ non residue,} \\
+			1 & \text{$m$ residue,} \\
+			0 & \text{$m \cong 0 \pmod{5}$.}
+		\end{cases} \]
+	\end{itemize}
+\end{example}
+
+The character is a completely multiplicative function.
+
+\begin{definition}[$L$-function]
+	Given a Dirichlet character $\chi$, we define the Dirichlet $L$-function 
+	$L(s,\chi)\colon \text{``$\C$''} \to \C$ by 
+	\[ 
+		L(s,\chi) = \sum_{n=1}^\infty \frac{\chi(n)}{n^s},
+	\]
+	which is just the Dirichlet series of $\chi$.
+\end{definition}
+
+\begin{example}
+	Let $\chi = \chi_0$ and let $q$ be prime.
+	Then $L(s, \chi_0) = \sum 1/n^s$ where $n \not\cong 0 \pmod{q}$.
+\end{example}
+
+\begin{remark*}
+	Why care about these characters? Well, they are really good at picking out
+	numbers which are $1$ modulo $q$.
+\end{remark*}
+
+\begin{theorem*}
+	There are infinitely numbers $x \cong a \pmod{q}$.
+	Yeah, this is easy.
+\end{theorem*}
+
+\begin{proof}
+	Let's look at $\psi$ characters of $(\Z/m\Z, +)$.
+	Extend to Dirichlet character $\psi\colon \N \to \C$.
+	Look at 
+	\begin{align*}
+		\sum_{\psi} L(s,\psi) &= \sum_\psi \sum_{n=1}^\infty \frac{\psi(n)}{n^s} \\
+							&= \sum_{n=1}^\infty \frac{1}{n^s}\sum_\psi \psi(n) \\
+							  &= m \sum_{n =km } \frac{1}{n^s}.
+	\end{align*}
+	If there were finitely many $n \cong 0 \pmod{m}$, then the right hand side
+	would need to be finite.
+	However, we can show rather easily that
+	\[ \lim_{s \to 1^+} \sum_\psi L(s,\psi) = \infty, \]
+	and so there must be infinitely many $n$.
+	The obstacles we'll face are 
+	\begin{itemize}
+		\item Actually analyze the above sum;
+		\item We want to sum over only primes which are congruent to $1$ modulo
+		$q$;
+		\item We want to restrict our attention to things that are only 
+		relatively prime to $q$.
+	\end{itemize}
+\end{proof}
+
+\subsubsection*{Convergence of \texorpdfstring{$L$}{L}-functions}
+
+Let $\chi$ be a character of $G \isom (\Z/q\Z)^\times$.
+Assume that $\chi \not= \chi_0$.
+We know that 
+\[ 
+	\sum_{x\in G} \chi(x) = 0 \implies \sum_{x=0}^{q-1} \chi(x) = 0, \tag{by orthogonality}
+\]
+so consider 
+\[ 
+	\sum_{n \leq x} \chi(n) = \sum_{n \leq kq} \chi(n) + \sum_{kq+1}^x \chi(n)
+	\leq \varphi(q),	
+\]
+where the first term must be $0$, and in the latter, there are at most 
+$\varphi(q)$ summands which are relatively prime to $q$.
+This implies that the $L$-functions always converge.
+
+\begin{problem}[Homework]
+	Let $f(n)$ be a monotonically decreasing positive function. 
+	Then $\sum_{n =M}^N f(n)\chi(n) \leq 3\varphi(q)f(M)$.
+	\textbf{Hint:} We know that $\chi$ is a periodic function.
+	Use summation by parts.
+\end{problem}
+
+\begin{corollary}
+	If $\chi$ is not $\chi_0$ and $s > 0$ then 
+	\[ L(s,\chi) = \sum \frac{\chi(n)}{n^s} \]
+	converges.
+\end{corollary}
+
+\begin{proof}
+	Use the homework problem to get that 
+	\[ \abs{L(s,\chi) - \sum_{n \leq x} \frac{\chi(n)}{n^s}} \leq \frac{3\varphi(q)}{n^s}, \]
+	which goes to zero.
+\end{proof}
+
+Since this function converges, we get an Euler product
+\begin{align*}
+	L(s, \chi) &= \prod_{\text{$p$ prime}} \qty(1 + \frac{\chi(p)}{p^2} + \frac{\chi(p^2)}{p^{2s}} + \cdots) \\
+	&= \prod_{\text{$p$ prime}} \qty(\frac{1}{1-\chi(p)/p^s}).
+\end{align*}
+
+In particular, 
+\[ L(s,\chi_0) = \zeta(s)\prod_{p \mid q}\qty(1-\frac{1}{p^s}). \]

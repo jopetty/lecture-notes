@@ -1,0 +1,63 @@
+% !TEX root = ../notes.tex
+
+\section{Monday, February 4}
+
+Recall that if $p$ is prime then $a^{p-1} \equiv_n 1$, which gives us a suggested primality test: If we want to know if $p$ is prime, pick some $1 \leq a \leq p$ and check $a^{p-1} \pmod{p}$. This doesn't always $4^{14} \equiv_{15} 1 $. The question now becomes, is this a rarity?
+
+\begin{definition}[Pseudoprime]
+A nonprime integer $n$ is a pseudoprime to the base $b$ if $b^{n-1} \equiv_n 1$.
+\end{definition}
+
+\begin{theorem}
+Fix a base $b=2$ with at least one odd pseudoprime $n$. There are infinitely many pseudoprimes to the base $b=2$.
+\end{theorem}
+
+\begin{proof}
+Consider $m = b^n - 1$. We know that $b^n - 1 = (b-1)(b^{n-1} + b^{n-1} + \cdots + 1)$. Since $n$ is a pseudoprime, we know we may write it as $n = ac$ where $a,c \not= 1$, and we know that $b^n \cong_n b$. Then $n$ divides $b^n - b$. We also know that $m$ is not prime since $b^a - 1$ divides $b^n - 1$.
+For now, let $b=2$. Now consider $b^{m-1} = b^{b^n - 2} = 2^{2^n - 2}$. We know that both $n$ and $2^{n}-1$ divide $2^{2^n-2}$. Then $m$ divides $2^{m-1}-1$ so $2^{m-1} \cong_m 1$.
+\end{proof}
+
+\begin{corollary}
+There are infinitely many pseudoprimes to the base $2$.
+\end{corollary}
+
+\begin{definition}[Carmichael Number]
+An integer $n$ is a Carmichael number if for any base $b$ which is relatively prime to $n$ we have $b^{n-1} \cong_n 1$. This means that the Fermat test for primality fails \emph{spectacularly}.
+\end{definition}
+
+\begin{theorem}
+There are infinitely many Carmichael numbers.
+\end{theorem}
+
+We will return to this theorem in a few weeks and extend it to the Miller Primality Test.
+
+\subsection{Rosen 7.1}
+
+Recall Euler's Totient Function $\varphi(n)$, which is weakly multiplicative in that $\varphi(nm) =\varphi(n)\varphi(m)$ when $(n,m) = 1$. We also know that $\varphi(p^\ell) = p^\ell - p^{\ell - 1}$ for prime $p$.
+
+Here is a fact: $\sum_{d \mid n} \varphi(d) = n$.
+
+\begin{proof}
+Look at the following sequence \[ \frac{1}{n}, \frac{2}{n}, \dotsc, \frac{n-1}{n}, \frac{n}{n}, \]
+when written in reduced form. For any fixed denominator $d$, it shows up $\varphi(d)$ times in this sequence. We wrote $n$ numbers, so $n = \sum_d \varphi(d)$.
+\end{proof}
+
+\subsection{Multiplicative Structure of\/ \texorpdfstring{$\Z/n\Z$}{Z/nZ}}
+
+Recall that $\qty(\Z/n\Z)^\times$ is the multiplicative group of units in $\Z/n\Z$. Our goal is to understand ``When is this group cyclic?'' This amounts to asking ``Is there an element of order $\varphi(n)$?'' Such an element, if it exists, is called a \emph{primitive root} modulo $n$.
+
+\begin{definition}[Order]
+The order of $r \in G$ is the smallest $a>0$ such that $r^a = e \in G$.
+\end{definition}
+
+\begin{theorem}
+$\qty(\Z/p\Z)^\times$ is cyclic for prime $p$.
+\end{theorem}
+
+\begin{lemma}
+It is always true that the order of $r$ modulo $p$ is a divisor of $p-1$.
+\end{lemma}
+
+\begin{proof}
+Lagrange's Theorem.
+\end{proof}

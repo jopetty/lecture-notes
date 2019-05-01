@@ -1,0 +1,57 @@
+% !TEX root = ../notes.tex
+
+\section{Wednesday, January 30}
+
+\subsection{Pollard-\texorpdfstring{$\rho$}{rho} Factorization}
+
+We want to factor $n$. If we can find $0 < a,b <n$ such that $a \equiv b \pmod{p}$ then $(b-a,n)=p$ is a nontrivial factor of $n$. Our first idea was to try numbers at random, and after about $\sqrt{p}$ samplings we'll find two $a,b$ which are congruent mod $p$. But since there were ${\sqrt{p} \choose 2}$ pairs so it takes about $p\log p$ steps.
+
+New idea: Start at $x_0 = 2$. For $i \geq 1$, let $x_{i+1} = x_i^2 + 1 \pmod{n}$. This will replace our random numbers, and the hope is that this sequence $x_1, x_2, \dotsc$ is ``random enough'' for our uses. Now if $x_j \equiv x_i \pmod{p}$ for any $p$ dividing $n$ then $x_{j+1} = x_j^2 + 1 \pmod{n} \equiv x_j^2 + 1 \pmod{p} \equiv x_i^2 + 1 \pmod{p} \equiv x_{i+1} \pmod{p}$. This forms a nice cycle modulo $p$. 
+
+\subsection{Floyd's Cycle Finding}
+
+Given a sequence $a_1, a_2,\dotsc$ which is eventually periodic (where repeats indicate multiples of the period), how do we find the period of the sequence? That is, we have no guarantee that $a_1$ will reappear, but we know that the sequence will eventually have a repeating part. Ideas:
+\begin{enumerate}
+\item Pick pairs at random. Really inefficient.
+\item Fix $a_1$ and check all the others in the list until you find a match. But we have no idea when the cycle starts.
+\end{enumerate}
+Instead we use a ``tortoise adn the hare method,'' where we have two pointers in our sequence. The slow pointer $t$ moves through the list while the fast pointer $h$ moves twice as fast as the tortoise. Eventually both of the following will happen:
+\begin{enumerate}
+\item $t_i = x_i$ in the sequnce, and 
+\item the length of the cycle $\ell$ divides $i$ 
+\end{enumerate}
+and then $t_i = h_i$ and we have a multiple of the cycle length.
+
+\subsection{Algorithm}
+
+Let $x_0 = 2$ and let $x_{i+1} = x_i^2 + 1 \pmod{n}$.
+\begin{enumerate}[label = {Step~\arabic*.}]
+\item Compute $(x_{2i} - x_i,n)$. If this equals $1$, continue. Otherwise it is a nontrivial factor of $n$.
+\end{enumerate}
+
+If the $x_i$ are sufficiently random, then with high probability there are two $j,k \leq O(\sqrt{p})$ such that $x_j \equiv x_k \pmod{p}$ where $p$ is any divisor of $n$. After $O(\sqrt{p})$ steps we will have
+\begin{itemize}
+\item $k-j$ divides $i$;
+\item $i \geq \min(j,k);$
+\end{itemize}
+These imply that $x_i$ is in the cycle and that $x_{2i} \equiv x_i \pmod{p}$. Then $x_i \equiv x_{i + (k-j)} \pmod{p}$. Then $(x_{2i}-x_i,n)$ is at least $p$, a nontrivial factor.
+
+Pollard-$\rho$ runs in about $O(n^{1/4}\log n)$, which is $O(n^{1/4})$ computations of the \textsc{gcd}, and it runs especially quickly in the case that $n$ has small prime factors since those determine the cycle length.
+
+\subsection{Some cool things}
+
+\begin{theorem}
+If $p$ is prime then $(p-1)! \equiv -1 \pmod{p}$.
+\end{theorem}
+
+\begin{proof}
+Every number can be paired with its mutliplicative inverse in $\Z/p\Z$. Then $(p-1)! = \prod a = \prod_{(a,a^{-1})}(a \cdot a^{-1}) \cdot -1 = -1$ (this double counts when $a = a^{-1}$, so when $a=\pm 1$).
+\end{proof}
+
+\begin{theorem}[Fermat's Little Theorem]
+For prime $p$, $x^p \equiv x \pmod{p}$ for any $x \in \Z$.
+\end{theorem}
+
+\begin{proof}
+Recall $\varphi(n)$ is the number if numbers less than $n$ which are relatively prime to $n$, and let $\Z/m\Z^\times$ is the set of units in $\Z/m\Z$, which is the set of numbers relatively prime to $m$ equipped with multiplication modulo $m$.
+\end{proof}

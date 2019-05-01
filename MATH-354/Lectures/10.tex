@@ -1,0 +1,122 @@
+% !TEX root = ../notes.tex
+
+\section{Wednesday, 23 February}
+
+Recall the question of when is $(a/p) = \pm1$ when $a\in\Z$, $(a,p) = 1$, and $p$ is prime. We defined $\abs{x} = \min\{x, p-x\}$ for $0 \leq x \leq p-1$. Recall Gauss' Lemma, which states
+
+\begin{lemma}[Gauss]
+Let $s$ be the number of $\ell$ such that $1 \leq \ell \leq (p-1)/2$ such that $\abs{a\ell} = -a\ell$. Then $(a/p) = (-1)^s$.
+\end{lemma}
+
+\begin{example}
+Let $p = 17$ and let $a = 2$. Then $\{a\ell\}$ is $\{2, 4, 6, 8, 10, 12, 14, 16\}$. We see that $(p+1)/2 = 9$. Then $s=4$ and so $(2/p) = 1$.
+\end{example}
+
+\begin{theorem}
+Let $p$ be an odd prime. Then 
+\[
+	\qty(\frac{2}{p}) = \begin{cases}
+		1 & p \cong_8 \pm 1, \\
+		-1 & p \cong_8 \pm 3.
+	\end{cases}
+\]
+\end{theorem}
+
+\begin{proof}
+We just need to look at how many even numbers are between $1$ and $(p-1)/2$ verses $(p+1)/2$ and $p$.
+\begin{enumerate}
+\item[\textbf{Case 1:}] $p = 1 + 8k$. Then $(p-1)/2 = 4k$, so $s = 2k$ and $(2/p) = (-1)^{2k} = 1$.
+\item[\textbf{Case 3:}] $p = 3 + 8k$. Then $(p-1)/2 = 4k + 1$, so there are $2k$ even numbers ebtween $1$ and $(p-1)/2$ and $2k+1$ even numbers between $(p+1)/2$ and $p$, so $(2/p) = -1$. \qedhere
+\end{enumerate}
+\end{proof}
+
+What about $(p/q)$ when $p$ and $q$ are odd primes.
+
+\begin{theorem}[Quadratic Reciprocity]
+If $p \cong_4 1$ or $q \cong_4 1$ then $(p/q) = (q/p)$. Otherwise, if $p \cong_4 q \cong_4 3$ then $(p/q) = -(q/p)$. Equivalently,
+\[ \qty(\frac{p}{q})\qty(\frac{q}{p}) = (-1)^{(p-1)/2 \cdot (q-1)/2} \]
+\end{theorem}
+
+\begin{proof}
+Consider $f(z) = 2i\sin(2\pi z)$, which has some nice properties. It's odd, so $-f(z) = f(-z)$. It's also $1$-periodic, so $f(z) = f(z+1)$. Note that $i \sin(z) = \sinh(iz)$, so 
+\[ f(z) = e^{2\pi i z} - e^{-2\pi i z}. \]
+Define $\zeta = \zeta_p$ to be the $p$\textsuperscript{th} root of unity $2^{2\pi i/p}$. Note that $\zeta^m \cdot \zeta^n = \zeta^{m+n \mod p}$ and $\qty(\zeta^m)^\ell = \zeta^{m\ell \mod p}$
+
+We also have the following Proposition and Lemma, listed after the proof.
+
+Now let $p,q$ be odd primes. Then 
+\[ \qty(\frac{q}{p}) = \prod_{\ell=1}^{(p-1)/2} \frac{f(q\ell/p)}{f(\ell/p)} = \prod_{\ell=1}^{(p-1)/2}\prod_k^{(q-1)/2} f\qty(\frac{\ell}{p} + \frac{k}{q})f\qty(\frac{\ell}{p} - \frac{k}{q}). \]
+Notice how this expression is almost symmetric in $p$ and $q$, with only one difference in the final term. In fact, switching them out only requires $(-1)^{(p-1)(q-1)/2}$.
+\end{proof}
+
+\begin{proposition}\label{prop:periodicity}
+Consider that
+\[ \prod_{\ell = 1}^{(p-1)/2} f\qty(\frac{a\ell}{p}) = \qty(\frac{a}{p}) \cdot  \prod_{\ell = 1}^{(p-1)/2} f\qty(\frac{\ell}{p}).\]
+The justification comes from the periodicity of $f$.
+\end{proposition}
+
+\begin{proof}
+Consider that if $1/2 < a\ell/p < 1$ then 
+\[ f\qty(\frac{a\ell}{p}) = -f\qty(\frac{\abs{a\ell}}{p}). \]
+Then 
+\[ \prod_{\ell = 1}^{(p-1)/2} f\qty(\frac{a\ell}{p}) = (-1)^s \prod_{\ell = 1}^{(p-1)/2} f\qty(\frac{\abs{a\ell}}{p}) = \qty(\frac{a}{p})\prod_{\ell = 1}^{(p-1)/2} f\qty(\frac{\abs{a\ell}}{p}). \]
+Then recall that the sequence $\{\abs{a}, \abs{2a}, \dotsc, \abs{(p-1)a/2}\}$ is just $\{1, 2, \dotsc, (p-1)/2\}$, which gets us that 
+\[ \qty(\frac{a}{p})\prod_{\ell = 1}^{(p-1)/2} f\qty(\frac{\abs{a\ell}}{p}) = \qty(\frac{a}{p})\prod_{\ell = 1}^{(p-1)/2} f\qty(\frac{\ell}{p}). \qedhere \]
+\end{proof}
+
+\begin{lemma}
+If $n$ is odd then \[
+x^n-y^n = \prod_{k=0}^n \qty(x\zeta^k - y\zeta^{-k}),
+\]
+where $\zeta = \zeta_n$.
+\end{lemma}
+\begin{proof}
+It suffices to look at $(x/y)^n - 1 = z^n - 1$, which factors as 
+\[ z^n - 1 = \prod_{k=0}^{n-1} \qty(z-\zeta^k) = \prod_{k=0}^{n-1} \qty(z-\zeta^{-2k}). \]
+Then 
+\[ x^n - y^n = \prod \qty(x-y\zeta^{-2k}) = \qty[\prod \qty(x\zeta^k - y\zeta^{-k})] \zeta^{-(n-1)/2}, \]
+where $\zeta^{-(n-1)/2} = 1$ since $n$ is odd.
+\end{proof}
+
+\begin{lemma}
+The value
+\[ \frac{f(nz)}{f(z)} = \prod_{k=1}^{(n-1)/2} f\qty(z + \frac{k}{n})f\qty(z - \frac{k}{n}) \]
+if $n$ is odd.
+\end{lemma}
+\begin{proof}
+Notice that $f(nz) = e^{2\pi i zn} - e^{-2\pi i zn}$. Now just apply the previous lemma.
+\end{proof}
+
+\subsection{Applications of QR}
+\pagebreak
+\begin{example}[We can use it to compute Legendre Symbols!]
+Compute
+\[ \qty(\frac{713}{1009}). \]
+We factor as 
+\[ \qty(\frac{23 \cdot 31}{1009}) = \qty(\frac{23}{1009})\qty(\frac{31}{1009}) = \qty(\frac{1009}{23})\qty(\frac{1009}{31}) = \qty(\frac{20}{23})\qty(\frac{17}{31}). \]
+\end{example}
+
+\begin{definition}[Jacobi Symbol]
+Let $(q/n)$ be the Jacobi symbol, where $n$ is a product of primes, then it is multiplicative.
+\[
+\qty(\frac{q}{n}) = \begin{cases}
+0 & (a,n) \not= 1, \\
+\prod \qty(\frac{a}{p_i})^{1/i} & (a,n) = 1.
+\end{cases}
+\]
+\end{definition}
+
+\begin{theorem}[Jacobi Reciprocity]
+Some facts:
+\begin{itemize}
+\item $(-1/n) = (-1)^{(n-1)/2}$
+\item $(2/n) = (-1)^{(n^2-1)/8}$
+\item If $m,n$ odd then $(m/n)(n/m) = (-1)^{(m-1)(n-1)/4}$
+\end{itemize}
+\end{theorem}
+
+\subsubsection*{Next Class}
+\begin{itemize}
+\item Use Jacobi to talk about when $a$ is a quadratic residue for almost all primes
+\item RSA/Diffie-Hellman, Zero Knowledge Proofs
+\end{itemize}

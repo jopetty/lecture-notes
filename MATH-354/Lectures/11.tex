@@ -1,0 +1,71 @@
+% !TEX root = ../notes.tex
+
+\section{Monday, 18 February}
+
+Recall the definition of the Jacobi Symbol. This is like the multiplicative extension of the  Legendre Symbol, although we loose the nice property that $(a/n) = 1$ if and only if $a$ is a quadratic residue modulo $n$. We do that the following properties:
+\[ \qty(\frac{a}{n})\qty(\frac{b}{n}) = \qty(\frac{ab}{n}) \qquad \text{and} \qquad \qty(\frac{a}{n})\qty(\frac{a}{\ell}) = \qty(\frac{a}{n\ell}). \]
+Also recall the theorem of Jacobi Reciprocity, restated here:
+\begin{theorem}[Jacobi Reciprocity]
+Some facts:
+\begin{itemize}
+\item $(-1/n) = (-1)^{(n-1)/2}$
+\item $(2/n) = (-1)^{(n^2-1)/8}$
+\item If $m,n$ odd then $(m/n)(n/m) = (-1)^{(m-1)(n-1)/4}$
+\end{itemize}
+\end{theorem}
+
+\begin{theorem}
+If $a$ is a non-square, there are infinitely many primes such that\/ $(a/p) = -1$, that is where $a$ is not a residue modulo $p$.
+\end{theorem}
+
+\begin{proof}
+Assume that $a = 2^e \cdot \prod q_i$, where $q_i$ are distinct primes and $e \in \{0,1\}$. We assume here that $a$ is square free, since we can always reduce the exponents modulo $2$ to get rid of this square part. Fix any set of primes $\ell_1, \dotsc, \ell_k$ distinct from $2,q_i$. We want to show that there is a prime $p$ not in this list such that $(a/p) = -1$. We do this by building such a number. By CRT we know there is a $x$ such that $x \cong_8 1 \cong_{\ell_i} 1 \cong_{q_{i < m}} 1 \cong_{q_m} s$, where $(s/q_m) = -1$. Consider that 
+\[ \qty(\frac{a}{x}) = \qty(\frac{2^e}{x}) \prod \qty(\frac{q_i}{x}) = 1 \cdot \prod \qty(\frac{x}{q_i}) \cdot (-1)^{(x-1)/2 \cdot (q-1)/2} = \prod \qty(\frac{x}{q_i}). \]
+Now, since $x \cong_{q_{i<m}} 1$, we get that 
+\[ \prod \qty(\frac{x}{q_i}) = 1^{m-1} \qty(\frac{s}{q_m}) = -1. \]
+Then we use the multiplicative nature of the Jacobi symbol to say that 
+\[ \qty(\frac{a}{x}) = -1 = \prod \qty(\frac{a}{p_i}) \qquad \text{where~} x = \prod p_i^{v_i}, \]
+and we know that $p_i \not= q_i$ since otherwise its congruence modulo $q_i$ would be zero. Since we already know this equals $-1$, there must be \emph{some} (at least one) $p_i$ such that $(a/p_i) = -1$. This is really similar to Euclid's proof of the infinitude of primes.
+\end{proof}
+
+Note: The above assumes that $a \not= 2$ since we implicitly assumed there was at least one odd prime factor. If $a = 2$, then it is a nonresidue if and only if $p \cong_8 3,5$. There are infinitely many primes $p \cong_8 3$.
+
+\subsection{RSA Cryptography}
+
+RSA is a public-key cryptography system. Historically, crypto systems has the same encoding and decoding key. An example is something like a cryptogram, like \texttt{XYQ ABCX}, where each letter is a swap for another letter in the alphabet, so \texttt{XYQ ABCX} $\to$ \texttt{THE BOAT}. If you know the bijection $f\colon A \to A$ then you can both encode and decode the message.
+
+\parshape=1
+0.1\textwidth 0.8\textwidth
+Fun fact, \texttt{BEBOPBOP} is a valid cryptogram for exactly one English word.
+
+Another example is Enigma (yay Alan Turing) from WWII, where the ability to read or send the messages was dependent on a (very high) number of possible dial-combinations, which made it easy to use but computationally difficult to break.
+
+Public Key cryptography sets up a system where anyone can encrypt a message for Alice, but only she may decrypt such a message. This is accomplished by having two different keys. In private, Alice will pick two primes $p,q$ and publicly announces their product $n = pq$. Privately, she can compute $\varphi(n) = (p-1)(q-1)$. She the picks an encryption exponent $e$ and announces this too, and then privately computes $d = e^{-1} \bmod \varphi(n)$. Let's say that Bob wants to send a message to Alice. Suppose this message is some number $P$ between $2$ and $n$ ($1$ fails for obvious reasons). Bob takes $P$ and encrypts is via $C = P^e$ and sends $C$ to Alice. When she receives it, she takes $C^d = P^{e^{d}} \cong P^{e \cdot e^{-1}} \bmod \varphi(n) = P$. If Eve is looking in on this transmission, she can see $C = P^e$ and she even knows what $e$ is! However, given a composite number $n$, it is computationally easy to compute $P^e \bmod n$, but it is nearly intractable to find $P$ given $P^e$. This means that Alice can't really decrypt the message by brute force. Nor can she compute $\varphi(n)$, since it is also very hard to compute $\varphi(n)$ from $n$; we believe it to be as hard as factoring $n$, which is not easy to do\footnote{We think this is the case.}.
+
+\subsection{Diffie-Hellman Key Exchange}
+
+Suppose that Alice has a secret she needs to share with Bob. They don't care what the secret is, but they both need to know it (like an Enigma Key!). It would be bad for Alice to announce it publicly, since anyone could hear it and it's not a secret anymore. One better method is for Alice to take the secret and lock it in a box and send it to Bob. Bob can't open it, but neither can anyone else. However, Bob \emph{can}\/ add his own lock to the box, and send it back to Alice. She then unlocks her lock, and sends the box back to Bob, who can not unlock the last remaining lock and read the secret message without anyone else having read it. This is (more or less) how Diffie-Hellman Key Exchange works.
+
+Alice and Bob agree publicly on a public prime $p$, and some primitive root-ish\footnote{This might be hard to find, so we can find something with a large enough order and just go with that.} $r$. Now they will each privately choose keys $k_A$ and $k_B$, which they don't reveal to anyone. Alice then transmits $c_A = r^{k_A} \bmod p$ and Bob transmits $c_B = r^{k_B} \bmod p$. Alice takes $c_B^{k_A} = r^{k_Ak_B} \bmod p$ and Bob takes $c_A^{k_B} = r^{k_Ak_B} \bmod p$. This is their shared secret. Note however that the secret they end up with $r^{k_Ak_B} \bmod p$ is different than what they started with it, but they both end up with a shared secret.
+
+\subsection{Zero-Knowledge Proofs}
+
+Suppose that Paula knows something (this is good) and she wants to prove that she knows it, but doesn't want to reveal the knowledge. A \emph{Zero-Knowledge Proof} is a protocol whereby she may interact with Vince, the verifier, that she knows this secret.
+
+\begin{example}
+Imagine that Vince is color-blind, and cannot tell red from green. Paula has a red sock and a greens sock. When Vince sees these, he can't tell which is which, but Paula wants to prove to Vince that she can distinguish between them. To do this, Paula hands both socks to Vince. In each round, 
+\begin{itemize}
+\item Vince will produce a sock (he doesn't know which one), shows it to Paula, and puts it behind his back, and then produces a second sock (either $S_1$ or $S_2$) and then asks Paula whether or not it is the same sock. 
+\item Paula answers him each time. If she couldn't tell the difference, she would have to guess which sock it was, and so in total she fails with probability $1-0.5^n$ after $n$ rounds. If, however, she \emph{does} see the difference then Vince is confident that she does so with the same probability.
+\end{itemize}
+Thus Vince can be as sure as he wants to be that Paula can see the colors without every actually learning which sock is which.
+\end{example}
+
+\begin{example}
+Paula wants to prove her identity to the world. She picks primes $p,q,u$ in private, and announces to the world ``I am Paula! $n=pq$ and $v=u^2$.'' Then Paula is anyone who knows $\sqrt{v} = u$ without showing what $u$ is. To do so, she will
+\begin{enumerate}
+\item Pick an $r$ at random and sends $x=r^2 \bmod n$ to Vince.
+\item Vince receives $x$ and flips a coin. If it is heads, Vince asks, ``Send me $r$.'' If it is tails, Vince asks, ``Send me $r^{-1} \cdot u \bmod n$''.
+\end{enumerate}
+Paula answers with $A$. Vince verifies that Paula is telling the truth. In the `heads' regime, Vince checks if $A^2 = x \bmod n$. In the `tails' regime, he checks if $A^2x = v \bmod n$.
+\end{example}
